@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TAREWA — El calor que tu industria necesita</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rojo: #D72B2B;
+      --amarillo: #F5C400;
+      --negro: #0D0D0D;
+      --gris-oscuro: #1A1A1A;
+      --gris-medio: #2A2A2A;
+      --gris-claro: #3A3A3A;
+      --blanco: #F0F0F0;
+      --texto-suave: #AAAAAA;
+      --whatsapp: #25D366;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: var(--negro);
+      color: var(--blanco);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      transition: padding 0.3s;
+    }
+
+    nav.scrolled { padding: 0.8rem 4rem; }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .nav-logo-img {
+      height: 46px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .nav-logo-text {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      color: var(--negro);
+      display: none;
+    }
+
+    .nav-logo-text span { color: var(--rojo); }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+    .nav-links a {
+      color: #555;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--rojo); }
+
+    .nav-cta {
+      background: var(--rojo);
+      color: #fff !important;
+      padding: 0.5rem 1.4rem;
+      border-radius: 4px;
+      transition: background 0.3s !important;
+    }
+
+    .nav-cta:hover { background: #b82222 !important; color: #fff !important; }
+
+    /* ── HERO CON SLIDER ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Swiper ocupa todo el fondo */
+    .hero-swiper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .hero-swiper .swiper-slide {
+      background-size: cover;
+      background-position: center;
+      background-color: var(--gris-oscuro);
+    }
+
+    /* Slide 1: foto de taller/resistencias generales */
+    /* ▼ REEMPLAZÁ con tus fotos reales en la carpeta assets/ ▼ */
+    .slide-1 { background-image: url('assets/slide-1.jpg'); }
+    .slide-2 { background-image: url('assets/slide-2.jpg'); }
+    .slide-3 { background-image: url('assets/slide-3.jpg'); }
+    .slide-4 { background-image: url('assets/slide-4.jpg'); }
+
+    /* Overlay oscuro sobre las imágenes para legibilidad del texto */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(13,13,13,0.78) 0%,
+        rgba(13,13,13,0.55) 50%,
+        rgba(13,13,13,0.82) 100%
+      );
+      z-index: 2;
+    }
+
+    /* Grilla sutil encima del overlay */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background-image:
+        linear-gradient(rgba(245,196,0,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,196,0,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* Contenido del hero por encima de todo */
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 2rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      border: 1px solid var(--amarillo);
+      color: var(--amarillo);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.2s ease forwards;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.9s 0.4s ease forwards;
+    }
+
+    .hero-title .highlight { color: var(--rojo); }
+    .hero-title .highlight-y { color: var(--amarillo); }
+
+    .hero-slogan {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: rgba(240,240,240,0.8);
+      font-weight: 400;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s 0.6s ease forwards;
+    }
+
+    .hero-slogan em { color: var(--blanco); font-style: normal; font-weight: 600; }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s 0.8s ease forwards;
+    }
+
+    .btn-primary {
+      background: var(--rojo);
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-primary:hover { background: #b82222; transform: translateY(-2px); }
+
+    .btn-secondary {
+      border: 1px solid rgba(240,240,240,0.35);
+      color: var(--blanco);
+      padding: 0.9rem 2.2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      transition: border-color 0.3s, color 0.3s, transform 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: var(--amarillo); color: var(--amarillo); transform: translateY(-2px); }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s ease forwards;
+    }
+
+    .hero-scroll span {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(240,240,240,0.6);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--amarillo), transparent);
+      animation: scrollPulse 1.8s ease-in-out infinite;
+    }
+
+    /* Swiper controles */
+    .hero-swiper .swiper-button-prev,
+    .hero-swiper .swiper-button-next {
+      color: var(--amarillo);
+      z-index: 20;
+    }
+
+    .hero-swiper .swiper-button-prev::after,
+    .hero-swiper .swiper-button-next::after {
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+
+    .hero-swiper .swiper-pagination {
+      z-index: 20;
+      bottom: 5rem;
+    }
+
+    .hero-swiper .swiper-pagination-bullet {
+      background: rgba(240,240,240,0.5);
+      opacity: 1;
+    }
+
+    .hero-swiper .swiper-pagination-bullet-active {
+      background: var(--amarillo);
+      width: 24px;
+      border-radius: 2px;
+    }
+
+    /* ── SECTIONS BASE ── */
+    section { padding: 7rem 4rem; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amarillo);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title span { color: var(--rojo); }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--texto-suave);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    /* ── PRODUCTOS ── */
+    #productos { background: var(--gris-oscuro); }
+
+    .productos-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Card estilo catálogo con imagen */
+    .producto-card {
+      background: var(--negro);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: border-color 0.35s, transform 0.35s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .producto-card:hover {
+      border-color: rgba(215,43,43,0.45);
+      transform: translateY(-5px);
+    }
+
+    /* Zona de imagen */
+    .producto-img {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      background: var(--gris-medio);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .producto-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+
+    .producto-card:hover .producto-img img {
+      transform: scale(1.06);
+    }
+
+    /* Fallback cuando no hay imagen todavía */
+    .producto-img.sin-foto {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--gris-medio) 0%, var(--gris-claro) 100%);
+    }
+
+    .producto-img.sin-foto svg {
+      width: 52px;
+      height: 52px;
+      color: rgba(245,196,0,0.35);
+    }
+
+    /* Etiqueta "Por pedido" flotante sobre la imagen */
+    .producto-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--rojo);
+      padding: 0.22rem 0.55rem;
+      border-radius: 2px;
+    }
+
+    /* Cuerpo de la card */
+    .producto-body {
+      padding: 1.4rem 1.6rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .producto-cod {
+      font-size: 0.65rem;
+      color: var(--texto-suave);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .producto-body h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.01em;
+    }
+
+    .producto-body p {
+      font-size: 0.86rem;
+      color: var(--texto-suave);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Botón WhatsApp verde en cada producto */
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--whatsapp);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      transition: background 0.3s, transform 0.2s;
+      align-self: flex-start;
+    }
+
+    .btn-whatsapp:hover { background: #1da851; transform: translateY(-1px); }
+
+    .btn-whatsapp svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    /* ── QUIÉNES SOMOS ── */
+    #nosotros {
+      background: var(--negro);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .nosotros-visual { position: relative; }
+
+    .nosotros-box {
+      background: var(--gris-oscuro);
+      border: 1px solid rgba(245,196,0,0.1);
+      padding: 3rem;
+      position: relative;
+    }
+
+    .nosotros-box::after {
+      content: '';
+      position: absolute;
+      bottom: -12px; right: -12px;
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(215,43,43,0.25);
+      z-index: -1;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat { border-top: 2px solid var(--rojo); padding-top: 1rem; }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--blanco);
+      line-height: 1;
+    }
+
+    .stat-number span { color: var(--amarillo); }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--texto-suave);
+      margin-top: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .nosotros-text .section-subtitle { max-width: 100%; margin-bottom: 1.5rem; }
+
+    .nosotros-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--amarillo);
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .nosotros-feature p { font-size: 0.9rem; color: var(--texto-suave); line-height: 1.6; }
+    .nosotros-feature strong { color: var(--blanco); }
+
+    /* ── SERVICIOS ── */
+    #servicios { background: var(--gris-oscuro); }
+
+    .servicios-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 5rem;
+    }
+
+    .servicios-header .section-subtitle { margin: 0 auto; }
+
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .servicio-card {
+      background: var(--negro);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 2.5rem;
+      border-radius: 2px;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .servicio-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--rojo), var(--amarillo));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+      transform-origin: left;
+    }
+
+    .servicio-card:hover { border-color: rgba(245,196,0,0.2); transform: translateY(-4px); }
+    .servicio-card:hover::after { transform: scaleX(1); }
+
+    .servicio-number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: rgba(215,43,43,0.15);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .servicio-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .servicio-card p { font-size: 0.88rem; color: var(--texto-suave); line-height: 1.65; }
+
+    /* ── MARCAS ── */
+    /* ⚠ Ajustá los nombres de marcas según las que realmente manejás */
+    #marcas {
+      background: var(--negro);
+      padding: 5rem 4rem;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    #marcas .section-title { margin-bottom: 0.5rem; }
+
+    #marcas .section-subtitle { margin: 0 auto 3.5rem; text-align: center; }
+
+    .marcas-swiper { width: 100%; padding: 0.5rem 0; }
+
+    .marca-logo-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      height: 100px;
+    }
+
+    .marca-logo-box img {
+      max-height: 68px;
+      max-width: 200px;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: grayscale(1) invert(1);
+      opacity: 0.55;
+      transition: opacity 0.35s;
+    }
+
+    .marca-logo-box:hover img {
+      opacity: 1;
+    }
+
+    /* ── CONTACTO ── */
+    #contacto {
+      background: var(--gris-oscuro);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contacto-info .section-subtitle { margin-bottom: 3rem; }
+
+    .contacto-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .contacto-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(215,43,43,0.12);
+      border: 1px solid rgba(215,43,43,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-radius: 2px;
+    }
+
+    .contacto-icon svg { width: 20px; height: 20px; color: var(--rojo); }
+
+    .contacto-item-text strong {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--texto-suave);
+      margin-bottom: 0.3rem;
+    }
+
+    .contacto-item-text a,
+    .contacto-item-text span {
+      font-size: 0.95rem;
+      color: var(--blanco);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contacto-item-text a:hover { color: var(--amarillo); }
+
+    .contacto-horario {
+      margin-top: 2.5rem;
+      padding: 1.5rem;
+      background: var(--negro);
+      border-left: 3px solid var(--amarillo);
+    }
+
+    .contacto-horario p { font-size: 0.85rem; color: var(--texto-suave); line-height: 1.7; }
+    .contacto-horario strong { color: var(--amarillo); }
+
+    /* WhatsApp en sección contacto */
+    .contacto-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--whatsapp);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.8rem 1.4rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-top: 1.5rem;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .contacto-wa:hover { background: #1da851; transform: translateY(-2px); }
+    .contacto-wa svg { width: 20px; height: 20px; }
+
+    /* FORM */
+    .contacto-form form { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .form-group label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--texto-suave);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--negro);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--blanco);
+      padding: 0.85rem 1rem;
+      font-size: 0.9rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.3s;
+      font-family: inherit;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--amarillo); }
+
+    .form-group select option { background: var(--negro); }
+
+    .form-group textarea { min-height: 120px; }
+
+    .btn-form {
+      background: var(--rojo);
+      color: #fff;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.3s, transform 0.2s;
+      align-self: flex-start;
+    }
+
+    .btn-form:hover { background: #b82222; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #F2F2F2;
+      border-top: 1px solid rgba(0,0,0,0.09);
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-logo img { height: 44px; width: auto; display: block; }
+    footer p { font-size: 0.8rem; color: #777; }
+
+    /* ── MAPA ── */
+    #mapa {
+      padding: 0;
+      line-height: 0;
+      border-top: 3px solid var(--rojo);
+    }
+
+    #mapa iframe {
+      width: 100%;
+      height: 420px;
+      border: none;
+      display: block;
+      filter: grayscale(0.25) contrast(1.05);
+    }
+
+    /* ── VOLVER ARRIBA ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 7.5rem;
+      right: 2.1rem;
+      z-index: 600;
+      width: 44px;
+      height: 44px;
+      background: var(--gris-oscuro);
+      border: 1px solid rgba(245,196,0,0.35);
+      color: var(--amarillo);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s, background 0.3s, border-color 0.3s;
+      pointer-events: none;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .back-to-top:hover {
+      background: var(--rojo);
+      border-color: var(--rojo);
+      color: #fff;
+    }
+
+    .back-to-top svg { width: 20px; height: 20px; }
+
+    /* ── BOTÓN WHATSAPP FLOTANTE ── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 600;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: var(--whatsapp);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .whatsapp-float:hover {
+      box-shadow: 0 6px 28px rgba(37,211,102,0.6);
+      transform: translateY(-2px);
+    }
+
+    .wf-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+    }
+
+    .wf-icon svg { width: 28px; height: 28px; }
+
+    .wf-text {
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+      max-width: 0;
+      overflow: hidden;
+      transition: max-width 0.4s ease, padding-right 0.4s ease;
+      padding-right: 0;
+    }
+
+    .whatsapp-float:hover .wf-text {
+      max-width: 160px;
+      padding-right: 1.2rem;
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.left { transform: translateX(-40px); }
+    .reveal.right { transform: translateX(40px); }
+    .reveal.visible { opacity: 1; transform: translate(0); }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+
+    /* ── KEYFRAMES ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; transform: scaleY(1); }
+      50% { opacity: 0.4; transform: scaleY(0.6); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      section { padding: 5rem 2rem; }
+      #nosotros, #contacto { grid-template-columns: 1fr; gap: 3rem; }
+      .servicios-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; text-align: center; }
+      .form-row { grid-template-columns: 1fr; }
+      #marcas { padding: 4rem 2rem; }
+      .wf-text { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <!--
+      LOGO: poné tu logo en assets/logo.png
+      Si no existe, muestra el texto TAREWA automáticamente.
+    -->
+    <a href="#hero" class="nav-logo">
+      <img src="assets/logo.png" alt="TAREWA" class="nav-logo-img" id="nav-logo-img" />
+      <span class="nav-logo-text" id="nav-logo-text">TAR<span>E</span>WA</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══ HERO CON SLIDER ══ -->
+  <!--
+    FOTOS DEL SLIDER: poné tus fotos en la carpeta assets/ con estos nombres:
+      assets/slide-1.jpg  → foto general del taller o de resistencias
+      assets/slide-2.jpg  → foto de resistencias blindadas / tubulares
+      assets/slide-3.jpg  → foto de sensores / pirómetros
+      assets/slide-4.jpg  → foto del equipo o productos terminados
+  -->
+  <section id="hero">
+    <div class="swiper hero-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide slide-1"></div>
+        <div class="swiper-slide slide-2"></div>
+        <div class="swiper-slide slide-3"></div>
+        <div class="swiper-slide slide-4"></div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+
+    <div class="hero-overlay"></div>
+    <div class="hero-grid"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">Resistencias Industriales · Morón, Buenos Aires</div>
+      <h1 class="hero-title">
+        El calor que<br>
+        tu <span class="highlight">industria</span><br>
+        <span class="highlight-y">necesita</span>
+      </h1>
+      <p class="hero-slogan">
+        Fabricamos resistencias eléctricas industriales a medida.<br>
+        <em>Calidad, precisión y entrega en todo el país.</em>
+      </p>
+      <div class="hero-buttons">
+        <a href="#productos" class="btn-primary">Ver productos</a>
+        <a href="#contacto" class="btn-secondary">Pedir presupuesto</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ══ PRODUCTOS ══ -->
+  <!--
+    FOTOS DE PRODUCTOS: poné tus fotos en assets/ con estos nombres:
+      assets/producto-blindada.jpg
+      assets/producto-tubular.jpg
+      assets/producto-zuncho.jpg
+      assets/producto-sensor.jpg
+      assets/producto-pirometro.jpg
+      assets/producto-especial.jpg
+    Si no tenés foto todavía, el card igual se muestra bien con un placeholder.
+  -->
+  <section id="productos">
+    <div class="productos-header">
+      <div>
+        <p class="section-label reveal">Catálogo</p>
+        <h2 class="section-title reveal reveal-delay-1">Nuestros <span>productos</span></h2>
+        <p class="section-subtitle reveal reveal-delay-2">
+          Fabricamos resistencias industriales por pedido. Cada pieza se diseña según las necesidades específicas de tu proceso.
+        </p>
+      </div>
+    </div>
+
+    <div class="productos-grid">
+
+      <!-- Resistencias Blindadas -->
+      <div class="producto-card reveal reveal-delay-1">
+        <div class="producto-img" id="img-blindada">
+          <img src="assets/producto-blindada.jpg" alt="Resistencias Blindadas"
+               onerror="document.getElementById('img-blindada').classList.add('sin-foto'); this.remove()" />
+          <svg style="display:none" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="6" y="18" width="36" height="12" rx="2"/><line x1="14" y1="18" x2="14" y2="30"/>
+            <line x1="20" y1="18" x2="20" y2="30"/><line x1="26" y1="18" x2="26" y2="30"/>
+            <line x1="32" y1="18" x2="32" y2="30"/><line x1="6" y1="24" x2="2" y2="24"/>
+            <line x1="42" y1="24" x2="46" y2="24"/>
+          </svg>
+          <span class="producto-badge">Por pedido</span>
+        </div>
+        <div class="producto-body">
+          <span class="producto-cod">Cód: RB-001</span>
+          <h3>Resistencias Blindadas</h3>
+          <p>Tubulares de acero inoxidable o cobre para inmersión y calentamiento de aire. Alta durabilidad en ambientes industriales exigentes.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Blindadas%20(C%C3%B3d%3A%20RB-001)" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Resistencias Tubulares -->
+      <div class="producto-card reveal reveal-delay-2">
+        <div class="producto-img" id="img-tubular">
+          <img src="assets/producto-tubular.jpg" alt="Resistencias Tubulares"
+               onerror="document.getElementById('img-tubular').classList.add('sin-foto'); this.remove()" />
+          <span class="producto-badge">Por pedido</span>
+        </div>
+        <div class="producto-body">
+          <span class="producto-cod">Cód: RT-002</span>
+          <h3>Resistencias Tubulares</h3>
+          <p>Diseñadas para aplicaciones compactas en fundiciones y maquinaria. Disponibles en distintos diámetros y longitudes a medida.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Tubulares%20(C%C3%B3d%3A%20RT-002)" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Resistencias de Zuncho -->
+      <div class="producto-card reveal reveal-delay-3">
+        <div class="producto-img" id="img-zuncho">
+          <img src="assets/producto-zuncho.jpg" alt="Resistencias de Zuncho"
+               onerror="document.getElementById('img-zuncho').classList.add('sin-foto'); this.remove()" />
+          <span class="producto-badge">Por pedido</span>
+        </div>
+        <div class="producto-body">
+          <span class="producto-cod">Cód: RZ-003</span>
+          <h3>Resistencias de Zuncho</h3>
+          <p>Para calentamiento perimetral de recipientes, moldes y cañerías. Adaptamos la forma y potencia exacta a tu equipo.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20de%20Zuncho%20(C%C3%B3d%3A%20RZ-003)" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Sensores de Temperatura -->
+      <div class="producto-card reveal reveal-delay-4">
+        <div class="producto-img" id="img-sensor">
+          <img src="assets/producto-sensor.jpg" alt="Sensores de Temperatura"
+               onerror="document.getElementById('img-sensor').classList.add('sin-foto'); this.remove()" />
+          <span class="producto-badge">Por pedido</span>
+        </div>
+        <div class="producto-body">
+          <span class="producto-cod">Cód: ST-004</span>
+          <h3>Sensores de Temperatura</h3>
+          <p>Termocuplas tipo J y K, termoresistencias Pt100, pirómetros y termostatos. Medición precisa para el control de tus procesos industriales.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Sensores%20de%20Temperatura%20(C%C3%B3d%3A%20ST-004)" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Accesorios -->
+      <div class="producto-card reveal reveal-delay-5">
+        <div class="producto-img" id="img-accesorios">
+          <img src="assets/producto-accesorios.jpg" alt="Accesorios"
+               onerror="document.getElementById('img-accesorios').classList.add('sin-foto'); this.remove()" />
+          <span class="producto-badge">Por pedido</span>
+        </div>
+        <div class="producto-body">
+          <span class="producto-cod">Cód: PT-005</span>
+          <h3>Accesorios</h3>
+          <p>Accesorios de conexión, aislamiento y protección para tus resistencias, sensores y tableros.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Accesorios%20(C%C3%B3d%3A%20PT-005)" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207 -.242-.579-.487-.5 -.669 -.51 -.173 -.008 -.371 -.01 -.57 -.01 -.198 0 -.52 .074 -.792 .372 -.272 .297 -1.04 1.016 -1.04 2.479 0 1.462 1.065 2.875 １．２１３ ３．０７４．１４９．１９８ ２．０９６ ３．２ ５．０７７ ４．４８７．７０９．３０６ １．２６２．４８９ １．６９４．６２５．７１２．２２７ １．３６．１９５ １．８７１．１１８．５７１－０．０８５ １．７５８－０．７１９ ２．００６－１．４１３．２４８－０．６９４．２４８－１．２８９．１７３－１．４１３－０．０７４－０．１２４－０．２７２－０．１９８－０．５７－０．３４７ｚ"/><path d="M₁₁·₉₉₉ ₁·₉₉₈C₆·₄₇₇ ₁·₉₉₈ ₂ ₆·₄₇₆ ₂ ₁₂c₀ ₁·₈₉·₅₂³ ³·⁶⁵⁹ ₁·⁴³⁵ ⁵·¹⁷³L₂ ₂₂l⁴·⁹⁷⁸−₁·³¹C₈·⁴¹ ₂₁·⁵³⁶ ₁₀·¹⁶³ ₂² ₁²²c⁵·⁵²² ₀ ₁₀−₄·⁴⁷₈ ₁₀−₁₀S₁₇·⁵²¹ ₁·₉₉₈ ₁²¹ ·十九点九九八zm₀¹八c−₁·七二₀−³·³²九−₀·四七六−四·七零三−¹·³零二l−₀·三三七−₀·二−³·四九八＋₀·九二一＋₀·九三六−³··四一−₀··三五A seven · nine five seven · nine five zero zero one one four c zero − four · four one one three · five eight nine − eight eight − eight s eight three · five eight nine − eight s eight three · five eight nine − eight z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Resistencias Especiales -->
+      <div class="producto-card reveal reveal-delay-6">
+        <div class="producto-img" id="img-especial">
+          <img src="assets/producto-especial.jpg" alt="Resistencias Especiales"
+               onerror="document.getElementById('img-especial').classList.add('sin-foto'); this.remove()" />
+          <span class="producto-badge">A medida</span>
+        </div>
+        <div class="producto-body">
+          <span class="producto-cod">Cód: RE-006</span>
+          <h3>Resistencias Especiales</h3>
+          <p>Desarrollo a medida para cualquier proceso industrial. Planas, de banda, infrarrojas cerámicas y cualquier geometría.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Especiales%20a%20medida%20(C%C3%B3d%3A%20RE-006)" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Pantallas Infrarrojas -->
+      <div class="producto-card reveal reveal-delay-1">
+        <div class="producto-img" id="img-infrarroja">
+          <img src="assets/producto-infrarroja.jpg" alt="Pantallas Infrarrojas"
+               onerror="document.getElementById('img-infrarroja').classList.add('sin-foto'); this.remove()" />
+          <span class="producto-badge">Por pedido</span>
+        </div>
+        <div class="producto-body">
+          <span class="producto-cod">Cód: PI-007</span>
+          <h3>Pantallas Infrarrojas</h3>
+          <p>Emisores cerámicos y cuarzos infrarrojos para secado, barnizado y calentamiento superficial sin contacto. Alta eficiencia energética y respuesta rápida.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Pantallas%20Infrarrojas%20(C%C3%B3d%3A%20PI-007)" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Resistencias Planas -->
+      <div class="producto-card reveal reveal-delay-2">
+        <div class="producto-img" id="img-plana">
+          <img src="assets/producto-plana.jpg" alt="Resistencias Planas"
+               onerror="document.getElementById('img-plana').classList.add('sin-foto'); this.remove()" />
+          <span class="producto-badge">Por pedido</span>
+        </div>
+        <div class="producto-body">
+          <span class="producto-cod">Cód: RP-008</span>
+          <h3>Resistencias Planas</h3>
+          <p>Ideales para calentamiento uniforme de superficies planas: platos, moldes, prensas y selladores. Disponibles en distintos voltajes, potencias y materiales aislantes.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Planas%20(C%C3%B3d%3A%20RP-008)" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Suspendidas -->
+      <div class="producto-card reveal reveal-delay-3">
+        <div class="producto-img" id="img-suspendida">
+          <img src="assets/producto-suspendida.jpg" alt="Resistencias Suspendidas"
+               onerror="document.getElementById('img-suspendida').classList.add('sin-foto'); this.remove()" />
+          <span class="producto-badge">Por pedido</span>
+        </div>
+        <div class="producto-body">
+          <span class="producto-cod">Cód: RS-009</span>
+          <h3>Resistencias Suspendidas</h3>
+          <p>Resistencias de hilo expuesto suspendido en soportes cerámicos, pensadas para hornos industriales y cámaras de calentamiento que requieren distribución uniforme del calor.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Suspendidas%20(C%C3%B3d%3A%20RS-009)" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Bancos de Carga Resistivos -->
+      <div class="producto-card reveal reveal-delay-4">
+        <div class="producto-img" id="img-banco">
+          <img src="assets/producto-banco.jpg" alt="Bancos de Carga Resistivos"
+               onerror="document.getElementById('img-banco').classList.add('sin-foto'); this.remove()" />
+          <span class="producto-badge">Por pedido</span>
+        </div>
+        <div class="producto-body">
+          <span class="producto-cod">Cód: BC-010</span>
+          <h3>Bancos de Carga Resistivos</h3>
+          <p>Conjuntos de resistencias montadas en bastidor para pruebas de carga de generadores, UPS y transformadores. Potencia regulable y construcción robusta para uso continuo.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Bancos%20de%20Carga%20Resistivos%20(C%C3%B3d%3A%20BC-010)" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QUIÉNES SOMOS -->
+  <section id="nosotros">
+    <div class="nosotros-visual">
+      <div class="nosotros-box reveal left">
+        <p class="section-label">Quiénes somos</p>
+        <h2 class="section-title" style="font-size:1.8rem; margin-bottom:0.5rem;">
+          Industria <span>argentina</span>,<br>calidad que se siente
+        </h2>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-number">100<span>%</span></div>
+            <div class="stat-label">Fabricación propia</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">+<span>60</span></div>
+            <div class="stat-label">Años en el rubro</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number"><span>∞</span></div>
+            <div class="stat-label">Variedad de modelos</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">ARG</div>
+            <div class="stat-label">Envíos a todo el país</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nosotros-text">
+      <p class="section-label reveal">Nuestra historia</p>
+      <h2 class="section-title reveal reveal-delay-1">¿Por qué elegir <span>TAREWA</span>?</h2>
+      <p class="section-subtitle reveal reveal-delay-2">
+        Desde 1964, somos una empresa argentina especializada en la fabricación de resistencias eléctricas industriales. Trabajamos con industrias de todos los rubros, brindando soluciones de calefacción eficientes y duraderas.
+      </p>
+      <div class="nosotros-feature reveal reveal-delay-3">
+        <div class="feature-dot"></div>
+        <p><strong>Fabricación por pedido:</strong> Cada resistencia se fabrica artesanalmente con las especificaciones exactas que tu proceso requiere.</p>
+      </div>
+      <div class="nosotros-feature reveal reveal-delay-4">
+        <div class="feature-dot"></div>
+        <p><strong>Amplia variedad:</strong> Blindadas, tubulares, zunchos, planas, infrarrojas, sensores, pirómetros y termostatos.</p>
+      </div>
+      <div class="nosotros-feature reveal reveal-delay-5">
+        <div class="feature-dot"></div>
+        <p><strong>Asesoramiento técnico:</strong> Nuestro equipo analiza tu proceso industrial y te recomienda la solución más eficiente en términos de potencia, material y durabilidad.</p>
+      </div>
+      <div class="nosotros-feature reveal reveal-delay-6">
+        <div class="feature-dot"></div>
+        <p><strong>Ubicados en Morón:</strong> Fábrica y oficinas en Huaura 235, Buenos Aires. Atención personalizada y envíos a todo el país.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios">
+    <div class="servicios-header">
+      <p class="section-label reveal">Lo que hacemos</p>
+      <h2 class="section-title reveal reveal-delay-1">Nuestros <span>servicios</span></h2>
+      <p class="section-subtitle reveal reveal-delay-2">
+        Más que vender productos, ofrecemos soluciones completas de calefacción industrial para tu negocio.
+      </p>
+    </div>
+    <div class="servicios-grid">
+      <div class="servicio-card reveal reveal-delay-1">
+        <div class="servicio-number">01</div>
+        <h3>Fabricación a medida</h3>
+        <p>Diseñamos y fabricamos resistencias según tus especificaciones técnicas: dimensiones, potencia, tensión y material adaptados a tu proceso.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-2">
+        <div class="servicio-number">02</div>
+        <h3>Asesoramiento técnico</h3>
+        <p>Nuestro equipo analiza tu proceso industrial y te recomienda la solución más eficiente en términos de potencia, material y durabilidad.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-3">
+        <div class="servicio-number">03</div>
+        <h3>Presupuesto sin cargo</h3>
+        <p>Consultá por WhatsApp, teléfono o email. Te respondemos con rapidez y sin compromiso con el mejor precio del mercado.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-4">
+        <div class="servicio-number">04</div>
+        <h3>Envíos a todo el país</h3>
+        <p>Despachamos a cualquier punto de Argentina. Coordinamos el envío más conveniente según urgencia y destino.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-5">
+        <div class="servicio-number">05</div>
+        <h3>Retiro en taller</h3>
+        <p>Podés pasar a buscar tu pedido directamente en nuestro taller en Huaura 235, Morón, de lunes a viernes.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-6">
+        <div class="servicio-number">06</div>
+        <h3>Reposición y mantenimiento</h3>
+        <p>Reemplazamos resistencias de cualquier marca o modelo. Traenos la pieza vieja y la reproducimos con materiales de primera calidad.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MARCAS ══ -->
+  <!--
+    ⚠ IMPORTANTE: cambiá estos nombres por las marcas que realmente manejás.
+    Si no trabajás con marcas de terceros, borrá toda esta sección.
+  -->
+  <section id="marcas">
+    <p class="section-label reveal">Nuestros clientes</p>
+    <h2 class="section-title reveal reveal-delay-1">Marcas que <span>confían en nosotros</span></h2>
+    <p class="section-subtitle reveal reveal-delay-2">
+      Empresas líderes de la industria argentina que eligen a TAREWA para sus soluciones de calefacción industrial.
+    </p>
+    <div class="swiper marcas-swiper reveal reveal-delay-3">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-heatcraft.png" alt="Heatcraft" /></div></div>
+        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-edos.png" alt="Edos" /></div></div>
+        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-las-marias.png" alt="Establecimiento Las Marías" /></div></div>
+        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-inelro.png" alt="Inelro" /></div></div>
+        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-meip.png" alt="MEIP" /></div></div>
+        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-multicontrol-westric.png" alt="Multicontrol Westric" /></div></div>
+        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-nucleoelectrica.png" alt="Nucleoeléctrica Argentina" /></div></div>
+        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-tigre-brasil.png" alt="Tigre Brasil" /></div></div>
+        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-tromen.png" alt="Tromen" /></div></div>
+        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-molinos.png" alt="Molinos" /></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="contacto-info">
+      <p class="section-label reveal">Hablemos</p>
+      <h2 class="section-title reveal reveal-delay-1">Pedí tu <span>presupuesto</span></h2>
+      <p class="section-subtitle reveal reveal-delay-2">
+        Contanos qué necesitás y te respondemos a la brevedad con el mejor precio.
+      </p>
+
+      <div class="contacto-item reveal reveal-delay-3">
+        <div class="contacto-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.15a16 16 0 006 6l1.52-1.52a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 13.92v3z"/>
+          </svg>
+        </div>
+        <div class="contacto-item-text">
+          <strong>Teléfono</strong>
+          <a href="tel:+5491141937728">11 4193-7728</a>
+        </div>
+      </div>
+
+      <div class="contacto-item reveal reveal-delay-4">
+        <div class="contacto-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div class="contacto-item-text">
+          <strong>Email</strong>
+          <a href="mailto:ventas@tarewa.com">ventas@tarewa.com</a>
+        </div>
+      </div>
+
+      <div class="contacto-item reveal reveal-delay-5">
+        <div class="contacto-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="contacto-item-text">
+          <strong>Dirección</strong>
+          <span>Huaura 235, Morón, Buenos Aires</span>
+        </div>
+      </div>
+
+      <div class="contacto-horario reveal reveal-delay-6">
+        <p><strong>Horario de atención:</strong><br>
+        Lunes a viernes · 8:00 a 16:30 hs</p>
+      </div>
+
+      <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20pedir%20un%20presupuesto." target="_blank" rel="noopener" class="contacto-wa reveal">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+        Escribinos por WhatsApp
+      </a>
+    </div>
+
+    <div class="contacto-form reveal right">
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-group">
+            <label>Empresa</label>
+            <input type="text" placeholder="Tu empresa (opcional)" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input type="tel" placeholder="Tu teléfono" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="Tu email" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Producto de interés</label>
+          <select>
+            <option value="">Seleccioná un producto</option>
+            <option>Resistencias blindadas</option>
+            <option>Resistencias tubulares</option>
+            <option>Resistencias de zuncho</option>
+            <option>Sensores de temperatura</option>
+            <option>Pirómetros y termostatos</option>
+            <option>Resistencias especiales / a medida</option>
+            <option>Pantallas infrarrojas</option>
+            <option>Resistencias planas</option>
+            <option>Resistencias suspendidas</option>
+            <option>Bancos de carga resistivos</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea placeholder="Describí lo que necesitás: tipo de resistencia, tensión, potencia, dimensiones, cantidad..."></textarea>
+        </div>
+        <button type="submit" class="btn-form">Enviar consulta</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- MAPA -->
+  <section id="mapa">
+    <iframe
+      src="https://maps.google.com/maps?q=Huaura+235%2C+Mor%C3%B3n%2C+Buenos+Aires%2C+Argentina&hl=es&z=16&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Ubicación TAREWA — Huaura 235, Morón, Buenos Aires">
+    </iframe>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><img src="assets/logo.png" alt="TAREWA" /></div>
+    <p>© 2025 TAREWA · Resistencias Industriales · Morón, Buenos Aires</p>
+    <p style="color: var(--texto-suave); font-size:0.78rem;">El calor que tu industria necesita</p>
+  </footer>
+
+  <!-- VOLVER ARRIBA -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Volver arriba">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <!-- ══ BOTÓN WHATSAPP FLOTANTE ══ -->
+  <a href="https://wa.me/5491141937728" target="_blank" rel="noopener" class="whatsapp-float" title="Consultanos por WhatsApp">
+    <div class="wf-icon">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+      </svg>
+    </div>
+    <span class="wf-text">Consultanos</span>
+  </a>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Carrusel de marcas
+    new Swiper('.marcas-swiper', {
+      loop: true,
+      autoplay: { delay: 2200, disableOnInteraction: false },
+      speed: 700,
+      slidesPerView: 4,
+      spaceBetween: 24,
+      breakpoints: {
+        0:   { slidesPerView: 2, spaceBetween: 16 },
+        600: { slidesPerView: 3, spaceBetween: 20 },
+        900: { slidesPerView: 4, spaceBetween: 24 },
+      },
+    });
+
+    // Hero Slider
+    new Swiper('.hero-swiper', {
+      loop: true,
+      autoplay: { delay: 4000, disableOnInteraction: false },
+      speed: 900,
+      effect: 'fade',
+      fadeEffect: { crossFade: true },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    // Logo: fallback a texto si no existe assets/logo.png
+    const logoImg = document.getElementById('nav-logo-img');
+    const logoText = document.getElementById('nav-logo-text');
+    if (logoImg) {
+      logoImg.onerror = function() {
+        logoImg.style.display = 'none';
+        logoText.style.display = 'block';
+      };
+    }
+
+    // Nav shrink on scroll
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Fallback SVG para imágenes sin foto
+    document.querySelectorAll('.producto-img').forEach(div => {
+      const svg = div.querySelector('svg');
+      if (svg) svg.style.display = 'block';
+    });
+
+    // Form submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.btn-form');
+      btn.textContent = '¡Enviado!';
+      btn.style.background = '#2a7a3b';
+      setTimeout(() => {
+        btn.textContent = 'Enviar consulta';
+        btn.style.background = '';
+        e.target.reset();
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
