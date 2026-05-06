@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TAREWA — El calor que tu industria necesita</title>
+  <title>TAREWA — El calor que tu Industria necesita</title>
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -933,13 +933,112 @@
       50% { opacity: 0.4; transform: scaleY(0.6); }
     }
 
+    /* ── HAMBURGER BUTTON ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .hb-bar {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--negro);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      transform-origin: center;
+    }
+
+    .nav-hamburger.is-open .hb-bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-hamburger.is-open .hb-bar:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .nav-hamburger.is-open .hb-bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ── MOBILE PANEL ── */
+    .nav-mobile-panel {
+      display: none;
+      overflow: hidden;
+      max-height: 0;
+      width: 100%;
+      transition: max-height 0.25s ease;
+    }
+
+    nav.nav-open .nav-mobile-panel {
+      max-height: 320px;
+    }
+
+    .nav-mobile-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem 0 1rem;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      margin-top: 0.25rem;
+    }
+
+    .nav-mobile-links li:last-child {
+      padding: 0.5rem 1.5rem 0;
+    }
+
+    .nav-mobile-links a {
+      display: block;
+      padding: 0.85rem 1.5rem;
+      color: #555;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-mobile-links a:hover,
+    .nav-mobile-links a:focus {
+      color: var(--rojo);
+      background: rgba(215,43,43,0.05);
+      outline: none;
+    }
+
+    .nav-mobile-links .nav-cta {
+      display: block;
+      background: var(--rojo);
+      color: #fff !important;
+      text-align: center;
+      border-radius: 4px;
+      padding: 0.7rem 1.4rem;
+    }
+
+    .nav-mobile-links .nav-cta:hover {
+      background: #b82222 !important;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      nav { padding: 1rem 2rem; }
+      nav { padding: 1rem 2rem; flex-wrap: wrap; }
+      nav.scrolled { padding: 0.8rem 2rem; }
       section { padding: 5rem 2rem; }
       #nosotros, #contacto { grid-template-columns: 1fr; gap: 3rem; }
       .servicios-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-mobile-panel { display: block; }
+      nav.nav-open .nav-logo-60 { display: none; }
       footer { flex-direction: column; text-align: center; }
       .form-row { grid-template-columns: 1fr; }
       #marcas { padding: 4rem 2rem; }
@@ -968,6 +1067,19 @@
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#contacto" class="nav-cta">Contacto</a></li>
     </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
+      <span class="hb-bar"></span>
+      <span class="hb-bar"></span>
+      <span class="hb-bar"></span>
+    </button>
+    <div class="nav-mobile-panel" id="navMobilePanel" aria-hidden="true">
+      <ul class="nav-mobile-links">
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+      </ul>
+    </div>
   </nav>
 
   <!-- ══ HERO CON SLIDER ══ -->
@@ -998,7 +1110,7 @@
       <div class="hero-badge">Resistencias Industriales · Morón, Buenos Aires</div>
       <h1 class="hero-title">
         El calor que<br>
-        tu <span class="highlight">industria</span><br>
+        tu <span class="highlight">Industria</span><br>
         <span class="highlight-y">necesita</span>
       </h1>
       <p class="hero-slogan">
@@ -1474,7 +1586,7 @@
   <footer>
     <div class="footer-logo"><img src="assets/logo.png" alt="TAREWA" /></div>
     <p>© 2025 TAREWA · Resistencias Industriales · Morón, Buenos Aires</p>
-    <p style="color: var(--texto-suave); font-size:0.78rem;">El calor que tu industria necesita</p>
+    <p style="color: var(--texto-suave); font-size:0.78rem;">El calor que tu Industria necesita</p>
   </footer>
 
   <!-- VOLVER ARRIBA -->
@@ -1542,6 +1654,47 @@
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
       backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('navHamburger');
+    const mobilePanel = document.getElementById('navMobilePanel');
+
+    function openMenu() {
+      hamburger.classList.add('is-open');
+      navbar.classList.add('nav-open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      hamburger.setAttribute('aria-label', 'Cerrar menú');
+      mobilePanel.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('is-open');
+      navbar.classList.remove('nav-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Abrir menú');
+      mobilePanel.setAttribute('aria-hidden', 'true');
+    }
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.contains('is-open') ? closeMenu() : openMenu();
+    });
+
+    // Close on link click (smooth scroll + close)
+    mobilePanel.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (navbar.classList.contains('nav-open') && !navbar.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Close when resizing to desktop width
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 900) closeMenu();
     });
 
     // Scroll reveal
