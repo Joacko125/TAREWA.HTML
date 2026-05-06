@@ -99,6 +99,21 @@
 
     .nav-cta:hover { background: #b82222 !important; color: #fff !important; }
 
+    .nav-logo-60 {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .nav-logo-60 img {
+      height: 51px;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.9;
+      transition: height 0.3s, opacity 0.3s;
+    }
+    nav.scrolled .nav-logo-60 img { height: 37px; }
+
     /* ── HERO CON SLIDER ── */
     #hero {
       position: relative;
@@ -944,6 +959,9 @@
       <img src="assets/logo.png" alt="TAREWA" class="nav-logo-img" id="nav-logo-img" />
       <span class="nav-logo-text" id="nav-logo-text">TAR<span>E</span>WA</span>
     </a>
+    <div class="nav-logo-60">
+      <img src="assets/logo-60.png" alt="60 años TAREWA" />
+    </div>
     <ul class="nav-links">
       <li><a href="#productos">Productos</a></li>
       <li><a href="#nosotros">Nosotros</a></li>
