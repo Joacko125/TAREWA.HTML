@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resistencias Eléctricas Industriales | TAREWA Argentina</title>
-  <meta name="description" content="TAREWA fabrica resistencias eléctricas industriales de alta calidad en Morón, Buenos Aires. Más de 60 años de experiencia. Blindadas, tubulares, infrarrojas y más. Pedí tu presupuesto." />
-  <link rel="canonical" href="https://tarewa.com.ar/" />
+  <meta name="description" content="TAREWA: fabricantes de resistencias eléctricas industriales en Morón, Buenos Aires. +60 años de experiencia. Pedí tu presupuesto." />
+  <link rel="canonical" href="https://tarewa.com/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -324,35 +324,6 @@
     }
 
     .btn-secondary:hover { border-color: var(--amarillo); color: var(--amarillo); transform: translateY(-2px); }
-
-    /* Scroll indicator */
-    .hero-scroll {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0;
-      animation: fadeIn 1s 1.5s ease forwards;
-    }
-
-    .hero-scroll span {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(240,240,240,0.6);
-    }
-
-    .scroll-line {
-      width: 1px;
-      height: 50px;
-      background: linear-gradient(to bottom, var(--amarillo), transparent);
-      animation: scrollPulse 1.8s ease-in-out infinite;
-    }
 
     /* Swiper controles */
     .hero-swiper .swiper-button-prev,
@@ -676,45 +647,6 @@
     .servicio-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem; }
     .servicio-card p { font-size: 0.88rem; color: var(--texto-suave); line-height: 1.65; }
 
-    /* ── MARCAS ── */
-    /* ⚠ Ajustá los nombres de marcas según las que realmente manejás */
-    #marcas {
-      background: var(--negro);
-      padding: 5rem 4rem;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    #marcas .section-title { margin-bottom: 0.5rem; }
-
-    #marcas .section-subtitle { margin: 0 auto 3.5rem; text-align: center; }
-
-    .marcas-swiper { width: 100%; padding: 0.5rem 0; }
-
-    .marca-logo-box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem 2rem;
-      height: 100px;
-    }
-
-    .marca-logo-box img {
-      max-height: 68px;
-      max-width: 200px;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      filter: grayscale(1) invert(1);
-      opacity: 0.55;
-      transition: opacity 0.35s;
-    }
-
-    .marca-logo-box:hover img {
-      opacity: 1;
-    }
-
     /* ── CONTACTO ── */
     #contacto {
       background: var(--gris-oscuro);
@@ -993,10 +925,6 @@
       to { opacity: 1; }
     }
 
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 1; transform: scaleY(1); }
-      50% { opacity: 0.4; transform: scaleY(0.6); }
-    }
 
     /* ── HAMBURGER BUTTON ── */
     .nav-hamburger {
@@ -1172,12 +1100,12 @@
     <div class="hero-grid"></div>
 
     <div class="hero-content">
-      <div class="hero-badge">Resistencias Industriales · Morón, Buenos Aires</div>
-      <h1 class="hero-title">
+      <h1 class="hero-badge">Resistencias Industriales · Morón, Buenos Aires</h1>
+      <div class="hero-title">
         El calor que<br>
         tu <span class="highlight">Industria</span><br>
         <span class="highlight-y">necesita</span>
-      </h1>
+      </div>
       <p class="hero-slogan">
         Fabricamos <strong>resistencias eléctricas industriales</strong> a medida.<br>
         <em>Calidad, precisión y entrega en todo el país.</em>
@@ -1188,10 +1116,6 @@
       </div>
     </div>
 
-    <div class="hero-scroll">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
-    </div>
   </section>
 
   <!-- ══ PRODUCTOS ══ -->
@@ -1504,33 +1428,6 @@
     </div>
   </section>
 
-  <!-- ══ MARCAS ══ -->
-  <!--
-    ⚠ IMPORTANTE: cambiá estos nombres por las marcas que realmente manejás.
-    Si no trabajás con marcas de terceros, borrá toda esta sección.
-  -->
-  <section id="marcas">
-    <p class="section-label reveal">Nuestros clientes</p>
-    <h2 class="section-title reveal reveal-delay-1">Marcas que <span>confían en nosotros</span></h2>
-    <p class="section-subtitle reveal reveal-delay-2">
-      Empresas líderes de la industria argentina que eligen a TAREWA para sus soluciones de calefacción industrial.
-    </p>
-    <div class="swiper marcas-swiper reveal reveal-delay-3">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-heatcraft.png" alt="Heatcraft" loading="lazy" /></div></div>
-        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-edos.png" alt="Edos" loading="lazy" /></div></div>
-        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-las-marias.png" alt="Establecimiento Las Marías" loading="lazy" /></div></div>
-        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-inelro.png" alt="Inelro" loading="lazy" /></div></div>
-        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-meip.png" alt="MEIP" loading="lazy" /></div></div>
-        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-multicontrol-westric.png" alt="Multicontrol Westric" loading="lazy" /></div></div>
-        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-nucleoelectrica.png" alt="Nucleoeléctrica Argentina" loading="lazy" /></div></div>
-        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-tigre-brasil.png" alt="Tigre Brasil" loading="lazy" /></div></div>
-        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-tromen.png" alt="Tromen" loading="lazy" /></div></div>
-        <div class="swiper-slide"><div class="marca-logo-box"><img src="assets/logo-molinos.png" alt="Molinos" loading="lazy" /></div></div>
-      </div>
-    </div>
-  </section>
-
   <!-- CONTACTO -->
   <section id="contacto">
     <div class="contacto-info">
@@ -1675,20 +1572,6 @@
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-    // Carrusel de marcas
-    new Swiper('.marcas-swiper', {
-      loop: true,
-      autoplay: { delay: 2200, disableOnInteraction: false },
-      speed: 700,
-      slidesPerView: 4,
-      spaceBetween: 24,
-      breakpoints: {
-        0:   { slidesPerView: 2, spaceBetween: 16 },
-        600: { slidesPerView: 3, spaceBetween: 20 },
-        900: { slidesPerView: 4, spaceBetween: 24 },
-      },
-    });
-
     // Hero Slider
     new Swiper('.hero-swiper', {
       loop: true,
