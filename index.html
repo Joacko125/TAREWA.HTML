@@ -12,7 +12,7 @@
   <meta property="og:title" content="Resistencias Eléctricas Industriales | TAREWA Argentina" />
   <meta property="og:description" content="Fabricantes de resistencias eléctricas industriales en Buenos Aires. +60 años de experiencia. Blindadas, tubulares, infrarrojas y más." />
   <meta property="og:url" content="https://tarewa.com/" />
-  <meta property="og:image" content="https://tarewa.com/assets/logo.avif" />
+  <meta property="og:image" content="https://tarewa.com/assets/logo.png" />
   <meta property="og:locale" content="es_AR" />
   <meta property="og:site_name" content="TAREWA" />
 
@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Resistencias Eléctricas Industriales | TAREWA" />
   <meta name="twitter:description" content="Fabricantes de resistencias eléctricas en Buenos Aires. +60 años de experiencia." />
-  <meta name="twitter:image" content="https://tarewa.com/assets/logo.avif" />
+  <meta name="twitter:image" content="https://tarewa.com/assets/logo.png" />
 
   <!-- Schema JSON-LD -->
   <script type="application/ld+json">
@@ -30,8 +30,8 @@
     "name": "TAREWA",
     "description": "Fabricantes de resistencias eléctricas industriales con más de 60 años de experiencia.",
     "url": "https://tarewa.com",
-    "logo": "https://tarewa.com/assets/logo.avif",
-    "image": "https://tarewa.com/assets/logo.avif",
+    "logo": "https://tarewa.com/assets/logo.png",
+    "image": "https://tarewa.com/assets/logo.png",
     "telephone": "+5491141937728",
     "email": "ventas@tarewa.com",
     "foundingDate": "1964",
@@ -70,6 +70,7 @@
   </script>
 
   <link rel="icon" type="image/avif" href="assets/favicon.avif" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -206,10 +207,38 @@
 
     /* Slide 1: foto de taller/resistencias generales */
     /* ▼ REEMPLAZÁ con tus fotos reales en la carpeta assets/ ▼ */
-    .slide-1 { background-image: url('assets/slide-1.avif'); }
-    .slide-2 { background-image: url('assets/slide-2.avif'); }
-    .slide-3 { background-image: url('assets/slide-3.avif'); }
-    .slide-4 { background-image: url('assets/slide-4.avif'); }
+    .slide-1 {
+      background-image: url('assets/slide-1.jpg');
+      background-image: image-set(
+        url('assets/slide-1.avif') type('image/avif'),
+        url('assets/slide-1.webp') type('image/webp'),
+        url('assets/slide-1.jpg') type('image/jpeg')
+      );
+    }
+    .slide-2 {
+      background-image: url('assets/slide-2.jpg');
+      background-image: image-set(
+        url('assets/slide-2.avif') type('image/avif'),
+        url('assets/slide-2.webp') type('image/webp'),
+        url('assets/slide-2.jpg') type('image/jpeg')
+      );
+    }
+    .slide-3 {
+      background-image: url('assets/slide-3.jpg');
+      background-image: image-set(
+        url('assets/slide-3.avif') type('image/avif'),
+        url('assets/slide-3.webp') type('image/webp'),
+        url('assets/slide-3.jpg') type('image/jpeg')
+      );
+    }
+    .slide-4 {
+      background-image: url('assets/slide-4.jpg');
+      background-image: image-set(
+        url('assets/slide-4.avif') type('image/avif'),
+        url('assets/slide-4.webp') type('image/webp'),
+        url('assets/slide-4.jpg') type('image/jpeg')
+      );
+    }
 
     /* Overlay oscuro sobre las imágenes para legibilidad del texto */
     .hero-overlay {
@@ -1048,11 +1077,19 @@
       Si no existe, muestra el texto TAREWA automáticamente.
     -->
     <a href="#hero" class="nav-logo">
-      <img src="assets/logo.avif" alt="TAREWA" class="nav-logo-img" id="nav-logo-img" width="1174" height="648" />
+      <picture>
+        <source type="image/avif" srcset="assets/logo.avif">
+        <source type="image/webp" srcset="assets/logo.webp">
+        <img src="assets/logo.png" alt="TAREWA" class="nav-logo-img" id="nav-logo-img" width="1174" height="648" />
+      </picture>
       <span class="nav-logo-text" id="nav-logo-text">TAR<span>E</span>WA</span>
     </a>
     <div class="nav-logo-60">
-      <img src="assets/logo-60.avif" alt="60 años TAREWA" width="116" height="116" />
+      <picture>
+        <source type="image/avif" srcset="assets/logo-60.avif">
+        <source type="image/webp" srcset="assets/logo-60.webp">
+        <img src="assets/logo-60.png" alt="60 años TAREWA" width="116" height="116" />
+      </picture>
     </div>
     <ul class="nav-links">
       <li><a href="#productos">Productos</a></li>
@@ -1145,8 +1182,12 @@
       <!-- Resistencias Blindadas -->
       <div class="producto-card reveal reveal-delay-1">
         <div class="producto-img" id="img-blindada">
-          <img src="assets/producto-blindada.avif" alt="Resistencias Blindadas Industriales" loading="lazy" width="900" height="613"
-               onerror="document.getElementById('img-blindada').classList.add('sin-foto'); this.remove()" />
+          <picture>
+            <source type="image/avif" srcset="assets/producto-blindada.avif">
+            <source type="image/webp" srcset="assets/producto-blindada.webp">
+            <img src="assets/producto-blindada.jpg" alt="Resistencias Blindadas Industriales" loading="lazy" width="900" height="613"
+                 onerror="document.getElementById('img-blindada').classList.add('sin-foto'); this.remove()" />
+          </picture>
           <svg style="display:none" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
             <rect x="6" y="18" width="36" height="12" rx="2"/><line x1="14" y1="18" x2="14" y2="30"/>
             <line x1="20" y1="18" x2="20" y2="30"/><line x1="26" y1="18" x2="26" y2="30"/>
@@ -1169,8 +1210,12 @@
       <!-- Resistencias Tubulares -->
       <div class="producto-card reveal reveal-delay-2">
         <div class="producto-img" id="img-tubular">
-          <img src="assets/producto-tubular.avif" alt="Resistencias Tubulares Industriales" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-tubular').classList.add('sin-foto'); this.remove()" />
+          <picture>
+            <source type="image/avif" srcset="assets/producto-tubular.avif">
+            <source type="image/webp" srcset="assets/producto-tubular.webp">
+            <img src="assets/producto-tubular.jpg" alt="Resistencias Tubulares Industriales" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-tubular').classList.add('sin-foto'); this.remove()" />
+          </picture>
           <span class="producto-badge">Por pedido</span>
         </div>
         <div class="producto-body">
@@ -1187,8 +1232,12 @@
       <!-- Resistencias de Zuncho -->
       <div class="producto-card reveal reveal-delay-3">
         <div class="producto-img" id="img-zuncho">
-          <img src="assets/producto-zuncho.avif" alt="Resistencias de Zuncho Industriales" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-zuncho').classList.add('sin-foto'); this.remove()" />
+          <picture>
+            <source type="image/avif" srcset="assets/producto-zuncho.avif">
+            <source type="image/webp" srcset="assets/producto-zuncho.webp">
+            <img src="assets/producto-zuncho.jpg" alt="Resistencias de Zuncho Industriales" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-zuncho').classList.add('sin-foto'); this.remove()" />
+          </picture>
           <span class="producto-badge">Por pedido</span>
         </div>
         <div class="producto-body">
@@ -1205,8 +1254,12 @@
       <!-- Sensores de Temperatura -->
       <div class="producto-card reveal reveal-delay-4">
         <div class="producto-img" id="img-sensor">
-          <img src="assets/producto-sensor.avif" alt="Sensores de Temperatura Industrial" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-sensor').classList.add('sin-foto'); this.remove()" />
+          <picture>
+            <source type="image/avif" srcset="assets/producto-sensor.avif">
+            <source type="image/webp" srcset="assets/producto-sensor.webp">
+            <img src="assets/producto-sensor.jpg" alt="Sensores de Temperatura Industrial" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-sensor').classList.add('sin-foto'); this.remove()" />
+          </picture>
           <span class="producto-badge">Por pedido</span>
         </div>
         <div class="producto-body">
@@ -1223,8 +1276,12 @@
       <!-- Accesorios -->
       <div class="producto-card reveal reveal-delay-5">
         <div class="producto-img" id="img-accesorios">
-          <img src="assets/producto-accesorios.avif" alt="Accesorios para Resistencias Eléctricas" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-accesorios').classList.add('sin-foto'); this.remove()" />
+          <picture>
+            <source type="image/avif" srcset="assets/producto-accesorios.avif">
+            <source type="image/webp" srcset="assets/producto-accesorios.webp">
+            <img src="assets/producto-accesorios.jpg" alt="Accesorios para Resistencias Eléctricas" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-accesorios').classList.add('sin-foto'); this.remove()" />
+          </picture>
           <span class="producto-badge">Por pedido</span>
         </div>
         <div class="producto-body">
@@ -1241,8 +1298,12 @@
       <!-- Resistencias Especiales -->
       <div class="producto-card reveal reveal-delay-6">
         <div class="producto-img" id="img-especial">
-          <img src="assets/producto-especial.avif" alt="Resistencias Eléctricas Especiales a Medida" loading="lazy" width="831" height="623"
-               onerror="document.getElementById('img-especial').classList.add('sin-foto'); this.remove()" />
+          <picture>
+            <source type="image/avif" srcset="assets/producto-especial.avif">
+            <source type="image/webp" srcset="assets/producto-especial.webp">
+            <img src="assets/producto-especial.jpg" alt="Resistencias Eléctricas Especiales a Medida" loading="lazy" width="831" height="623"
+                 onerror="document.getElementById('img-especial').classList.add('sin-foto'); this.remove()" />
+          </picture>
           <span class="producto-badge">A medida</span>
         </div>
         <div class="producto-body">
@@ -1259,8 +1320,12 @@
       <!-- Pantallas Infrarrojas -->
       <div class="producto-card reveal reveal-delay-1">
         <div class="producto-img" id="img-infrarroja">
-          <img src="assets/producto-infrarroja.avif" alt="Pantallas Infrarrojas Industriales" loading="lazy" width="900" height="601"
-               onerror="document.getElementById('img-infrarroja').classList.add('sin-foto'); this.remove()" />
+          <picture>
+            <source type="image/avif" srcset="assets/producto-infrarroja.avif">
+            <source type="image/webp" srcset="assets/producto-infrarroja.webp">
+            <img src="assets/producto-infrarroja.jpg" alt="Pantallas Infrarrojas Industriales" loading="lazy" width="900" height="601"
+                 onerror="document.getElementById('img-infrarroja').classList.add('sin-foto'); this.remove()" />
+          </picture>
           <span class="producto-badge">Por pedido</span>
         </div>
         <div class="producto-body">
@@ -1277,8 +1342,12 @@
       <!-- Resistencias Planas -->
       <div class="producto-card reveal reveal-delay-2">
         <div class="producto-img" id="img-plana">
-          <img src="assets/producto-plana.avif" alt="Resistencias Eléctricas Planas" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-plana').classList.add('sin-foto'); this.remove()" />
+          <picture>
+            <source type="image/avif" srcset="assets/producto-plana.avif">
+            <source type="image/webp" srcset="assets/producto-plana.webp">
+            <img src="assets/producto-plana.jpg" alt="Resistencias Eléctricas Planas" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-plana').classList.add('sin-foto'); this.remove()" />
+          </picture>
           <span class="producto-badge">Por pedido</span>
         </div>
         <div class="producto-body">
@@ -1295,8 +1364,12 @@
       <!-- Suspendidas -->
       <div class="producto-card reveal reveal-delay-3">
         <div class="producto-img" id="img-suspendida">
-          <img src="assets/producto-suspendida.avif" alt="Resistencias Suspendidas para Hornos Industriales" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-suspendida').classList.add('sin-foto'); this.remove()" />
+          <picture>
+            <source type="image/avif" srcset="assets/producto-suspendida.avif">
+            <source type="image/webp" srcset="assets/producto-suspendida.webp">
+            <img src="assets/producto-suspendida.jpg" alt="Resistencias Suspendidas para Hornos Industriales" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-suspendida').classList.add('sin-foto'); this.remove()" />
+          </picture>
           <span class="producto-badge">Por pedido</span>
         </div>
         <div class="producto-body">
@@ -1313,8 +1386,12 @@
       <!-- Bancos de Carga Resistivos -->
       <div class="producto-card reveal reveal-delay-4">
         <div class="producto-img" id="img-banco">
-          <img src="assets/producto-banco.avif" alt="Bancos de Carga Resistivos Industriales" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-banco').classList.add('sin-foto'); this.remove()" />
+          <picture>
+            <source type="image/avif" srcset="assets/producto-banco.avif">
+            <source type="image/webp" srcset="assets/producto-banco.webp">
+            <img src="assets/producto-banco.jpg" alt="Bancos de Carga Resistivos Industriales" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-banco').classList.add('sin-foto'); this.remove()" />
+          </picture>
           <span class="producto-badge">Por pedido</span>
         </div>
         <div class="producto-body">
@@ -1546,7 +1623,13 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo"><img src="assets/logo.avif" alt="TAREWA" loading="lazy" width="1174" height="648" /></div>
+    <div class="footer-logo">
+      <picture>
+        <source type="image/avif" srcset="assets/logo.avif">
+        <source type="image/webp" srcset="assets/logo.webp">
+        <img src="assets/logo.png" alt="TAREWA" loading="lazy" width="1174" height="648" />
+      </picture>
+    </div>
     <p>© 2025 TAREWA · Resistencias Industriales · Morón, Buenos Aires</p>
     <p style="color: var(--texto-suave); font-size:0.78rem;">El calor que tu Industria necesita</p>
   </footer>
