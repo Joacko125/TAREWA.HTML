@@ -1,0 +1,38 @@
+# build output
+dist/
+.output/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.production
+.env.local
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# Astro
+.astro/
+
+# Backup HTML original (no se deploya)
+_backup_html_original/
+
+# Carpeta temporal de inicialización de Astro
+_astro_tmp/
+
+# Netlify
+.netlify/
+
+# Claude Code local config
+.claude/

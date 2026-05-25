@@ -1,0 +1,43 @@
+---
+// Header global. Los anchors funcionan desde el index;
+// desde otras páginas anteponen "/" para volver al index y hacer scroll.
+const isHome = Astro.url.pathname === '/';
+const heroHref = isHome ? '#hero' : '/';
+const productosHref = isHome ? '#productos' : '/#productos';
+---
+
+<!-- NAV -->
+<nav id="navbar">
+  <!--
+    LOGO: poné tu logo en assets/logo.png
+    Si no existe, muestra el texto TAREWA automáticamente.
+  -->
+  <a href={heroHref} class="nav-logo">
+    <img src="/assets/logo.avif" alt="TAREWA" class="nav-logo-img" id="nav-logo-img" width="1174" height="648" />
+    <span class="nav-logo-text" id="nav-logo-text">TAR<span>E</span>WA</span>
+  </a>
+  <div class="nav-logo-60">
+    <img src="/assets/logo-60.avif" alt="60 años TAREWA" width="116" height="116" />
+  </div>
+  <ul class="nav-links">
+    <li><a href={productosHref}>Productos</a></li>
+    <li><a href="/nosotros">Nosotros</a></li>
+    <li><a href="/servicios">Servicios</a></li>
+    <li><a href="/contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
+    <span class="hb-bar"></span>
+    <span class="hb-bar"></span>
+    <span class="hb-bar"></span>
+  </button>
+  <div class="nav-mobile-panel" id="navMobilePanel" aria-hidden="true">
+    <ul class="nav-mobile-links">
+      <li><a href={productosHref}>Productos</a></li>
+      <li><a href="/nosotros">Nosotros</a></li>
+      <li><a href="/servicios">Servicios</a></li>
+      <li><a href="/catalogos">Catálogos</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { catalogos } from '../data/catalogos.js';
+
+const fmtFecha = (iso) => {
+  if (!iso) return '';
+  const d = new Date(iso + 'T00:00:00');
+  return d.toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' });
+};
+---
+
+<BaseLayout
+  title="Catálogos | TAREWA — Descargá los PDF oficiales"
+  description="Descargá los catálogos en PDF de TAREWA: resistencias industriales, sensores, accesorios y más. Especificaciones técnicas, códigos y aplicaciones."
+  canonical="https://tarewa.com/catalogos"
+>
+  <main class="inner-page">
+
+    <header class="page-header reveal">
+      <p class="section-label">Descargas</p>
+      <h1>Catálogos para <span>descargar</span></h1>
+      <p>Estos son los catálogos oficiales TAREWA en formato PDF. Hacé click en el botón para descargarlos a tu equipo.</p>
+    </header>
+
+    <section class="catalogos-section">
+      {catalogos.length === 0 ? (
+        <p class="catalogos-empty">Próximamente publicaremos catálogos para descarga.</p>
+      ) : (
+        <div class="catalogos-grid">
+          {catalogos.map((c, i) => (
+            <article class={`catalogo-card reveal reveal-delay-${(i % 6) + 1}`}>
+              <div class="catalogo-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <text x="7" y="17" font-family="Inter, sans-serif" font-size="5" font-weight="900" fill="currentColor" stroke="none">PDF</text>
+                </svg>
+              </div>
+              <div class="catalogo-body">
+                {c.categoria && <span class="catalogo-cat">{c.categoria}</span>}
+                <h2>{c.titulo}</h2>
+                <p>{c.descripcion}</p>
+                <div class="catalogo-meta">
+                  <span>{fmtFecha(c.fecha)}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>{c.tamano}</span>
+                </div>
+                <a class="catalogo-btn" href={c.archivo} download>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Descargar PDF
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </section>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .catalogos-section {
+    padding: 4rem 4rem 7rem;
+    background: var(--gris-oscuro);
+  }
+  .catalogos-empty {
+    text-align: center;
+    color: var(--texto-suave);
+    font-size: 1rem;
+    padding: 4rem 0;
+  }
+  .catalogos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .catalogo-card {
+    background: var(--negro);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    transition: border-color 0.35s, transform 0.35s;
+  }
+  .catalogo-card:hover {
+    border-color: rgba(215,43,43,0.45);
+    transform: translateY(-4px);
+  }
+  .catalogo-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(215,43,43,0.12);
+    border: 1px solid rgba(215,43,43,0.3);
+    border-radius: 2px;
+    color: var(--rojo);
+  }
+  .catalogo-icon svg { width: 32px; height: 32px; }
+  .catalogo-body { flex: 1; min-width: 0; }
+  .catalogo-cat {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amarillo);
+    margin-bottom: 0.5rem;
+  }
+  .catalogo-body h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.55rem;
+    line-height: 1.3;
+  }
+  .catalogo-body p {
+    font-size: 0.88rem;
+    color: var(--texto-suave);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .catalogo-meta {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--texto-suave);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.02em;
+  }
+  .catalogo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--rojo);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.7rem 1.3rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .catalogo-btn:hover {
+    background: #b82222;
+    transform: translateY(-1px);
+  }
+  .catalogo-btn svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 900px), (orientation: landscape) and (max-height: 500px) {
+    .catalogos-section { padding: 3rem 2rem 5rem; }
+    .catalogo-card { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+  }
+</style>
