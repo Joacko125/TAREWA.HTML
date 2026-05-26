@@ -41,7 +41,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
       <div class="hero-buttons">
         <a href="#productos" class="btn-primary">Ver productos</a>
-        <a href="/contacto" class="btn-secondary">Pedir presupuesto</a>
+        <a href="#contacto" class="btn-secondary">Pedir presupuesto</a>
       </div>
     </div>
 
@@ -76,7 +76,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="producto-body">
           <span class="producto-cod">Cód: RB-001</span>
-          <h3>Resistencias Blindadas Industriales</h3>
+          <h3><a class="producto-link" href="/catalogos/resistencias-blindadas">Resistencias Blindadas Industriales</a></h3>
           <p>Tubulares de acero inoxidable o cobre para inmersión y calentamiento de aire. Alta durabilidad en ambientes industriales exigentes.</p>
           <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Blindadas%20(C%C3%B3d%3A%20RB-001)" target="_blank" rel="noopener" class="btn-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
@@ -94,7 +94,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="producto-body">
           <span class="producto-cod">Cód: RT-002</span>
-          <h3>Resistencias Tubulares Industriales</h3>
+          <h3><a class="producto-link" href="/catalogos/resistencias-tubulares">Resistencias Tubulares Industriales</a></h3>
           <p>Diseñadas para aplicaciones compactas en fundiciones y maquinaria. Disponibles en distintos diámetros y longitudes a medida.</p>
           <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Tubulares%20(C%C3%B3d%3A%20RT-002)" target="_blank" rel="noopener" class="btn-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
@@ -106,15 +106,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Resistencias de Zuncho -->
       <div class="producto-card reveal reveal-delay-3">
         <div class="producto-img" id="img-zuncho">
-          <img src="/assets/producto-zuncho.avif" alt="Resistencias de Zuncho Industriales" loading="lazy" width="900" height="597"
+          <img src="/assets/producto-zuncho.avif" alt="Resistencias tipo Zuncho Industriales" loading="lazy" width="900" height="597"
                onerror="document.getElementById('img-zuncho').classList.add('sin-foto'); this.remove()" />
           <span class="producto-badge">Por pedido</span>
         </div>
         <div class="producto-body">
           <span class="producto-cod">Cód: RZ-003</span>
-          <h3>Resistencias de Zuncho Industriales</h3>
+          <h3><a class="producto-link" href="/catalogos/resistencias-zuncho">Resistencias tipo Zuncho Industriales</a></h3>
           <p>Para calentamiento perimetral de recipientes, moldes y cañerías. Adaptamos la forma y potencia exacta a tu equipo.</p>
-          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20de%20Zuncho%20(C%C3%B3d%3A%20RZ-003)" target="_blank" rel="noopener" class="btn-whatsapp">
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20tipo%20Zuncho%20(C%C3%B3d%3A%20RZ-003)" target="_blank" rel="noopener" class="btn-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
             Consultar por WhatsApp
           </a>
@@ -124,13 +124,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Sensores de Temperatura -->
       <div class="producto-card reveal reveal-delay-4">
         <div class="producto-img" id="img-sensor">
-          <img src="/assets/producto-sensor.avif" alt="Sensores de Temperatura Industrial" loading="lazy" width="900" height="597"
+          <img src="/assets/producto-sensor.avif" alt="Sensores de Temperatura Industriales" loading="lazy" width="900" height="597"
                onerror="document.getElementById('img-sensor').classList.add('sin-foto'); this.remove()" />
           <span class="producto-badge">Por pedido</span>
         </div>
         <div class="producto-body">
           <span class="producto-cod">Cód: ST-004</span>
-          <h3>Sensores de Temperatura Industrial</h3>
+          <h3><a class="producto-link" href="/catalogos/sensores-temperatura">Sensores de Temperatura Industriales</a></h3>
           <p>Termocuplas tipo J y K, termoresistencias Pt100, pirómetros y termostatos. Medición precisa para el control de tus procesos industriales.</p>
           <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Sensores%20de%20Temperatura%20(C%C3%B3d%3A%20ST-004)" target="_blank" rel="noopener" class="btn-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
@@ -150,7 +150,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="producto-body">
           <span class="producto-cod">Cód: PT-005</span>
-          <h3>Accesorios para Resistencias Eléctricas</h3>
+          <h3><a class="producto-link" href="/catalogos/accesorios">Accesorios para Resistencias Eléctricas</a></h3>
           <p>Accesorios de conexión, aislamiento y protección para tus resistencias, sensores y tableros.</p>
           <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Accesorios%20(C%C3%B3d%3A%20PT-005)" target="_blank" rel="noopener" class="btn-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
@@ -168,7 +168,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="producto-body">
           <span class="producto-cod">Cód: RE-006</span>
-          <h3>Resistencias Eléctricas Especiales a Medida</h3>
+          <h3><a class="producto-link" href="/catalogos/resistencias-especiales">Resistencias Eléctricas Especiales a Medida</a></h3>
           <p>Desarrollo a medida para cualquier proceso industrial. Planas, de banda, infrarrojas cerámicas y cualquier geometría.</p>
           <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Especiales%20a%20medida%20(C%C3%B3d%3A%20RE-006)" target="_blank" rel="noopener" class="btn-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
@@ -186,7 +186,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="producto-body">
           <span class="producto-cod">Cód: PI-007</span>
-          <h3>Pantallas Infrarrojas Industriales</h3>
+          <h3><a class="producto-link" href="/catalogos/pantallas-infrarrojas">Pantallas Infrarrojas Industriales</a></h3>
           <p>Emisores cerámicos y cuarzos infrarrojos para secado, barnizado y calentamiento superficial sin contacto. Alta eficiencia energética y respuesta rápida.</p>
           <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Pantallas%20Infrarrojas%20(C%C3%B3d%3A%20PI-007)" target="_blank" rel="noopener" class="btn-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
@@ -204,7 +204,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="producto-body">
           <span class="producto-cod">Cód: RP-008</span>
-          <h3>Resistencias Eléctricas Planas</h3>
+          <h3><a class="producto-link" href="/catalogos/resistencias-planas">Resistencias Eléctricas Planas</a></h3>
           <p>Ideales para calentamiento uniforme de superficies planas: platos, moldes, prensas y selladores. Disponibles en distintos voltajes, potencias y materiales aislantes.</p>
           <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Planas%20(C%C3%B3d%3A%20RP-008)" target="_blank" rel="noopener" class="btn-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
@@ -216,13 +216,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Suspendidas -->
       <div class="producto-card reveal reveal-delay-3">
         <div class="producto-img" id="img-suspendida">
-          <img src="/assets/producto-suspendida.avif" alt="Resistencias Suspendidas para Hornos Industriales" loading="lazy" width="900" height="597"
+          <img src="/assets/producto-suspendida.avif" alt="Resistencias Suspendidas Industriales" loading="lazy" width="900" height="597"
                onerror="document.getElementById('img-suspendida').classList.add('sin-foto'); this.remove()" />
           <span class="producto-badge">Por pedido</span>
         </div>
         <div class="producto-body">
           <span class="producto-cod">Cód: RS-009</span>
-          <h3>Resistencias Suspendidas para Hornos Industriales</h3>
+          <h3><a class="producto-link" href="/catalogos/resistencias-suspendidas">Resistencias Suspendidas Industriales</a></h3>
           <p>Resistencias de hilo expuesto suspendido en soportes cerámicos, pensadas para hornos industriales y cámaras de calentamiento que requieren distribución uniforme del calor.</p>
           <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Suspendidas%20(C%C3%B3d%3A%20RS-009)" target="_blank" rel="noopener" class="btn-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
@@ -240,7 +240,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="producto-body">
           <span class="producto-cod">Cód: BC-010</span>
-          <h3>Bancos de Carga Resistivos Industriales</h3>
+          <h3><a class="producto-link" href="/catalogos/bancos-de-carga">Bancos de Carga Resistivos Industriales</a></h3>
           <p>Conjuntos de resistencias montadas en bastidor para pruebas de carga de generadores, UPS y transformadores. Potencia regulable y construcción robusta para uso continuo.</p>
           <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Bancos%20de%20Carga%20Resistivos%20(C%C3%B3d%3A%20BC-010)" target="_blank" rel="noopener" class="btn-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
@@ -292,22 +292,112 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- ══ RESUMEN CONTACTO (modo híbrido) ══ -->
-  <section id="contacto-resumen">
-    <div class="contacto-resumen-inner">
+  <!-- ══ CONTACTO ══ -->
+  <section id="contacto">
+
+    <div class="contacto-header">
       <p class="section-label reveal">Hablemos</p>
       <h2 class="section-title reveal reveal-delay-1">Pedí tu <span>presupuesto</span></h2>
-      <p class="section-subtitle reveal reveal-delay-2" style="margin-left:auto; margin-right:auto;">
-        Te respondemos rápido y sin compromiso con el mejor precio.
+      <p class="section-subtitle reveal reveal-delay-2">
+        Contanos qué necesitás y te respondemos a la brevedad con el mejor precio.
       </p>
-      <a href="tel:+5491141937728" class="contacto-resumen-phone reveal reveal-delay-3">11 4193-7728</a>
-      <div class="contacto-resumen-actions">
-        <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20pedir%20un%20presupuesto." target="_blank" rel="noopener" class="contacto-wa reveal reveal-delay-4">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
-          Escribinos por WhatsApp
-        </a>
-        <a href="/contacto" class="summary-cta summary-cta-secondary reveal reveal-delay-5">Ir al formulario</a>
+    </div>
+
+    <div class="contacto-info">
+      <div class="contacto-item reveal reveal-delay-3">
+        <div class="contacto-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.15a16 16 0 006 6l1.52-1.52a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 13.92v3z"/>
+          </svg>
+        </div>
+        <div class="contacto-item-text">
+          <strong>Teléfono</strong>
+          <a href="tel:+5491141937728">11 4193-7728</a>
+        </div>
       </div>
+
+      <div class="contacto-item reveal reveal-delay-4">
+        <div class="contacto-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div class="contacto-item-text">
+          <strong>Email</strong>
+          <a href="mailto:ventas@tarewa.com">ventas@tarewa.com</a>
+        </div>
+      </div>
+
+      <div class="contacto-item reveal reveal-delay-5">
+        <div class="contacto-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="contacto-item-text">
+          <strong>Dirección</strong>
+          <span>Huaura 235, Morón, Buenos Aires</span>
+        </div>
+      </div>
+
+      <div class="contacto-horario reveal reveal-delay-6">
+        <p><strong>Horario de atención:</strong><br>
+        Lunes a viernes · 8:00 a 16:30 hs</p>
+      </div>
+
+      <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20pedir%20un%20presupuesto." target="_blank" rel="noopener" class="contacto-wa reveal">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+        Escribinos por WhatsApp
+      </a>
+    </div>
+
+    <div class="contacto-form reveal right">
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-group">
+            <label>Empresa</label>
+            <input type="text" placeholder="Tu empresa (opcional)" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input type="tel" placeholder="Tu teléfono" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="Tu email" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Producto de interés</label>
+          <select>
+            <option value="">Seleccioná un producto</option>
+            <option>Resistencias blindadas</option>
+            <option>Resistencias tubulares</option>
+            <option>Resistencias de zuncho</option>
+            <option>Sensores de temperatura</option>
+            <option>Pirómetros y termostatos</option>
+            <option>Resistencias especiales / a medida</option>
+            <option>Pantallas infrarrojas</option>
+            <option>Resistencias planas</option>
+            <option>Resistencias suspendidas</option>
+            <option>Bancos de carga resistivos</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea placeholder="Describí lo que necesitás: tipo de resistencia, tensión, potencia, dimensiones, cantidad..."></textarea>
+        </div>
+        <button type="submit" class="btn-form">Enviar consulta</button>
+      </form>
     </div>
   </section>
 

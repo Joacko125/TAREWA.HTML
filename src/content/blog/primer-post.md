@@ -24,10 +24,10 @@ La tensión disponible en el tablero —220 V monofásica, 380 V trifásica o 24
 
 El material define la durabilidad ante el medio. Algunos ejemplos típicos:
 
-- **Acero inoxidable AISI 304 o 316**: alimentos, agua, vapor, ambientes con corrosión leve.
-- **Incoloy 800/825**: aceites, hidrocarburos, temperaturas altas, química industrial.
-- **Cobre**: agua limpia, baja exigencia química.
-- **Vaina cerámica**: hornos industriales, infrarrojas, temperaturas muy altas.
+- **Cobre**: agua limpia, calentamiento de líquidos no agresivos, baja exigencia química.
+- **AISI 304**: uso industrial general, agua, vapor, ambientes con corrosión leve.
+- **AISI 316**: ambientes más agresivos, presencia de cloruros, agua de mar, química industrial.
+- **Vaina cerámica**: hornos industriales, infrarrojas, temperaturas muy altas (cuando aplica).
 
 ### Geometría
 
@@ -45,4 +45,4 @@ A lo largo de los años repetimos las mismas observaciones cuando un equipo vien
 
 Cuando un cliente nos pide una resistencia, lo primero que hacemos es pedir tres datos: qué quiere calentar, hasta qué temperatura, y qué tensión tiene disponible. Con eso ya podemos sugerir tipo, geometría y materiales. Después coordinamos plano técnico, plazo de entrega y forma de envío.
 
-Si querés que te asesoremos sobre un caso puntual, escribinos por WhatsApp o desde el [formulario de contacto](/contacto). Te respondemos el mismo día hábil con un presupuesto técnico claro.
+Si querés que te asesoremos sobre un caso puntual, escribinos por WhatsApp o desde el [formulario de contacto](/#contacto). Te respondemos el mismo día hábil con un presupuesto técnico claro.

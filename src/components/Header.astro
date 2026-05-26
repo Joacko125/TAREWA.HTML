@@ -4,6 +4,16 @@
 const isHome = Astro.url.pathname === '/';
 const heroHref = isHome ? '#hero' : '/';
 const productosHref = isHome ? '#productos' : '/#productos';
+const contactoHref = isHome ? '#contacto' : '/#contacto';
+
+const navItems = [
+  { label: 'Productos', href: productosHref, cta: false },
+  { label: 'Nosotros', href: '/nosotros', cta: false },
+  { label: 'Servicios', href: '/servicios', cta: false },
+  { label: 'Catálogos', href: '/catalogos', cta: false },
+  { label: 'Blog', href: '/blog', cta: false },
+  { label: 'Contacto', href: contactoHref, cta: true },
+];
 ---
 
 <!-- NAV -->
@@ -20,10 +30,9 @@ const productosHref = isHome ? '#productos' : '/#productos';
     <img src="/assets/logo-60.avif" alt="60 años TAREWA" width="116" height="116" />
   </div>
   <ul class="nav-links">
-    <li><a href={productosHref}>Productos</a></li>
-    <li><a href="/nosotros">Nosotros</a></li>
-    <li><a href="/servicios">Servicios</a></li>
-    <li><a href="/contacto" class="nav-cta">Contacto</a></li>
+    {navItems.map(item => (
+      <li><a href={item.href} class={item.cta ? 'nav-cta' : ''}>{item.label}</a></li>
+    ))}
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">
     <span class="hb-bar"></span>
@@ -32,12 +41,9 @@ const productosHref = isHome ? '#productos' : '/#productos';
   </button>
   <div class="nav-mobile-panel" id="navMobilePanel" aria-hidden="true">
     <ul class="nav-mobile-links">
-      <li><a href={productosHref}>Productos</a></li>
-      <li><a href="/nosotros">Nosotros</a></li>
-      <li><a href="/servicios">Servicios</a></li>
-      <li><a href="/catalogos">Catálogos</a></li>
-      <li><a href="/blog">Blog</a></li>
-      <li><a href="/contacto" class="nav-cta">Contacto</a></li>
+      {navItems.map(item => (
+        <li><a href={item.href} class={item.cta ? 'nav-cta' : ''}>{item.label}</a></li>
+      ))}
     </ul>
   </div>
 </nav>

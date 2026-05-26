@@ -1,0 +1,293 @@
+---
+// Carrusel manual de hitos de la historia de TAREWA.
+// Recibe un array de hitos: { anio, titulo, texto, imagen? }.
+// Navegación: flechas izq/der, dots y swipe. SIN autoplay.
+interface Hito {
+  anio: string;
+  titulo: string;
+  texto: string;
+  imagen?: string;
+}
+const { hitos = [] } = Astro.props as { hitos: Hito[] };
+---
+
+<div class="historia-carrusel" data-historia>
+
+  <div class="historia-viewport">
+    <ul class="historia-track">
+      {hitos.map((h, i) => (
+        <li class={`historia-slide ${i === 0 ? 'is-active' : ''}`} data-slide={i}>
+          <div class="historia-imagen">
+            {h.imagen ? (
+              <img
+                src={h.imagen}
+                alt={`${h.anio} — ${h.titulo}`}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                onerror="this.closest('.historia-imagen').classList.add('sin-foto'); this.remove();"
+              />
+            ) : null}
+            <div class="historia-imagen-placeholder">
+              <span>{h.anio}</span>
+            </div>
+          </div>
+          <div class="historia-texto">
+            <p class="historia-anio">{h.anio}</p>
+            <h3 class="historia-titulo">{h.titulo}</h3>
+            <p class="historia-cuerpo">{h.texto}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <button class="historia-flecha historia-flecha-prev" type="button" aria-label="Hito anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+    <button class="historia-flecha historia-flecha-next" type="button" aria-label="Hito siguiente">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+  </div>
+
+  <ol class="historia-dots" role="tablist">
+    {hitos.map((h, i) => (
+      <li>
+        <button
+          type="button"
+          class={`historia-dot ${i === 0 ? 'is-active' : ''}`}
+          data-dot={i}
+          aria-label={`Ir al hito de ${h.anio}: ${h.titulo}`}
+        >
+          <span>{h.anio}</span>
+        </button>
+      </li>
+    ))}
+  </ol>
+</div>
+
+<style>
+  .historia-carrusel {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .historia-viewport {
+    position: relative;
+    background: var(--gris-oscuro);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+    overflow: hidden;
+    min-height: 380px;
+    touch-action: pan-y;
+  }
+  .historia-track {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    min-height: 380px;
+  }
+  .historia-slide {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 0;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    pointer-events: none;
+  }
+  .historia-slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* IMAGEN */
+  .historia-imagen {
+    position: relative;
+    overflow: hidden;
+    background: var(--gris-medio);
+  }
+  .historia-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .historia-imagen-placeholder {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--gris-oscuro) 0%, var(--gris-medio) 100%);
+  }
+  .historia-imagen-placeholder span {
+    font-size: clamp(3rem, 7vw, 4.6rem);
+    font-weight: 900;
+    color: rgba(245,196,0,0.18);
+    letter-spacing: 0.05em;
+  }
+  .historia-imagen.sin-foto .historia-imagen-placeholder { display: flex; }
+
+  /* TEXTO */
+  .historia-texto {
+    padding: 2.5rem 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .historia-anio {
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    font-weight: 900;
+    color: var(--amarillo);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+  .historia-titulo {
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: var(--blanco);
+  }
+  .historia-cuerpo {
+    font-size: 0.96rem;
+    color: rgba(240,240,240,0.85);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  /* FLECHAS */
+  .historia-flecha {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: rgba(13,13,13,0.7);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--blanco);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, border-color 0.3s;
+    z-index: 3;
+  }
+  .historia-flecha:hover {
+    background: var(--rojo);
+    border-color: var(--rojo);
+    transform: translateY(-50%) scale(1.08);
+  }
+  .historia-flecha svg { width: 22px; height: 22px; }
+  .historia-flecha-prev { left: 0.8rem; }
+  .historia-flecha-next { right: 0.8rem; }
+
+  /* DOTS */
+  .historia-dots {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .historia-dot {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--texto-suave);
+    padding: 0.35rem 0.85rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .historia-dot:hover {
+    color: var(--blanco);
+    border-color: rgba(255,255,255,0.4);
+  }
+  .historia-dot.is-active {
+    background: var(--rojo);
+    border-color: var(--rojo);
+    color: #fff;
+  }
+
+  @media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
+    .historia-viewport { min-height: 0; }
+    .historia-track { min-height: 0; }
+    .historia-slide { grid-template-columns: 1fr; position: relative; }
+    .historia-slide:not(.is-active) { display: none; }
+    .historia-slide.is-active { display: grid; }
+    .historia-imagen { aspect-ratio: 4 / 3; }
+    .historia-texto { padding: 2rem 1.6rem 2.5rem; }
+    .historia-flecha { width: 38px; height: 38px; }
+    .historia-flecha svg { width: 18px; height: 18px; }
+    .historia-flecha-prev { left: 0.5rem; }
+    .historia-flecha-next { right: 0.5rem; }
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    const carruseles = document.querySelectorAll('[data-historia]');
+    carruseles.forEach((root) => {
+      const slides = root.querySelectorAll('.historia-slide');
+      const dots = root.querySelectorAll('.historia-dot');
+      const prev = root.querySelector('.historia-flecha-prev');
+      const next = root.querySelector('.historia-flecha-next');
+      const viewport = root.querySelector('.historia-viewport');
+      if (!slides.length) return;
+
+      let actual = 0;
+      const total = slides.length;
+
+      function go(i) {
+        actual = (i + total) % total;
+        slides.forEach((s, idx) => s.classList.toggle('is-active', idx === actual));
+        dots.forEach((d, idx) => d.classList.toggle('is-active', idx === actual));
+      }
+
+      prev && prev.addEventListener('click', () => go(actual - 1));
+      next && next.addEventListener('click', () => go(actual + 1));
+      dots.forEach((d) => {
+        d.addEventListener('click', () => go(parseInt(d.dataset.dot, 10)));
+      });
+
+      // Teclado
+      viewport.setAttribute('tabindex', '0');
+      viewport.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(actual - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(actual + 1); }
+      });
+
+      // Swipe
+      let startX = 0;
+      let startY = 0;
+      let moviendo = false;
+      viewport.addEventListener('touchstart', (e) => {
+        const t = e.changedTouches[0];
+        startX = t.clientX;
+        startY = t.clientY;
+        moviendo = true;
+      }, { passive: true });
+      viewport.addEventListener('touchend', (e) => {
+        if (!moviendo) return;
+        moviendo = false;
+        const t = e.changedTouches[0];
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+          dx < 0 ? go(actual + 1) : go(actual - 1);
+        }
+      }, { passive: true });
+    });
+  })();
+</script>
