@@ -2,6 +2,10 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+// Fuentes self-hosted (Fontsource, variables, font-display: swap)
+import '@fontsource-variable/space-grotesk'; // Display / títulos
+import '@fontsource-variable/inter';         // Cuerpo
+import '@fontsource-variable/jetbrains-mono'; // Datos / specs / códigos
 import '../styles/global.css';
 
 interface Props {
@@ -89,12 +93,7 @@ const {
   })} />
 
   <link rel="icon" type="image/avif" href="/assets/favicon.avif" />
-  <!-- Google Fonts: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Tipografías self-hosted (Fontsource) importadas en el frontmatter del layout -->
 </head>
 <body>
 
@@ -113,25 +112,7 @@ const {
 
   <WhatsAppButton />
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" is:inline></script>
   <script is:inline>
-    // Hero Slider (solo se inicializa si existe .hero-swiper en la página)
-    if (document.querySelector('.hero-swiper')) {
-      new Swiper('.hero-swiper', {
-        loop: true,
-        autoplay: { delay: 4000, disableOnInteraction: false },
-        speed: 900,
-        effect: 'fade',
-        fadeEffect: { crossFade: true },
-        pagination: { el: '.swiper-pagination', clickable: true },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-      });
-    }
-
     // Logo: fallback a texto si no existe assets/logo.png
     const logoImg = document.getElementById('nav-logo-img');
     const logoText = document.getElementById('nav-logo-text');
@@ -213,10 +194,10 @@ const {
       e.preventDefault();
       const btn = e.target.querySelector('.btn-form');
       btn.textContent = '¡Enviado!';
-      btn.style.background = '#2a7a3b';
+      btn.classList.add('is-sent');
       setTimeout(() => {
         btn.textContent = 'Enviar consulta';
-        btn.style.background = '';
+        btn.classList.remove('is-sent');
         e.target.reset();
       }, 3000);
     }
