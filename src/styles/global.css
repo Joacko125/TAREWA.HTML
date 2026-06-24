@@ -398,16 +398,17 @@ nav.nav-open .nav-mobile-panel { max-height: 360px; }
 
 /* Encabezado de páginas internas */
 .page-header {
+  max-width: calc(var(--maxw) + 2 * var(--gutter));
+  margin-inline: auto;
   padding: 4.5rem var(--gutter) 2.5rem;
   background: var(--papel);
   position: relative;
 }
-.page-header > * { max-width: var(--maxw); margin-inline: auto; }
 .page-header::before {
   content: '';
   position: absolute;
   top: 4.5rem;
-  left: max(var(--gutter), calc(50% - var(--maxw) / 2));
+  left: var(--gutter);
   width: 60px; height: 2px;
   background: var(--filamento);
 }
