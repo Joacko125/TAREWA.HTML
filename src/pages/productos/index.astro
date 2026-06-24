@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { productos } from '../../data/productos.js';
+import { whatsappLink } from '../../data/contacto.js';
+---
+
+<BaseLayout
+  title="Productos | TAREWA — Resistencias industriales a medida"
+  description="Catálogo online de TAREWA: resistencias blindadas, tubulares, zunchos, planas, sensores de temperatura, pantallas infrarrojas y más. Fabricación a medida."
+  canonical="https://tarewa.com/productos"
+>
+  <main class="inner-page">
+
+    <header class="page-header reveal">
+      <p class="section-label">Catálogo online</p>
+      <h1>Nuestros <span>productos</span></h1>
+      <p>Fabricamos resistencias industriales por pedido. Elegí un producto para ver el detalle, las fotos y consultar precio.</p>
+    </header>
+
+    <section class="productos-page-section">
+      <div class="productos-grid">
+        {productos.map((p, i) => (
+          <article class={`producto-card reveal reveal-delay-${(i % 6) + 1}`}>
+            <a class="producto-img-link" href={`/productos/${p.slug}`} aria-label={p.nombre}>
+              <div class="producto-img" id={`img-${p.slug}`}>
+                <img
+                  src={p.imagen}
+                  alt={p.nombre}
+                  loading="lazy"
+                  width="900"
+                  height="600"
+                  onerror={`document.getElementById('img-${p.slug}').classList.add('sin-foto'); this.remove();`}
+                />
+                <svg style="display:none" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+                  <rect x="6" y="18" width="36" height="12" rx="2"/><line x1="14" y1="18" x2="14" y2="30"/>
+                  <line x1="20" y1="18" x2="20" y2="30"/><line x1="26" y1="18" x2="26" y2="30"/>
+                  <line x1="32" y1="18" x2="32" y2="30"/><line x1="6" y1="24" x2="2" y2="24"/>
+                  <line x1="42" y1="24" x2="46" y2="24"/>
+                </svg>
+                <span class="producto-badge">{p.badge}</span>
+              </div>
+            </a>
+            <div class="producto-body">
+              <span class="producto-cod">Cód: {p.codigo}</span>
+              <h3><a class="producto-link" href={`/productos/${p.slug}`}>{p.nombre}</a></h3>
+              <p>{p.resumen}</p>
+              <div class="producto-card-acciones">
+                <a href={`/productos/${p.slug}`} class="producto-ver">Ver detalle</a>
+                <a href={whatsappLink(p.whatsappTexto)} target="_blank" rel="noopener" class="btn-whatsapp">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+                  Consultar
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="productos-page-cta reveal">
+        <p>¿Buscás las fichas técnicas completas? Descargá los catálogos en PDF.</p>
+        <a href="/catalogos" class="summary-cta">Ver catálogos para descargar</a>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .productos-page-section {
+    padding: 3.5rem var(--gutter) var(--space-section);
+    background: var(--papel);
+  }
+  .productos-page-section .productos-grid {
+    max-width: var(--maxw);
+    margin: 0 auto;
+  }
+  /* La imagen es un enlace: mantener el comportamiento visual de .producto-img */
+  .producto-img-link { display: block; text-decoration: none; }
+
+  .producto-card-acciones {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+  .producto-ver {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1.1rem;
+    border: 1px solid var(--linea);
+    border-radius: var(--radius);
+    color: var(--grafito);
+    text-decoration: none;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+  }
+  .producto-ver:hover { border-color: var(--grafito); color: var(--rojo-tinta); }
+
+  .productos-page-cta {
+    max-width: var(--maxw);
+    margin: 4rem auto 0;
+    text-align: center;
+    padding-top: 3rem;
+    border-top: 1px solid var(--linea);
+  }
+  .productos-page-cta p {
+    color: var(--acero);
+    margin-bottom: 1.2rem;
+    font-size: var(--fs-base);
+  }
+
+  @media (max-width: 900px), (orientation: landscape) and (max-height: 500px) {
+    .productos-page-section { padding: 2.5rem var(--gutter) 4.5rem; }
+  }
+</style>
