@@ -1,13 +1,14 @@
 ---
 // Header global. Los anchors funcionan desde el index;
 // desde otras páginas anteponen "/" para volver al index y hacer scroll.
+import { productos } from '../data/productos.js';
+
 const isHome = Astro.url.pathname === '/';
 const heroHref = isHome ? '#hero' : '/';
-const productosHref = isHome ? '#productos' : '/#productos';
 const contactoHref = isHome ? '#contacto' : '/#contacto';
 
 const navItems = [
-  { label: 'Productos', href: productosHref, cta: false },
+  { label: 'Productos', href: '/productos', cta: false, dropdown: true },
   { label: 'Nosotros', href: '/nosotros', cta: false },
   { label: 'Servicios', href: '/servicios', cta: false },
   { label: 'Catálogos', href: '/catalogos', cta: false },
@@ -31,7 +32,21 @@ const navItems = [
   </div>
   <ul class="nav-links">
     {navItems.map(item => (
-      <li><a href={item.href} class={item.cta ? 'nav-cta' : ''}>{item.label}</a></li>
+      item.dropdown ? (
+        <li class="has-dropdown">
+          <a href={item.href} class="nav-dropdown-trigger" aria-haspopup="true">
+            {item.label}
+            <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </a>
+          <ul class="nav-dropdown">
+            {productos.map(p => (
+              <li><a href={`/productos/${p.slug}`}>{p.nombre}</a></li>
+            ))}
+          </ul>
+        </li>
+      ) : (
+        <li><a href={item.href} class={item.cta ? 'nav-cta' : ''}>{item.label}</a></li>
+      )
     ))}
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false">

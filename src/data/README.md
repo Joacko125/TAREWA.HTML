@@ -41,7 +41,12 @@ Los catálogos PDF se muestran en la página [`/catalogos`](https://tarewa.com/c
 
 ## 🔧 2. Agregar / editar un producto del catálogo online (`productos.js`)
 
-Cada entrada de `productos.js` genera automáticamente una página propia en `/catalogos/[slug]`, con carrusel de fotos, descripción y CTA de WhatsApp.
+Cada entrada de `productos.js` genera automáticamente:
+- Una página propia en `/productos/[slug]` (layout apaisado con carrusel horizontal de fotos, descripción y CTA de WhatsApp).
+- Una card en el listado `/productos`.
+- Un ítem en el menú desplegable que aparece al pasar el mouse por **PRODUCTOS** en el header.
+
+> Las páginas viejas `/catalogos/[slug]` quedan redirigidas a `/productos/[slug]` (ver `netlify.toml`).
 
 ### Pasos para agregar un producto nuevo
 
@@ -52,7 +57,9 @@ Cada entrada de `productos.js` genera automáticamente una página propia en `/c
      slug: 'mi-producto-nuevo',
      nombre: 'Mi Producto Nuevo',
      codigo: 'XX-099',
-     resumen: 'Descripción corta para la card del index.',
+     imagen: '/assets/producto-mi-producto.avif',
+     badge: 'Por pedido',
+     resumen: 'Descripción corta para la card del listado.',
      descripcion: [
        'Primer párrafo descriptivo (técnico-comercial, 3-5 líneas).',
        'Segundo párrafo (materiales, aplicaciones).',
@@ -63,14 +70,16 @@ Cada entrada de `productos.js` genera automáticamente una página propia en `/c
    ```
 
    - `slug`: kebab-case, sin tildes ni espacios. Será la URL.
-   - `nombre`: el título visible (en `<h1>` y en el index).
+   - `nombre`: el título visible (en `<h1>`, en el listado y en el menú desplegable).
    - `codigo`: opcional pero usado en la página y en SEO.
+   - `imagen`: ruta a la foto principal (primera del carrusel y card del listado).
+   - `badge`: etiqueta flotante sobre la imagen (ej: "Por pedido", "A medida").
    - `descripcion`: array de párrafos. Se renderizan uno abajo del otro.
    - `whatsappTexto`: el mensaje pre-cargado cuando el cliente clickea el botón.
 
-2. **Crear la carpeta de fotos** en `public/assets/productos/mi-producto-nuevo/` y subir `1.jpg`, `2.jpg`, `3.jpg`, `4.jpg`. Si no subís fotos, la página muestra un placeholder con el nombre del producto.
+2. **Fotos del carrusel.** La primera foto es la del campo `imagen`. Para sumar más, creá la carpeta `public/assets/productos/mi-producto-nuevo/` y subí `1.jpg`, `2.jpg`, … (hasta `6.jpg`); aparecen automáticamente en el carrusel. Las que no existan se ocultan solas.
 
-3. **Agregar el producto al index** (`src/pages/index.astro`), copiando una `.producto-card` existente y reemplazando los campos. Importante: el `<h3>` debe envolver el nombre con `<a class="producto-link" href="/catalogos/mi-producto-nuevo">`.
+3. **(Opcional) Destacarlo en el home.** El producto ya aparece solo en `/productos` y en el menú desplegable. Si además querés mostrarlo en la sección de la portada, copiá una `.producto-card` existente en `src/pages/index.astro` y apuntá el `<h3>` a `<a class="producto-link" href="/productos/mi-producto-nuevo">`.
 
 4. **Commitear y pushear:**
 

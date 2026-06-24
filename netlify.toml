@@ -2,6 +2,13 @@
   command = "npm run build"
   publish = "dist"
 
+# Las páginas de producto se movieron de /catalogos/[slug] a /productos/[slug].
+# Redirige las URLs viejas (solo subrutas; /catalogos sigue siendo la página de PDFs).
+[[redirects]]
+  from = "/catalogos/*"
+  to = "/productos/:splat"
+  status = 301
+
 [[headers]]
   for = "/*"
   [headers.values]

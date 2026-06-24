@@ -7,6 +7,8 @@ export const productos = [
     slug: 'resistencias-blindadas',
     nombre: 'Resistencias Blindadas Industriales',
     codigo: 'RB-001',
+    imagen: '/assets/producto-blindada.avif',
+    badge: 'Por pedido',
     resumen: 'Tubulares de acero inoxidable o cobre para inmersión y calentamiento de aire. Alta durabilidad en ambientes industriales exigentes.',
     descripcion: [
       'Las resistencias blindadas son una de las soluciones más robustas para el calentamiento industrial. Están construidas con un hilo resistivo alojado dentro de una vaina metálica, aislado eléctricamente por óxido de magnesio (MgO) compactado a alta densidad. Esa construcción las hace aptas tanto para inmersión directa en líquidos como para calentamiento de aire o sólidos en contacto.',
@@ -19,6 +21,8 @@ export const productos = [
     slug: 'resistencias-tubulares',
     nombre: 'Resistencias Tubulares Industriales',
     codigo: 'RT-002',
+    imagen: '/assets/producto-tubular.avif',
+    badge: 'Por pedido',
     resumen: 'Diseñadas para aplicaciones compactas en fundiciones y maquinaria. Disponibles en distintos diámetros y longitudes a medida.',
     descripcion: [
       'Las resistencias tubulares son la base de muchos equipos industriales por su versatilidad. Las fabricamos en diámetros de 6,5 a 16 mm y largos a medida, con la geometría que necesite tu equipo: rectas, en U, en W, en espiral, formadas en frío para ingresar en alojamientos específicos.',
@@ -31,6 +35,8 @@ export const productos = [
     slug: 'resistencias-zuncho',
     nombre: 'Resistencias tipo Zuncho Industriales',
     codigo: 'RZ-003',
+    imagen: '/assets/producto-zuncho.avif',
+    badge: 'Por pedido',
     resumen: 'Para calentamiento perimetral de recipientes, moldes y cañerías. Adaptamos la forma y potencia exacta a tu equipo.',
     descripcion: [
       'Las resistencias tipo zuncho (también conocidas como resistencias de banda o de abrazadera) se ajustan al perímetro exterior de un cilindro: caños, cilindros de inyectoras, cuerpos de extrusoras, sopladores y bocas de descarga. Transfieren el calor por contacto directo con la superficie metálica.',
@@ -43,6 +49,8 @@ export const productos = [
     slug: 'sensores-temperatura',
     nombre: 'Sensores de Temperatura Industriales',
     codigo: 'ST-004',
+    imagen: '/assets/producto-sensor.avif',
+    badge: 'Por pedido',
     resumen: 'Termocuplas tipo J y K, termoresistencias Pt100, pirómetros y termostatos. Medición precisa para el control de tus procesos industriales.',
     descripcion: [
       'Una resistencia industrial sin un buen sensor es una bomba de tiempo: sin lectura confiable de temperatura no hay control, y sin control la pieza se quema o el producto sale fuera de especificación. Por eso fabricamos también la parte de sensado: termocuplas tipo J (Fe-Cu/Ni) y tipo K (NiCr-NiAl), termoresistencias Pt100 simples y dobles, y armamos pirómetros y termostatos sobre pedido.',
@@ -55,6 +63,8 @@ export const productos = [
     slug: 'accesorios',
     nombre: 'Accesorios para Resistencias Eléctricas',
     codigo: 'PT-005',
+    imagen: '/assets/producto-accesorios.avif',
+    badge: 'Por pedido',
     resumen: 'Accesorios de conexión, aislamiento y protección para tus resistencias, sensores y tableros.',
     descripcion: [
       'No alcanza con fabricar bien la resistencia: la conexión también define la vida útil. Por eso ofrecemos toda la línea de accesorios complementarios: terminales de bronce, cobre estañado y acero inoxidable, aisladores cerámicos, prensa-cables, fundas siliconadas para alta temperatura, cubre-bornes y cajas de conexión IP65.',
@@ -67,6 +77,8 @@ export const productos = [
     slug: 'resistencias-especiales',
     nombre: 'Resistencias Eléctricas Especiales a Medida',
     codigo: 'RE-006',
+    imagen: '/assets/producto-especial.avif',
+    badge: 'A medida',
     resumen: 'Desarrollo a medida para cualquier proceso industrial. Planas, de banda, infrarrojas cerámicas y cualquier geometría.',
     descripcion: [
       'Cuando una resistencia estándar no resuelve el problema, fabricamos a medida. Recibimos el plano del equipo, el dato de potencia y tensión, y desarrollamos una solución. Lo hicimos durante 60 años y por eso seguimos teniendo clientes que vienen con problemas que en otro lado les dijeron "no se puede".',
@@ -79,6 +91,8 @@ export const productos = [
     slug: 'pantallas-infrarrojas',
     nombre: 'Pantallas Infrarrojas Industriales',
     codigo: 'PI-007',
+    imagen: '/assets/producto-infrarroja.avif',
+    badge: 'Por pedido',
     resumen: 'Emisores cerámicos y cuarzos infrarrojos para secado, barnizado y calentamiento superficial sin contacto. Alta eficiencia energética y respuesta rápida.',
     descripcion: [
       'El calentamiento por infrarrojo es lejos el método más eficiente cuando hay que calentar una superficie sin contacto: secado de pinturas y barnices, termo-formado de plásticos, deshidratado, pre-calentamiento de moldes, curado de adhesivos. Calienta directo el producto, no el aire alrededor, así que el rendimiento energético es muy alto.',
@@ -91,6 +105,8 @@ export const productos = [
     slug: 'resistencias-planas',
     nombre: 'Resistencias Eléctricas Planas',
     codigo: 'RP-008',
+    imagen: '/assets/producto-plana.avif',
+    badge: 'Por pedido',
     resumen: 'Ideales para calentamiento uniforme de superficies planas: platos, moldes, prensas y selladores. Disponibles en distintos voltajes, potencias y materiales aislantes.',
     descripcion: [
       'Las resistencias planas son el formato a elegir cuando se necesita calentamiento uniforme sobre una superficie plana: platos de prensa, mesas de termo-sellado, planchas de vulcanización, moldes planos, calefactores de chapa.',
@@ -103,6 +119,8 @@ export const productos = [
     slug: 'resistencias-suspendidas',
     nombre: 'Resistencias Suspendidas Industriales',
     codigo: 'RS-009',
+    imagen: '/assets/producto-suspendida.avif',
+    badge: 'Por pedido',
     resumen: 'Resistencias de hilo expuesto suspendido en soportes cerámicos, pensadas para hornos industriales y cámaras de calentamiento que requieren distribución uniforme del calor.',
     descripcion: [
       'En los hornos industriales de alta temperatura el calor se transmite principalmente por radiación, y para eso conviene el hilo expuesto: una espiral de aleación resistiva montada sobre soportes cerámicos, suspendida del techo o las paredes del horno.',
@@ -115,6 +133,8 @@ export const productos = [
     slug: 'bancos-de-carga',
     nombre: 'Bancos de Carga Resistivos Industriales',
     codigo: 'BC-010',
+    imagen: '/assets/producto-banco.avif',
+    badge: 'Por pedido',
     resumen: 'Conjuntos de resistencias montadas en bastidor para pruebas de carga de generadores, UPS y transformadores. Potencia regulable y construcción robusta para uso continuo.',
     descripcion: [
       'Los bancos de carga resistivos sirven para algo que los manuales no resuelven: probar de verdad si un generador, un UPS o un transformador entrega lo que dice entregar. Los conectás a la salida del equipo, regulás los pasos de potencia y medís voltaje, corriente y comportamiento bajo carga real.',
