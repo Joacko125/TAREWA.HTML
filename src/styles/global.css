@@ -402,14 +402,15 @@ nav.nav-open .nav-mobile-panel { max-height: 360px; }
   background: var(--papel);
   position: relative;
 }
+.page-header > * { max-width: var(--maxw); margin-inline: auto; }
 .page-header::before {
   content: '';
   position: absolute;
-  top: 4.5rem; left: var(--gutter);
+  top: 4.5rem;
+  left: max(var(--gutter), calc(50% - var(--maxw) / 2));
   width: 60px; height: 2px;
   background: var(--filamento);
 }
-.page-header-inner { max-width: var(--maxw); margin: 0 auto; }
 .page-header h1 {
   font-size: var(--fs-2xl);
   font-weight: 600;

@@ -87,9 +87,9 @@ import { historia } from '../data/historia.js';
 
 <style>
   .historia-section {
-    padding: 5rem 4rem 6rem;
-    background: var(--gris-oscuro);
-    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: var(--space-section) var(--gutter);
+    background: var(--lino);
+    border-top: 1px solid var(--linea);
   }
   .historia-section-header {
     text-align: center;
@@ -98,10 +98,10 @@ import { historia } from '../data/historia.js';
   }
   .historia-section-header .section-title { margin-top: 0.5rem; }
   .historia-section-header .section-subtitle {
-    margin-top: 1rem;
-    color: var(--texto-suave);
+    margin: 1rem auto 0;
+    color: var(--acero);
   }
   @media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
-    .historia-section { padding: 3.5rem 1.5rem 4.5rem; }
+    .historia-section { padding: 3.5rem var(--gutter) 4.5rem; }
   }
 </style>
