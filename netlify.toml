@@ -9,6 +9,21 @@
   to = "/productos/:splat"
   status = 301
 
+# /servicios se unificó dentro del index como sección #servicios.
+# 301 real en el edge (force = true) para que tenga prioridad sobre la página
+# de fallback que Astro genera por el campo `redirects` de astro.config.mjs.
+[[redirects]]
+  from = "/servicios"
+  to = "/#servicios"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/servicios/"
+  to = "/#servicios"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]

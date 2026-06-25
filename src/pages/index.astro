@@ -1,10 +1,28 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Slideshow del hero: levantamos dinámicamente todas las slide-*.avif de
+// public/assets (no hardcodeadas). Astro corre este frontmatter en build.
+const slides = fs
+  .readdirSync(path.resolve('public/assets'))
+  .filter((f) => /^slide-\d+\.avif$/i.test(f))
+  .sort((a, b) => parseInt(a.match(/\d+/)[0], 10) - parseInt(b.match(/\d+/)[0], 10))
+  .map((f) => `/assets/${f}`);
 ---
 
 <BaseLayout>
 
-  <!-- ══ HERO — tesis de marca (paper-dominant, asimétrico) ══ -->
+  <!-- ══ SLIDESHOW DE FONDO FIJO — capa detrás de todo el contenido ══ -->
+  <div class="hero-bg" aria-hidden="true">
+    {slides.map((src, i) => (
+      <div class={`hero-slide${i === 0 ? ' is-active' : ''}`} style={`background-image:url(${src})`}></div>
+    ))}
+    <div class="hero-bg-overlay"></div>
+  </div>
+
+  <!-- ══ HERO — tesis de marca sobre el slideshow incandescente ══ -->
   <section id="hero">
     <div class="filamento"></div>
     <div class="hero-inner wrap">
@@ -24,18 +42,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <li><span>100%</span> industria argentina</li>
           <li><span>10+</span> líneas de producto</li>
         </ul>
-      </div>
-
-      <div class="hero-visual">
-        <figure class="hero-figure">
-          <img src="/assets/slide-1.avif" alt="Taller de TAREWA fabricando resistencias eléctricas industriales"
-               width="1600" height="1200" fetchpriority="high" decoding="async" />
-          <figcaption class="hero-figcaption">Fabricación propia · Morón, Buenos Aires</figcaption>
-        </figure>
-        <div class="hero-stat">
-          <span class="hero-stat-label">Fabricando desde</span>
-          <span class="hero-stat-num">1964</span>
-        </div>
       </div>
     </div>
   </section>
@@ -245,8 +251,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- ══ RESUMEN NOSOTROS (modo híbrido) ══ -->
-  <section class="index-summary">
+  <!-- ══ RESUMEN NOSOTROS (modo híbrido) — fondo resistencia fijo ══ -->
+  <section class="index-summary seccion-fondo">
+    <div class="seccion-fondo-capa" aria-hidden="true">
+      <div class="seccion-fondo-img" style="background-image:url(/assets/fondo-resistencia.avif)"></div>
+      <div class="seccion-fondo-overlay"></div>
+    </div>
     <div class="index-summary-grid">
       <div class="nosotros-visual">
         <div class="nosotros-box reveal left">
@@ -281,6 +291,49 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           Desde 1964, somos una empresa argentina especializada en la fabricación de resistencias eléctricas industriales. Fabricamos por pedido, asesoramos técnicamente y enviamos a todo el país.
         </p>
         <a href="/nosotros" class="summary-cta reveal reveal-delay-3">Conocer la empresa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SERVICIOS (unificado desde la antigua página /servicios) ══ -->
+  <section id="servicios">
+    <div class="servicios-header reveal">
+      <p class="section-label"><span class="brand-dot"></span> Lo que hacemos</p>
+      <h2 class="section-title">Nuestros <span>servicios</span></h2>
+      <p class="section-subtitle">
+        Más que vender productos, ofrecemos soluciones completas de calefacción industrial para tu negocio.
+      </p>
+    </div>
+    <div class="servicios-grid">
+      <div class="servicio-card reveal reveal-delay-1">
+        <div class="servicio-number">01</div>
+        <h3>Fabricación a medida</h3>
+        <p>Diseñamos y fabricamos resistencias según tus especificaciones técnicas: dimensiones, potencia, tensión y material adaptados a tu proceso.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-2">
+        <div class="servicio-number">02</div>
+        <h3>Asesoramiento técnico</h3>
+        <p>Nuestro equipo analiza tu proceso industrial y te recomienda la solución más eficiente en términos de potencia, material y durabilidad.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-3">
+        <div class="servicio-number">03</div>
+        <h3>Presupuesto sin cargo</h3>
+        <p>Consultá por WhatsApp, teléfono o email. Te respondemos con rapidez y sin compromiso con el mejor precio del mercado.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-4">
+        <div class="servicio-number">04</div>
+        <h3>Envíos a todo el país</h3>
+        <p>Despachamos a cualquier punto de Argentina. Coordinamos el envío más conveniente según urgencia y destino.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-5">
+        <div class="servicio-number">05</div>
+        <h3>Retiro en taller</h3>
+        <p>Podés pasar a buscar tu pedido directamente en nuestro taller en Huaura 235, Morón, de lunes a viernes.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-6">
+        <div class="servicio-number">06</div>
+        <h3>Reposición y mantenimiento</h3>
+        <p>Reemplazamos resistencias de cualquier marca o modelo. Traenos la pieza vieja y la reproducimos con materiales de primera calidad.</p>
       </div>
     </div>
   </section>
@@ -406,5 +459,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       title="Ubicación TAREWA — Huaura 235, Morón, Buenos Aires">
     </iframe>
   </section>
+
+  <!-- Autoplay del slideshow del hero (crossfade). Sin controles manuales. -->
+  <script is:inline>
+    (function () {
+      const slides = Array.from(document.querySelectorAll('.hero-bg .hero-slide'));
+      if (slides.length < 2) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      let i = 0;
+      setInterval(function () {
+        slides[i].classList.remove('is-active');
+        i = (i + 1) % slides.length;
+        slides[i].classList.add('is-active');
+      }, 5500);
+    })();
+  </script>
 
 </BaseLayout>

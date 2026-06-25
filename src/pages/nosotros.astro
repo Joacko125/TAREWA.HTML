@@ -17,7 +17,12 @@ import { historia } from '../data/historia.js';
       <p>Más de 60 años fabricando resistencias eléctricas industriales en Argentina. Una empresa familiar, con producción propia y atención personalizada.</p>
     </header>
 
-    <section id="nosotros">
+    <section id="nosotros" class="seccion-fondo">
+      <div class="seccion-fondo-capa" aria-hidden="true">
+        <div class="seccion-fondo-img" style="background-image:url(/assets/fondo-resistencia.avif)"></div>
+        <div class="seccion-fondo-overlay"></div>
+      </div>
+      <div class="nosotros-grid">
       <div class="nosotros-visual">
         <div class="nosotros-box reveal left">
           <p class="section-label">Quiénes somos</p>
@@ -67,6 +72,7 @@ import { historia } from '../data/historia.js';
           <div class="feature-dot"></div>
           <p><strong>Ubicados en Morón:</strong> Fábrica y oficinas en Huaura 235, Buenos Aires. Atención personalizada y envíos a todo el país.</p>
         </div>
+      </div>
       </div>
     </section>
 

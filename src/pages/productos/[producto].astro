@@ -23,7 +23,7 @@ const ficha = [
 ];
 
 // Galería: imagen principal + fotos numeradas opcionales en
-// /assets/productos/[slug]/1.jpg ... 6.jpg (se ocultan solas si no existen).
+// /assets/productos/[slug]/1.avif ... 6.avif (se ocultan solas si no existen).
 const extras = [1, 2, 3, 4, 5, 6];
 ---
 
@@ -63,7 +63,7 @@ const extras = [1, 2, 3, 4, 5, 6];
           </li>
           {extras.map((n) => (
             <li class="galeria-slide" data-extra>
-              <img src={`/assets/productos/${producto.slug}/${n}.jpg`} alt={`${producto.nombre} — foto ${n}`} loading="lazy" />
+              <img src={`/assets/productos/${producto.slug}/${n}.avif`} alt={`${producto.nombre} — foto ${n}`} loading="lazy" />
             </li>
           ))}
         </ul>
