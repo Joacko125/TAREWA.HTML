@@ -61,7 +61,7 @@ const slides = fs
     <div class="productos-grid">
 
       <!-- Resistencias Blindadas -->
-      <div class="producto-card reveal reveal-delay-1">
+      <div class="producto-card">
         <div class="producto-img" id="img-blindada">
           <img src="/assets/producto-blindada.avif" alt="Resistencias Blindadas Industriales" loading="lazy" width="900" height="613"
                onerror="document.getElementById('img-blindada').classList.add('sin-foto'); this.remove()" />
@@ -85,7 +85,7 @@ const slides = fs
       </div>
 
       <!-- Resistencias Tubulares -->
-      <div class="producto-card reveal reveal-delay-2">
+      <div class="producto-card">
         <div class="producto-img" id="img-tubular">
           <img src="/assets/producto-tubular.avif" alt="Resistencias Tubulares Industriales" loading="lazy" width="900" height="597"
                onerror="document.getElementById('img-tubular').classList.add('sin-foto'); this.remove()" />
@@ -103,7 +103,7 @@ const slides = fs
       </div>
 
       <!-- Resistencias de Zuncho -->
-      <div class="producto-card reveal reveal-delay-3">
+      <div class="producto-card">
         <div class="producto-img" id="img-zuncho">
           <img src="/assets/producto-zuncho.avif" alt="Resistencias tipo Zuncho Industriales" loading="lazy" width="900" height="597"
                onerror="document.getElementById('img-zuncho').classList.add('sin-foto'); this.remove()" />
@@ -121,7 +121,7 @@ const slides = fs
       </div>
 
       <!-- Sensores de Temperatura -->
-      <div class="producto-card reveal reveal-delay-4">
+      <div class="producto-card">
         <div class="producto-img" id="img-sensor">
           <img src="/assets/producto-sensor.avif" alt="Sensores de Temperatura Industriales" loading="lazy" width="900" height="597"
                onerror="document.getElementById('img-sensor').classList.add('sin-foto'); this.remove()" />
@@ -141,7 +141,7 @@ const slides = fs
       <!-- Accesorios -->
       <!-- NOTA: el SVG de WhatsApp original de este card estaba corrupto (chars unicode FULLWIDTH).
            Se restauró con el path correcto idéntico al de los otros productos. -->
-      <div class="producto-card reveal reveal-delay-5">
+      <div class="producto-card">
         <div class="producto-img" id="img-accesorios">
           <img src="/assets/producto-accesorios.avif" alt="Accesorios para Resistencias Eléctricas" loading="lazy" width="900" height="597"
                onerror="document.getElementById('img-accesorios').classList.add('sin-foto'); this.remove()" />
@@ -159,7 +159,7 @@ const slides = fs
       </div>
 
       <!-- Resistencias Especiales -->
-      <div class="producto-card reveal reveal-delay-6">
+      <div class="producto-card">
         <div class="producto-img" id="img-especial">
           <img src="/assets/producto-especial.avif" alt="Resistencias Eléctricas Especiales a Medida" loading="lazy" width="831" height="623"
                onerror="document.getElementById('img-especial').classList.add('sin-foto'); this.remove()" />
@@ -177,7 +177,7 @@ const slides = fs
       </div>
 
       <!-- Pantallas Infrarrojas -->
-      <div class="producto-card reveal reveal-delay-1">
+      <div class="producto-card">
         <div class="producto-img" id="img-infrarroja">
           <img src="/assets/producto-infrarroja.avif" alt="Pantallas Infrarrojas Industriales" loading="lazy" width="900" height="601"
                onerror="document.getElementById('img-infrarroja').classList.add('sin-foto'); this.remove()" />
@@ -195,7 +195,7 @@ const slides = fs
       </div>
 
       <!-- Resistencias Planas -->
-      <div class="producto-card reveal reveal-delay-2">
+      <div class="producto-card">
         <div class="producto-img" id="img-plana">
           <img src="/assets/producto-plana.avif" alt="Resistencias Eléctricas Planas" loading="lazy" width="900" height="597"
                onerror="document.getElementById('img-plana').classList.add('sin-foto'); this.remove()" />
@@ -213,7 +213,7 @@ const slides = fs
       </div>
 
       <!-- Suspendidas -->
-      <div class="producto-card reveal reveal-delay-3">
+      <div class="producto-card">
         <div class="producto-img" id="img-suspendida">
           <img src="/assets/producto-suspendida.avif" alt="Resistencias Suspendidas Industriales" loading="lazy" width="900" height="597"
                onerror="document.getElementById('img-suspendida').classList.add('sin-foto'); this.remove()" />
@@ -231,7 +231,7 @@ const slides = fs
       </div>
 
       <!-- Bancos de Carga Resistivos -->
-      <div class="producto-card reveal reveal-delay-4">
+      <div class="producto-card">
         <div class="producto-img" id="img-banco">
           <img src="/assets/producto-banco.avif" alt="Bancos de Carga Resistivos Industriales" loading="lazy" width="900" height="597"
                onerror="document.getElementById('img-banco').classList.add('sin-foto'); this.remove()" />
@@ -472,6 +472,34 @@ const slides = fs
         i = (i + 1) % slides.length;
         slides[i].classList.add('is-active');
       }, 5500);
+    })();
+  </script>
+
+  <!-- El fondo fijo del hero se apaga al pasar la sección catálogo (productos):
+       el efecto de imagen fija aplica sólo por encima de catálogo. -->
+  <script is:inline>
+    (function () {
+      const heroBg = document.querySelector('.hero-bg');
+      const hero = document.getElementById('hero');
+      if (!heroBg || !hero || !('IntersectionObserver' in window)) return;
+      new IntersectionObserver(function (entries) {
+        heroBg.classList.toggle('is-past', !entries[0].isIntersecting);
+      }, { threshold: 0 }).observe(hero);
+    })();
+  </script>
+
+  <!-- Grilla de productos: carga escalonada por columna al entrar al viewport. -->
+  <script is:inline>
+    (function () {
+      const grid = document.querySelector('.productos-grid');
+      if (!grid) return;
+      if (!('IntersectionObserver' in window)) { grid.classList.add('is-revealed'); return; }
+      const obs = new IntersectionObserver(function (entries, o) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { grid.classList.add('is-revealed'); o.disconnect(); }
+        });
+      }, { threshold: 0.15 });
+      obs.observe(grid);
     })();
   </script>
 

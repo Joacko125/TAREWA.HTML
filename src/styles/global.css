@@ -405,15 +405,42 @@ nav.nav-open .nav-mobile-panel { max-height: 360px; }
   padding: 4.5rem var(--gutter) 2.5rem;
   background: var(--papel);
   position: relative;
+  isolation: isolate; /* stacking context propio para el glow detrás del label */
 }
+/* Glow incandescente cálido (rojo→ámbar) DETRÁS y POR DEBAJO del section-label.
+   Vive en una capa inferior (z-index:-1 dentro del contexto propio): queda sobre
+   el papel pero por debajo del texto, que se mantiene perfectamente legible.
+   rgba con los valores EXACTOS de marca (--rojo #ED3237 / --amarillo #FFCC29),
+   igual que los overlays incandescentes de .hero-bg-overlay / .seccion-fondo. */
 .page-header::before {
   content: '';
   position: absolute;
-  top: 4.5rem;
-  left: var(--gutter);
-  width: 60px; height: 2px;
-  background: var(--filamento);
+  z-index: -1;
+  left: calc(var(--gutter) - 0.75rem);
+  top: 4.3rem;
+  width: clamp(190px, 34vw, 320px);
+  height: 96px;
+  background:
+    radial-gradient(78% 132% at 15% 34%,
+      rgba(237, 50, 55, 0.18) 0%,
+      rgba(255, 204, 41, 0.12) 46%,
+      rgba(237, 50, 55, 0) 74%);
+  filter: blur(11px);
+  pointer-events: none;
 }
+/* Acento filamento de firma — POR DEBAJO del label, sin cruzar el texto */
+.page-header::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 6.2rem;
+  left: var(--gutter);
+  width: 56px; height: 2px;
+  background: var(--filamento);
+  pointer-events: none;
+}
+/* El contenido (label, h1, p) siempre por encima del glow */
+.page-header > * { position: relative; z-index: 1; }
 .page-header h1 {
   font-size: var(--fs-2xl);
   font-weight: 600;
@@ -440,7 +467,12 @@ nav.nav-open .nav-mobile-panel { max-height: 360px; }
   z-index: -1;
   overflow: hidden;
   background: var(--grafito); /* base sólida mientras cargan las imágenes */
+  transition: opacity 0.5s var(--ease);
 }
+/* El efecto de fondo fijo aplica SÓLO al hero. Al pasar la sección catálogo
+   (productos) la capa se apaga; de ahí hacia abajo cada sección lleva su propio
+   fondo opaco. Toggle por IntersectionObserver sobre #hero (ver index.astro). */
+.hero-bg.is-past { opacity: 0; visibility: hidden; }
 .hero-slide {
   position: absolute;
   inset: 0;
@@ -603,10 +635,39 @@ section { padding: var(--space-section) var(--gutter); }
 
 .productos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(5, 1fr); /* 5 columnas × 2 filas = 10 productos */
   gap: 1.5rem;
   max-width: var(--maxw);
   margin: 0 auto;
+}
+@media (max-width: 1180px) { .productos-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px)  { .productos-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .productos-grid { grid-template-columns: 1fr; } }
+
+/* Carga escalonada POR COLUMNA: las dos filas de cada columna entran juntas.
+   Se dispara cuando la grilla entra al viewport (.is-revealed vía
+   IntersectionObserver, ver index.astro). El stagger es delay = (índice % 5) * paso,
+   resuelto con nth-child(5n+k) sobre las 5 columnas (paso = 0.1s).
+   Se anima la propiedad independiente `translate` (no `transform`) para no
+   interferir con el lift en hover de la card. */
+.productos-grid .producto-card { opacity: 0; }
+.productos-grid.is-revealed .producto-card {
+  animation: producto-rise 0.6s var(--ease) var(--col-delay, 0s) both;
+}
+.productos-grid .producto-card:nth-child(5n+1) { --col-delay: 0s;   }
+.productos-grid .producto-card:nth-child(5n+2) { --col-delay: 0.1s; }
+.productos-grid .producto-card:nth-child(5n+3) { --col-delay: 0.2s; }
+.productos-grid .producto-card:nth-child(5n+4) { --col-delay: 0.3s; }
+.productos-grid .producto-card:nth-child(5n+5) { --col-delay: 0.4s; }
+
+@keyframes producto-rise {
+  from { opacity: 0; translate: 0 30px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .productos-grid .producto-card { opacity: 1; }
+  .productos-grid.is-revealed .producto-card { animation: none; }
 }
 
 .producto-card {
