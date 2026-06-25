@@ -587,23 +587,28 @@ nav.nav-open .nav-mobile-panel { max-height: 360px; }
   text-transform: none;
 }
 
-/* ── FONDO FIJO POR SECCIÓN (sticky, iOS-safe) ────────────────────────────
-   La capa se "fija" al viewport mientras la sección pasa por delante. El
-   margin-bottom negativo evita que ocupe alto de layout. Las secciones opacas
-   vecinas tapan el desborde. */
+/* ── FONDO CONFINADO POR SECCIÓN (full-bleed, scrollea con la sección) ──────
+   La imagen es fondo ÚNICAMENTE de su sección. La capa se ancla con position
+   absolute al recuadro EXACTO de la sección (top/bottom: 0) y se hace full-bleed
+   a 100vw centrada, recortando con overflow:hidden. Sin background-attachment:
+   fixed ni sticky → scrollea con la sección (iOS-safe), sin desbordar a las
+   vecinas. Orden de capas: imagen (0) < overlay (1) < contenido (≥2). */
 .seccion-fondo { position: relative; isolation: isolate; }
 .seccion-fondo-capa {
-  position: sticky;
+  position: absolute;
   top: 0;
-  height: 100vh;
-  margin-bottom: -100vh;
-  z-index: -1;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;            /* full-bleed: borde a borde del viewport */
+  transform: translateX(-50%);
+  z-index: 0;
   pointer-events: none;
-  overflow: hidden;
+  overflow: hidden;        /* recorta la imagen al rectángulo de la sección */
 }
 .seccion-fondo-img {
   position: absolute;
   inset: 0;
+  z-index: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -611,6 +616,7 @@ nav.nav-open .nav-mobile-panel { max-height: 360px; }
 .seccion-fondo-overlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
     linear-gradient(180deg, rgba(20,14,12,0.84) 0%, rgba(20,14,12,0.76) 100%),
     linear-gradient(120deg, rgba(168,33,31,0.26) 0%, rgba(20,14,12,0) 56%),
@@ -758,7 +764,7 @@ section { padding: var(--space-section) var(--gutter); }
   max-width: var(--maxw);
   margin: 0 auto;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 .index-summary .section-label { color: var(--acero-claro); }
 .index-summary .section-title { color: var(--papel); }
@@ -839,7 +845,7 @@ section { padding: var(--space-section) var(--gutter); }
   max-width: var(--maxw);
   margin: 0 auto;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* Features con punto — usado en /nosotros */
