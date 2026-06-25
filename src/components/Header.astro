@@ -6,11 +6,13 @@ import { productos } from '../data/productos.js';
 const isHome = Astro.url.pathname === '/';
 const heroHref = isHome ? '#hero' : '/';
 const contactoHref = isHome ? '#contacto' : '/#contacto';
+// Servicios dejó de ser página propia: ahora es la sección #servicios del index.
+const serviciosHref = isHome ? '#servicios' : '/#servicios';
 
 const navItems = [
   { label: 'Productos', href: '/productos', cta: false, dropdown: true },
   { label: 'Nosotros', href: '/nosotros', cta: false },
-  { label: 'Servicios', href: '/servicios', cta: false },
+  { label: 'Servicios', href: serviciosHref, cta: false },
   { label: 'Catálogos', href: '/catalogos', cta: false },
   { label: 'Blog', href: '/blog', cta: false },
   { label: 'Contacto', href: contactoHref, cta: true },
@@ -20,7 +22,7 @@ const navItems = [
 <!-- NAV -->
 <nav id="navbar">
   <!--
-    LOGO: poné tu logo en assets/logo.png
+    LOGO: poné tu logo en assets/logo.avif
     Si no existe, muestra el texto TAREWA automáticamente.
   -->
   <a href={heroHref} class="nav-logo">

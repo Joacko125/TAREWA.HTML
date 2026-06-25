@@ -2,24 +2,27 @@
   TAREWA — Instrucciones para las fotos
 ======================================
 
+El sitio está estandarizado en formato .avif (más liviano y nítido).
 Copiá tus fotos en esta carpeta con exactamente estos nombres:
 
 ── SLIDER DEL HERO (fondo de pantalla completa) ──
-  slide-1.jpg   → foto del taller o de resistencias en general
-  slide-2.jpg   → foto de resistencias blindadas / tubulares
-  slide-3.jpg   → foto de sensores o pirómetros
-  slide-4.jpg   → foto de productos terminados o del equipo
+  slide-1.avif   → foto del taller o de resistencias en general
+  slide-2.avif   → foto de resistencias blindadas / tubulares
+  slide-3.avif   → foto de sensores o pirómetros
+  slide-4.avif   → foto de productos terminados o del equipo
+  (podés agregar slide-5.avif, slide-6.avif, etc.: el hero las
+   levanta automáticamente todas las que se llamen slide-*.avif)
 
 ── FOTOS DE PRODUCTOS (aparecen en cada tarjeta) ──
-  producto-blindada.jpg   → resistencias blindadas
-  producto-tubular.jpg    → resistencias tubulares
-  producto-zuncho.jpg     → resistencias de zuncho
-  producto-sensor.jpg     → sensores de temperatura
-  producto-pirometro.jpg  → pirómetros y termostatos
-  producto-especial.jpg   → resistencias especiales
+  producto-blindada.avif   → resistencias blindadas
+  producto-tubular.avif    → resistencias tubulares
+  producto-zuncho.avif     → resistencias de zuncho
+  producto-sensor.avif     → sensores de temperatura
+  producto-pirometro.avif  → pirómetros y termostatos
+  producto-especial.avif   → resistencias especiales
 
 TIPS:
-- Formatos aceptados: .jpg, .jpeg, .png, .webp
+- Formato: .avif (convertí tus .jpg/.png con sharp o squoosh.app)
 - Tamaño ideal para el slider: 1920 x 1080 px (horizontal)
 - Tamaño ideal para productos: 800 x 600 px mínimo
 - Si no tenés foto de algún producto, no pasa nada,
