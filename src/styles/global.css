@@ -623,6 +623,40 @@ nav.nav-open .nav-mobile-panel { max-height: 360px; }
     linear-gradient(0deg, rgba(255,204,41,0.08) 0%, rgba(255,204,41,0) 42%);
 }
 
+/* ── FONDO FIJO AL SCROLL DE LA SECCIÓN RESUMEN (.index-summary) ─────────────
+   Réplica EXACTA de la técnica del slideshow del hero (.hero-bg): una capa
+   position:fixed REAL (iOS-safe, sin background-attachment:fixed) a 100vw×100vh
+   detrás de todo (z-index:-1). Las secciones vecinas opacas (#productos arriba,
+   #servicios abajo) la tapan; sólo se descubre por la ventana de la sección
+   resumen cuando ésta se vuelve transparente. La imagen va cover+center (mismo
+   encuadro) y, al cubrir el viewport entero, nunca deja huecos arriba ni abajo.
+   La activación la maneja un IntersectionObserver (ver index.astro): así la capa
+   no se filtra por la ventana transparente del hero. Es progresivo: sin JS la
+   sección conserva su fondo grafito + imagen interna (sin regresión). */
+.resumen-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--grafito);   /* base sólida mientras carga la imagen */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s var(--ease);
+}
+.resumen-bg.is-active { opacity: 1; visibility: visible; }
+.resumen-bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;   /* mismo encuadro que .seccion-fondo-img */
+  background-repeat: no-repeat;
+}
+/* Con la capa fija activa, la sección se vuelve transparente para revelarla y
+   oculta su imagen interna (fallback) para no duplicar el fondo. El overlay y el
+   contenido siguen intactos sobre la imagen fija. */
+.index-summary.seccion-fondo.is-bgfixed { background: transparent; }
+.index-summary.seccion-fondo.is-bgfixed .seccion-fondo-img { opacity: 0; }
+
 /* ══ SECCIONES BASE ════════════════════════════════════════════════════════ */
 section { padding: var(--space-section) var(--gutter); }
 

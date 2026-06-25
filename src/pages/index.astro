@@ -22,6 +22,15 @@ const slides = fs
     <div class="hero-bg-overlay"></div>
   </div>
 
+  <!-- ══ FONDO FIJO DE LA SECCIÓN RESUMEN — misma técnica que el slideshow del
+       hero: capa position:fixed REAL (iOS-safe, sin background-attachment:fixed).
+       Vive a 100vw×100vh detrás de todo (z-index:-1); las secciones vecinas
+       opacas la tapan y sólo se descubre a través de la sección resumen (que se
+       vuelve transparente). Toggle por IntersectionObserver (ver script abajo). ══ -->
+  <div class="resumen-bg" aria-hidden="true">
+    <div class="resumen-bg-img" style="background-image:url(/assets/fondo-resistencia.avif)"></div>
+  </div>
+
   <!-- ══ HERO — tesis de marca sobre el slideshow incandescente ══ -->
   <section id="hero">
     <div class="filamento"></div>
@@ -485,6 +494,23 @@ const slides = fs
       new IntersectionObserver(function (entries) {
         heroBg.classList.toggle('is-past', !entries[0].isIntersecting);
       }, { threshold: 0 }).observe(hero);
+    })();
+  </script>
+
+  <!-- Fondo fijo de la sección resumen: misma técnica que el hero. La capa
+       fija (.resumen-bg) se enciende sólo mientras la sección intersecta el
+       viewport y la sección se vuelve transparente para revelarla. Fuera de
+       ese rango queda apagada (no se filtra por la ventana del hero). -->
+  <script is:inline>
+    (function () {
+      const bg = document.querySelector('.resumen-bg');
+      const sec = document.querySelector('.index-summary.seccion-fondo');
+      if (!bg || !sec || !('IntersectionObserver' in window)) return;
+      new IntersectionObserver(function (entries) {
+        const visible = entries[0].isIntersecting;
+        bg.classList.toggle('is-active', visible);
+        sec.classList.toggle('is-bgfixed', visible);
+      }, { threshold: 0 }).observe(sec);
     })();
   </script>
 
