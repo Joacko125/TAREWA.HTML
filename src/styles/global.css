@@ -633,7 +633,8 @@ nav.nav-open .nav-mobile-panel { max-height: 360px; }
    La activación la maneja un IntersectionObserver (ver index.astro): así la capa
    no se filtra por la ventana transparente del hero. Es progresivo: sin JS la
    sección conserva su fondo grafito + imagen interna (sin regresión). */
-.resumen-bg {
+.resumen-bg,
+.nosotros-bg {
   position: fixed;
   inset: 0;
   z-index: -1;
@@ -643,8 +644,10 @@ nav.nav-open .nav-mobile-panel { max-height: 360px; }
   visibility: hidden;
   transition: opacity 0.5s var(--ease);
 }
-.resumen-bg.is-active { opacity: 1; visibility: visible; }
-.resumen-bg-img {
+.resumen-bg.is-active,
+.nosotros-bg.is-active { opacity: 1; visibility: visible; }
+.resumen-bg-img,
+.nosotros-bg-img {
   position: absolute;
   inset: 0;
   background-size: cover;
@@ -654,8 +657,10 @@ nav.nav-open .nav-mobile-panel { max-height: 360px; }
 /* Con la capa fija activa, la sección se vuelve transparente para revelarla y
    oculta su imagen interna (fallback) para no duplicar el fondo. El overlay y el
    contenido siguen intactos sobre la imagen fija. */
-.index-summary.seccion-fondo.is-bgfixed { background: transparent; }
-.index-summary.seccion-fondo.is-bgfixed .seccion-fondo-img { opacity: 0; }
+.index-summary.seccion-fondo.is-bgfixed,
+#nosotros.seccion-fondo.is-bgfixed { background: transparent; }
+.index-summary.seccion-fondo.is-bgfixed .seccion-fondo-img,
+#nosotros.seccion-fondo.is-bgfixed .seccion-fondo-img { opacity: 0; }
 
 /* ══ SECCIONES BASE ════════════════════════════════════════════════════════ */
 section { padding: var(--space-section) var(--gutter); }
