@@ -194,8 +194,10 @@ img { max-width: 100%; height: auto; }
 .btn-whatsapp:hover { background: var(--whatsapp-hover); transform: translateY(-1px); }
 .btn-whatsapp svg { width: 15px; height: 15px; flex-shrink: 0; }
 
-/* ══ NAV ══════════════════════════════════════════════════════════════════ */
-nav {
+/* ══ NAV ══════════════════════════════════════════════════════════════════
+   Scopeado a #navbar: las páginas internas tienen otros <nav> (breadcrumb)
+   que NO deben heredar position:fixed ni el layout de la barra. */
+#navbar {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 500;
@@ -210,13 +212,13 @@ nav {
               border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 /* sólido + filamento al scrollear */
-nav.scrolled {
+#navbar.scrolled {
   padding: 0.7rem var(--gutter);
   background: rgba(244,243,240,0.96);
   border-bottom-color: var(--linea);
   box-shadow: var(--shadow-sm);
 }
-nav.scrolled::after {
+#navbar.scrolled::after {
   content: '';
   position: absolute;
   left: 0; right: 0; bottom: -1px;
@@ -332,7 +334,7 @@ nav.scrolled::after {
   opacity: 0.95;
   transition: height 0.3s var(--ease);
 }
-nav.scrolled .nav-logo-60 img { height: 36px; }
+#navbar.scrolled .nav-logo-60 img { height: 36px; }
 
 /* ── HAMBURGER ── */
 .nav-hamburger {
@@ -364,7 +366,7 @@ nav.scrolled .nav-logo-60 img { height: 36px; }
   width: 100%;
   transition: max-height 0.28s var(--ease);
 }
-nav.nav-open .nav-mobile-panel { max-height: 360px; }
+#navbar.nav-open .nav-mobile-panel { max-height: 360px; }
 .nav-mobile-links {
   list-style: none;
   display: flex;
@@ -743,6 +745,9 @@ section { padding: var(--space-section) var(--gutter); }
   box-shadow: var(--shadow-md);
 }
 .producto-card:hover::after { transform: scaleX(1); }
+
+/* La imagen de la card es un enlace a la página del producto */
+.producto-img-link { display: block; text-decoration: none; }
 
 .producto-img {
   width: 100%;
@@ -1177,12 +1182,12 @@ footer p { font-size: var(--fs-sm); color: var(--acero-claro); }
 }
 
 @media (max-width: 900px), (orientation: landscape) and (max-height: 500px) {
-  nav { padding: 0.9rem var(--gutter); flex-wrap: wrap; }
-  nav.scrolled { padding: 0.75rem var(--gutter); }
+  #navbar { padding: 0.9rem var(--gutter); flex-wrap: wrap; }
+  #navbar.scrolled { padding: 0.75rem var(--gutter); }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
   .nav-mobile-panel { display: block; }
-  nav.nav-open .nav-logo-60 { display: none; }
+  #navbar.nav-open .nav-logo-60 { display: none; }
   .servicios-grid { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; text-align: center; }
   .form-row { grid-template-columns: 1fr; }

@@ -71,17 +71,19 @@ const slides = fs
 
       <!-- Resistencias Blindadas -->
       <div class="producto-card">
-        <div class="producto-img" id="img-blindada">
-          <img src="/assets/producto-blindada.avif" alt="Resistencias Blindadas Industriales" loading="lazy" width="900" height="613"
-               onerror="document.getElementById('img-blindada').classList.add('sin-foto'); this.remove()" />
-          <svg style="display:none" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="6" y="18" width="36" height="12" rx="2"/><line x1="14" y1="18" x2="14" y2="30"/>
-            <line x1="20" y1="18" x2="20" y2="30"/><line x1="26" y1="18" x2="26" y2="30"/>
-            <line x1="32" y1="18" x2="32" y2="30"/><line x1="6" y1="24" x2="2" y2="24"/>
-            <line x1="42" y1="24" x2="46" y2="24"/>
-          </svg>
-          <span class="producto-badge">Por pedido</span>
-        </div>
+        <a class="producto-img-link" href="/productos/resistencias-blindadas" aria-label="Resistencias Blindadas Industriales">
+          <div class="producto-img" id="img-blindada">
+            <img src="/assets/producto-blindada.avif" alt="Resistencias Blindadas Industriales" loading="lazy" width="900" height="613"
+                 onerror="document.getElementById('img-blindada').classList.add('sin-foto'); this.remove()" />
+            <svg style="display:none" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+              <rect x="6" y="18" width="36" height="12" rx="2"/><line x1="14" y1="18" x2="14" y2="30"/>
+              <line x1="20" y1="18" x2="20" y2="30"/><line x1="26" y1="18" x2="26" y2="30"/>
+              <line x1="32" y1="18" x2="32" y2="30"/><line x1="6" y1="24" x2="2" y2="24"/>
+              <line x1="42" y1="24" x2="46" y2="24"/>
+            </svg>
+            <span class="producto-badge">Por pedido</span>
+          </div>
+        </a>
         <div class="producto-body">
           <span class="producto-cod">Cód: RB-001</span>
           <h3><a class="producto-link" href="/productos/resistencias-blindadas">Resistencias Blindadas Industriales</a></h3>
@@ -95,11 +97,13 @@ const slides = fs
 
       <!-- Resistencias Tubulares -->
       <div class="producto-card">
-        <div class="producto-img" id="img-tubular">
-          <img src="/assets/producto-tubular.avif" alt="Resistencias Tubulares Industriales" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-tubular').classList.add('sin-foto'); this.remove()" />
-          <span class="producto-badge">Por pedido</span>
-        </div>
+        <a class="producto-img-link" href="/productos/resistencias-tubulares" aria-label="Resistencias Tubulares Industriales">
+          <div class="producto-img" id="img-tubular">
+            <img src="/assets/producto-tubular.avif" alt="Resistencias Tubulares Industriales" loading="lazy" width="597" height="900"
+                 onerror="document.getElementById('img-tubular').classList.add('sin-foto'); this.remove()" />
+            <span class="producto-badge">Por pedido</span>
+          </div>
+        </a>
         <div class="producto-body">
           <span class="producto-cod">Cód: RT-002</span>
           <h3><a class="producto-link" href="/productos/resistencias-tubulares">Resistencias Tubulares Industriales</a></h3>
@@ -113,11 +117,13 @@ const slides = fs
 
       <!-- Resistencias de Zuncho -->
       <div class="producto-card">
-        <div class="producto-img" id="img-zuncho">
-          <img src="/assets/producto-zuncho.avif" alt="Resistencias tipo Zuncho Industriales" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-zuncho').classList.add('sin-foto'); this.remove()" />
-          <span class="producto-badge">Por pedido</span>
-        </div>
+        <a class="producto-img-link" href="/productos/resistencias-zuncho" aria-label="Resistencias tipo Zuncho Industriales">
+          <div class="producto-img" id="img-zuncho">
+            <img src="/assets/producto-zuncho.avif" alt="Resistencias tipo Zuncho Industriales" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-zuncho').classList.add('sin-foto'); this.remove()" />
+            <span class="producto-badge">Por pedido</span>
+          </div>
+        </a>
         <div class="producto-body">
           <span class="producto-cod">Cód: RZ-003</span>
           <h3><a class="producto-link" href="/productos/resistencias-zuncho">Resistencias tipo Zuncho Industriales</a></h3>
@@ -131,11 +137,13 @@ const slides = fs
 
       <!-- Sensores de Temperatura -->
       <div class="producto-card">
-        <div class="producto-img" id="img-sensor">
-          <img src="/assets/producto-sensor.avif" alt="Sensores de Temperatura Industriales" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-sensor').classList.add('sin-foto'); this.remove()" />
-          <span class="producto-badge">Por pedido</span>
-        </div>
+        <a class="producto-img-link" href="/productos/sensores-temperatura" aria-label="Sensores de Temperatura Industriales">
+          <div class="producto-img" id="img-sensor">
+            <img src="/assets/producto-sensor.avif" alt="Sensores de Temperatura Industriales" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-sensor').classList.add('sin-foto'); this.remove()" />
+            <span class="producto-badge">Por pedido</span>
+          </div>
+        </a>
         <div class="producto-body">
           <span class="producto-cod">Cód: ST-004</span>
           <h3><a class="producto-link" href="/productos/sensores-temperatura">Sensores de Temperatura Industriales</a></h3>
@@ -151,11 +159,13 @@ const slides = fs
       <!-- NOTA: el SVG de WhatsApp original de este card estaba corrupto (chars unicode FULLWIDTH).
            Se restauró con el path correcto idéntico al de los otros productos. -->
       <div class="producto-card">
-        <div class="producto-img" id="img-accesorios">
-          <img src="/assets/producto-accesorios.avif" alt="Accesorios para Resistencias Eléctricas" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-accesorios').classList.add('sin-foto'); this.remove()" />
-          <span class="producto-badge">Por pedido</span>
-        </div>
+        <a class="producto-img-link" href="/productos/accesorios" aria-label="Accesorios para Resistencias Eléctricas">
+          <div class="producto-img" id="img-accesorios">
+            <img src="/assets/producto-accesorios.avif" alt="Accesorios para Resistencias Eléctricas" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-accesorios').classList.add('sin-foto'); this.remove()" />
+            <span class="producto-badge">Por pedido</span>
+          </div>
+        </a>
         <div class="producto-body">
           <span class="producto-cod">Cód: PT-005</span>
           <h3><a class="producto-link" href="/productos/accesorios">Accesorios para Resistencias Eléctricas</a></h3>
@@ -169,11 +179,13 @@ const slides = fs
 
       <!-- Resistencias Especiales -->
       <div class="producto-card">
-        <div class="producto-img" id="img-especial">
-          <img src="/assets/producto-especial.avif" alt="Resistencias Eléctricas Especiales a Medida" loading="lazy" width="831" height="623"
-               onerror="document.getElementById('img-especial').classList.add('sin-foto'); this.remove()" />
-          <span class="producto-badge">A medida</span>
-        </div>
+        <a class="producto-img-link" href="/productos/resistencias-especiales" aria-label="Resistencias Eléctricas Especiales a Medida">
+          <div class="producto-img" id="img-especial">
+            <img src="/assets/producto-especial.avif" alt="Resistencias Eléctricas Especiales a Medida" loading="lazy" width="831" height="623"
+                 onerror="document.getElementById('img-especial').classList.add('sin-foto'); this.remove()" />
+            <span class="producto-badge">A medida</span>
+          </div>
+        </a>
         <div class="producto-body">
           <span class="producto-cod">Cód: RE-006</span>
           <h3><a class="producto-link" href="/productos/resistencias-especiales">Resistencias Eléctricas Especiales a Medida</a></h3>
@@ -187,11 +199,13 @@ const slides = fs
 
       <!-- Pantallas Infrarrojas -->
       <div class="producto-card">
-        <div class="producto-img" id="img-infrarroja">
-          <img src="/assets/producto-infrarroja.avif" alt="Pantallas Infrarrojas Industriales" loading="lazy" width="900" height="601"
-               onerror="document.getElementById('img-infrarroja').classList.add('sin-foto'); this.remove()" />
-          <span class="producto-badge">Por pedido</span>
-        </div>
+        <a class="producto-img-link" href="/productos/pantallas-infrarrojas" aria-label="Pantallas Infrarrojas Industriales">
+          <div class="producto-img" id="img-infrarroja">
+            <img src="/assets/producto-infrarroja.avif" alt="Pantallas Infrarrojas Industriales" loading="lazy" width="900" height="601"
+                 onerror="document.getElementById('img-infrarroja').classList.add('sin-foto'); this.remove()" />
+            <span class="producto-badge">Por pedido</span>
+          </div>
+        </a>
         <div class="producto-body">
           <span class="producto-cod">Cód: PI-007</span>
           <h3><a class="producto-link" href="/productos/pantallas-infrarrojas">Pantallas Infrarrojas Industriales</a></h3>
@@ -205,11 +219,13 @@ const slides = fs
 
       <!-- Resistencias Planas -->
       <div class="producto-card">
-        <div class="producto-img" id="img-plana">
-          <img src="/assets/producto-plana.avif" alt="Resistencias Eléctricas Planas" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-plana').classList.add('sin-foto'); this.remove()" />
-          <span class="producto-badge">Por pedido</span>
-        </div>
+        <a class="producto-img-link" href="/productos/resistencias-planas" aria-label="Resistencias Eléctricas Planas">
+          <div class="producto-img" id="img-plana">
+            <img src="/assets/producto-plana.avif" alt="Resistencias Eléctricas Planas" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-plana').classList.add('sin-foto'); this.remove()" />
+            <span class="producto-badge">Por pedido</span>
+          </div>
+        </a>
         <div class="producto-body">
           <span class="producto-cod">Cód: RP-008</span>
           <h3><a class="producto-link" href="/productos/resistencias-planas">Resistencias Eléctricas Planas</a></h3>
@@ -223,11 +239,13 @@ const slides = fs
 
       <!-- Suspendidas -->
       <div class="producto-card">
-        <div class="producto-img" id="img-suspendida">
-          <img src="/assets/producto-suspendida.avif" alt="Resistencias Suspendidas Industriales" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-suspendida').classList.add('sin-foto'); this.remove()" />
-          <span class="producto-badge">Por pedido</span>
-        </div>
+        <a class="producto-img-link" href="/productos/resistencias-suspendidas" aria-label="Resistencias Suspendidas Industriales">
+          <div class="producto-img" id="img-suspendida">
+            <img src="/assets/producto-suspendida.avif" alt="Resistencias Suspendidas Industriales" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-suspendida').classList.add('sin-foto'); this.remove()" />
+            <span class="producto-badge">Por pedido</span>
+          </div>
+        </a>
         <div class="producto-body">
           <span class="producto-cod">Cód: RS-009</span>
           <h3><a class="producto-link" href="/productos/resistencias-suspendidas">Resistencias Suspendidas Industriales</a></h3>
@@ -241,11 +259,13 @@ const slides = fs
 
       <!-- Bancos de Carga Resistivos -->
       <div class="producto-card">
-        <div class="producto-img" id="img-banco">
-          <img src="/assets/producto-banco.avif" alt="Bancos de Carga Resistivos Industriales" loading="lazy" width="900" height="597"
-               onerror="document.getElementById('img-banco').classList.add('sin-foto'); this.remove()" />
-          <span class="producto-badge">Por pedido</span>
-        </div>
+        <a class="producto-img-link" href="/productos/bancos-de-carga" aria-label="Bancos de Carga Resistivos Industriales">
+          <div class="producto-img" id="img-banco">
+            <img src="/assets/producto-banco.avif" alt="Bancos de Carga Resistivos Industriales" loading="lazy" width="900" height="597"
+                 onerror="document.getElementById('img-banco').classList.add('sin-foto'); this.remove()" />
+            <span class="producto-badge">Por pedido</span>
+          </div>
+        </a>
         <div class="producto-body">
           <span class="producto-cod">Cód: BC-010</span>
           <h3><a class="producto-link" href="/productos/bancos-de-carga">Bancos de Carga Resistivos Industriales</a></h3>

@@ -45,67 +45,70 @@ const extras = [1, 2, 3, 4, 5, 6];
 
     <article class="producto-detalle">
 
-      <header class="producto-detalle-header reveal">
-        <p class="section-label">Producto · {producto.codigo}</p>
-        <h1>{producto.nombre}</h1>
-        <p class="producto-detalle-resumen">{producto.resumen}</p>
-      </header>
+      <!-- ══ 2 COLUMNAS: GALERÍA | INFO ══ -->
+      <div class="producto-layout">
 
-      <!-- ══ CARRUSEL HORIZONTAL (filmstrip) ══ -->
-      <div class="galeria reveal" data-galeria aria-roledescription="carrusel">
-        <button class="galeria-flecha galeria-prev" type="button" aria-label="Imagen anterior" hidden>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-
-        <ul class="galeria-track">
-          <li class="galeria-slide">
-            <img src={producto.imagen} alt={`${producto.nombre} — foto principal`} loading="eager" />
-          </li>
-          {extras.map((n) => (
-            <li class="galeria-slide" data-extra>
-              <img src={`/assets/productos/${producto.slug}/${n}.avif`} alt={`${producto.nombre} — foto ${n}`} loading="lazy" />
+        <div class="producto-galeria reveal" data-galeria>
+          <figure class="galeria-main">
+            <img data-galeria-main src={producto.imagen} alt={`${producto.nombre} — foto principal`} loading="eager" />
+          </figure>
+          <ul class="galeria-thumbs" aria-label="Fotos del producto">
+            <li>
+              <button class="galeria-thumb is-active" type="button" aria-label="Ver foto principal" aria-current="true">
+                <img src={producto.imagen} alt="" loading="eager" decoding="async" data-alt={`${producto.nombre} — foto principal`} />
+              </button>
             </li>
-          ))}
-        </ul>
-
-        <button class="galeria-flecha galeria-next" type="button" aria-label="Imagen siguiente" hidden>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-
-        <ol class="galeria-dots" role="tablist" aria-label="Seleccionar foto"></ol>
-      </div>
-
-      <!-- ══ INFO HORIZONTAL / APAISADA ══ -->
-      <div class="producto-info reveal">
-        <div class="producto-texto">
-          {producto.descripcion.map((p) => <p>{p}</p>)}
+            {extras.map((n) => (
+              <li data-extra hidden>
+                <button class="galeria-thumb" type="button" aria-label={`Ver foto ${n + 1}`}>
+                  <img src={`/assets/productos/${producto.slug}/${n}.avif`} alt="" loading="eager" decoding="async" data-alt={`${producto.nombre} — foto ${n + 1}`} />
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <aside class="producto-aside">
-          <span class="producto-aside-cod">Ficha técnica</span>
-          <dl class="ficha-mono">
-            {ficha.map((f) => (
-              <div class="ficha-row">
-                <dt>{f.k}</dt>
-                <dd>{f.v}</dd>
-              </div>
-            ))}
-          </dl>
-          <p class="producto-aside-titulo">¿Te interesa este producto?</p>
-          <p class="producto-aside-sub">Fabricamos a medida según tu potencia, tensión y geometría. Escribinos y te asesoramos.</p>
+        <div class="producto-head reveal reveal-delay-1">
+          <p class="section-label"><span class="brand-dot"></span> Producto · <span class="producto-head-cod">{producto.codigo}</span></p>
+          <h1>{producto.nombre}</h1>
+          <p class="producto-resumen">{producto.resumen}</p>
 
-          <a href={waHref} target="_blank" rel="noopener" class="producto-cta-wa">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
-            Consultar por WhatsApp
-          </a>
+          <section class="producto-ficha" aria-label="Ficha técnica">
+            <span class="producto-ficha-titulo">Ficha técnica</span>
+            <dl class="ficha-mono">
+              {ficha.map((f) => (
+                <div class="ficha-row">
+                  <dt>{f.k}</dt>
+                  <dd>{f.v}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
 
-          <p class="producto-aside-secundario">
-            ¿Preferís llamar? <a href={`tel:${contacto.telefonoLink}`}>{contacto.telefonoDisplay}</a><br>
-            o escribinos a <a href={`mailto:${contacto.email}`}>{contacto.email}</a>
-          </p>
-          <a class="producto-aside-catalogo" href="/catalogos">Ver catálogos en PDF →</a>
-        </aside>
+          <aside class="producto-cta-card">
+            <p class="producto-cta-titulo">¿Te interesa este producto?</p>
+            <p class="producto-cta-sub">Fabricamos a medida según tu potencia, tensión y geometría. Escribinos y te asesoramos.</p>
+
+            <a href={waHref} target="_blank" rel="noopener" class="producto-cta-wa">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+              Consultar por WhatsApp
+            </a>
+
+            <p class="producto-cta-secundario">
+              ¿Preferís llamar? <a href={`tel:${contacto.telefonoLink}`}>{contacto.telefonoDisplay}</a><br>
+              o escribinos a <a href={`mailto:${contacto.email}`}>{contacto.email}</a>
+            </p>
+            <a class="producto-cta-catalogo" href="/catalogos">Ver catálogos en PDF →</a>
+          </aside>
+        </div>
+
       </div>
+
+      <!-- ══ DESCRIPCIÓN LARGA (ancho de lectura) ══ -->
+      <section class="producto-descripcion reveal">
+        <p class="section-label">En detalle</p>
+        {producto.descripcion.map((p) => <p class="producto-descripcion-parrafo">{p}</p>)}
+      </section>
 
       <a href="/productos" class="producto-back">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -142,155 +145,123 @@ const extras = [1, 2, 3, 4, 5, 6];
     margin: 0 auto;
     padding: 2rem var(--gutter) var(--space-section);
   }
-  .producto-detalle-header { text-align: center; margin-bottom: 2.5rem; }
-  .producto-detalle-header h1 {
-    font-size: var(--fs-2xl);
-    font-weight: 600;
-    line-height: 1.08;
-    letter-spacing: -0.03em;
-    margin-top: 0.6rem;
-    color: var(--grafito);
-  }
-  .producto-detalle-resumen {
-    max-width: 720px;
-    margin: 1rem auto 0;
-    color: var(--acero);
-    font-size: var(--fs-md);
-    line-height: 1.6;
+
+  /* ══ LAYOUT 2 COLUMNAS ══ */
+  .producto-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+    align-items: start;
   }
 
-  /* ══ CARRUSEL HORIZONTAL ══ */
-  .galeria { position: relative; margin-bottom: 3.5rem; }
-  .galeria-track {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .galeria-track::-webkit-scrollbar { display: none; }
-  .galeria-slide {
-    flex: 0 0 auto;
-    width: min(760px, 82%);
-    scroll-snap-align: center;
-    position: relative;
-  }
-  .galeria-slide img {
+  /* ══ GALERÍA: principal + thumbnails ══ */
+  .producto-galeria { position: sticky; top: 5.5rem; }
+  .galeria-main { margin: 0; }
+  .galeria-main img {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
     display: block;
     border: 1px solid var(--linea);
     border-radius: var(--radius-sm);
     background: var(--lino);
   }
-  /* Cuando hay una sola imagen, ocupa todo el ancho disponible */
-  .galeria.is-single .galeria-slide { width: 100%; }
-
-  .galeria-flecha {
-    position: absolute;
-    top: calc(50% - 1.4rem);
-    transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
-    background: rgba(244,243,240,0.9);
-    border: 1px solid var(--linea);
-    color: var(--grafito);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    backdrop-filter: blur(4px);
-    transition: background 0.25s var(--ease), transform 0.2s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease);
-    z-index: 3;
-  }
-  .galeria-flecha:hover { background: var(--rojo-tinta); border-color: var(--rojo-tinta); color: #fff; transform: translateY(-50%) scale(1.08); }
-  .galeria-flecha[hidden] { display: none; }
-  .galeria-flecha svg { width: 24px; height: 24px; }
-  .galeria-prev { left: 0.8rem; }
-  .galeria-next { right: 0.8rem; }
-
-  .galeria-dots {
+  .galeria-thumbs {
     list-style: none;
-    margin: 1.3rem 0 0;
+    margin: 0.9rem 0 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    gap: 0.55rem;
+    flex-wrap: wrap;
+    gap: 0.7rem;
   }
-  .galeria-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: var(--linea);
-    border: none; padding: 0;
-    cursor: pointer;
-    transition: background 0.25s var(--ease), transform 0.2s var(--ease);
-  }
-  .galeria-dot:hover { background: var(--acero); }
-  .galeria-dot.is-active { background: var(--rojo-tinta); transform: scale(1.25); }
-
-  /* ══ INFO APAISADA ══ */
-  .producto-info {
-    display: grid;
-    grid-template-columns: 1.7fr 1fr;
-    gap: 3rem;
-    align-items: start;
-  }
-  .producto-texto p {
-    color: var(--grafito);
-    line-height: 1.85;
-    margin-bottom: 1.2rem;
-    font-size: 1.05rem;
-  }
-  /* En pantallas anchas, el texto fluye en dos columnas (lectura apaisada) */
-  @media (min-width: 1200px) {
-    .producto-texto { column-count: 2; column-gap: 2.5rem; }
-    .producto-texto p:first-child { margin-top: 0; }
-  }
-
-  .producto-aside {
-    background: var(--lino);
+  .producto-galeria.is-single .galeria-thumbs { display: none; }
+  .galeria-thumb {
+    display: block;
+    width: 86px;
+    height: 64px;
+    padding: 0;
     border: 1px solid var(--linea);
     border-radius: var(--radius-sm);
-    padding: 1.8rem;
-    position: sticky;
-    top: 6rem;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--lino);
+    opacity: 0.7;
+    transition: border-color 0.25s var(--ease), opacity 0.25s var(--ease), transform 0.2s var(--ease);
   }
-  .producto-aside-cod {
+  .galeria-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .galeria-thumb:hover { opacity: 1; transform: translateY(-2px); }
+  .galeria-thumb.is-active { border-color: var(--rojo-tinta); opacity: 1; }
+
+  /* ══ INFO: título, resumen, ficha, CTA ══ */
+  .producto-head-cod { color: var(--rojo-tinta); }
+  .producto-head h1 {
+    font-size: var(--fs-xl);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--grafito);
+    margin-bottom: 0.9rem;
+  }
+  .producto-resumen {
+    color: var(--acero);
+    font-size: var(--fs-md);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .producto-ficha-titulo {
     display: inline-block;
     font-family: var(--font-mono);
     font-size: var(--fs-xs);
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--rojo-tinta);
-    margin-bottom: 0.9rem;
+    color: var(--acero);
+    margin-bottom: 0.7rem;
   }
-  /* Ficha técnica en mono (key/value) */
+  /* Ficha técnica en mono (key/value alineados) */
   .ficha-mono {
     font-family: var(--font-mono);
     font-size: var(--fs-sm);
-    margin-bottom: 1.6rem;
     border-top: 1px solid var(--linea);
+    margin-bottom: 2.2rem;
   }
   .ficha-row {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0.6rem 0;
+    padding: 0.65rem 0;
     border-bottom: 1px solid var(--linea);
   }
   .ficha-row dt { color: var(--acero); letter-spacing: 0.02em; }
   .ficha-row dd { color: var(--grafito); font-weight: 500; text-align: right; }
 
-  .producto-aside-titulo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--grafito); margin-bottom: 0.5rem; }
-  .producto-aside-sub { color: var(--acero); font-size: var(--fs-sm); line-height: 1.6; margin-bottom: 1.4rem; }
+  /* ══ CTA destacado (acento rojo de marca, filamento arriba) ══ */
+  .producto-cta-card {
+    position: relative;
+    background: var(--lino);
+    border: 1px solid var(--linea);
+    border-radius: var(--radius-sm);
+    padding: 1.8rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .producto-cta-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--filamento);
+  }
+  .producto-cta-titulo {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--grafito);
+    margin-bottom: 0.5rem;
+  }
+  .producto-cta-sub { color: var(--acero); font-size: var(--fs-sm); line-height: 1.6; margin-bottom: 1.4rem; }
 
   .producto-cta-wa {
     display: flex;
@@ -309,15 +280,15 @@ const extras = [1, 2, 3, 4, 5, 6];
   .producto-cta-wa:hover { background: var(--whatsapp-hover); transform: translateY(-2px); }
   .producto-cta-wa svg { width: 22px; height: 22px; }
 
-  .producto-aside-secundario {
+  .producto-cta-secundario {
     margin-top: 1.3rem;
     color: var(--acero);
     font-size: var(--fs-sm);
     line-height: 1.8;
   }
-  .producto-aside-secundario a { color: var(--rojo-tinta); text-decoration: none; font-weight: 500; }
-  .producto-aside-secundario a:hover { text-decoration: underline; }
-  .producto-aside-catalogo {
+  .producto-cta-secundario a { color: var(--rojo-tinta); text-decoration: none; font-weight: 500; }
+  .producto-cta-secundario a:hover { text-decoration: underline; }
+  .producto-cta-catalogo {
     display: inline-block;
     margin-top: 1.3rem;
     padding-top: 1.2rem;
@@ -330,7 +301,21 @@ const extras = [1, 2, 3, 4, 5, 6];
     letter-spacing: 0.02em;
     transition: color 0.25s var(--ease);
   }
-  .producto-aside-catalogo:hover { color: var(--rojo-tinta); }
+  .producto-cta-catalogo:hover { color: var(--rojo-tinta); }
+
+  /* ══ DESCRIPCIÓN LARGA ══ */
+  .producto-descripcion {
+    max-width: 760px;
+    margin: clamp(3.5rem, 7vw, 5.5rem) auto 0;
+    padding-top: clamp(2.5rem, 5vw, 3.5rem);
+    border-top: 1px solid var(--linea);
+  }
+  .producto-descripcion-parrafo {
+    color: var(--grafito);
+    line-height: 1.85;
+    font-size: 1.05rem;
+  }
+  .producto-descripcion-parrafo + .producto-descripcion-parrafo { margin-top: 1.2rem; }
 
   .producto-back {
     display: inline-flex;
@@ -352,104 +337,66 @@ const extras = [1, 2, 3, 4, 5, 6];
   @media (max-width: 900px), (orientation: landscape) and (max-height: 500px) {
     .breadcrumb { padding: 1.2rem var(--gutter) 0; }
     .producto-detalle { padding: 1.5rem var(--gutter) 4.5rem; }
-    .galeria-slide { width: 88%; }
-    .galeria-flecha { width: 40px; height: 40px; }
-    .galeria-flecha svg { width: 20px; height: 20px; }
-    .producto-info { grid-template-columns: 1fr; gap: 2rem; }
-    .producto-aside { position: static; }
+    .producto-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .producto-galeria { position: static; }
+    .galeria-thumb { width: 72px; height: 54px; }
+    .producto-resumen { margin-bottom: 1.6rem; }
   }
 </style>
 
 <script is:inline>
   (function () {
     document.querySelectorAll('[data-galeria]').forEach((root) => {
-      const track = root.querySelector('.galeria-track');
-      const dotsWrap = root.querySelector('.galeria-dots');
-      const prev = root.querySelector('.galeria-prev');
-      const next = root.querySelector('.galeria-next');
-      const slides = Array.from(track.querySelectorAll('.galeria-slide'));
-      if (!slides.length) return;
+      const main = root.querySelector('[data-galeria-main]');
+      const thumbsWrap = root.querySelector('.galeria-thumbs');
+      const thumbs = Array.from(root.querySelectorAll('.galeria-thumb'));
+      if (!main || !thumbsWrap) return;
 
-      let pending = slides.length;
-
-      function evaluate(slide, ok) {
-        if (!ok) slide.remove();
-        if (--pending === 0) finalize();
+      function activate(btn) {
+        const img = btn.querySelector('img');
+        if (!img) return;
+        main.src = img.getAttribute('src');
+        main.alt = img.dataset.alt || main.alt;
+        thumbs.forEach((t) => {
+          const on = t === btn;
+          t.classList.toggle('is-active', on);
+          if (on) t.setAttribute('aria-current', 'true');
+          else t.removeAttribute('aria-current');
+        });
       }
 
-      slides.forEach((slide) => {
-        const img = slide.querySelector('img');
-        if (!img) { evaluate(slide, false); return; }
+      // Las fotos extra son opcionales: se muestran solo si el archivo existe.
+      let pending = 0;
+
+      function finalize() {
+        if (thumbsWrap.querySelectorAll('.galeria-thumb').length <= 1) {
+          root.classList.add('is-single');
+        }
+      }
+
+      thumbs.forEach((btn) => {
+        btn.addEventListener('click', () => activate(btn));
+
+        const li = btn.closest('li');
+        if (!li || !li.hasAttribute('data-extra')) return;
+
+        const img = btn.querySelector('img');
+        pending++;
+        const settle = (ok) => {
+          if (ok) li.removeAttribute('hidden');
+          else li.remove();
+          if (--pending === 0) finalize();
+        };
+        if (!img) { settle(false); return; }
         if (img.complete) {
-          evaluate(slide, img.naturalWidth > 0);
+          settle(img.naturalWidth > 0);
         } else {
-          img.addEventListener('load', () => evaluate(slide, true), { once: true });
-          img.addEventListener('error', () => evaluate(slide, false), { once: true });
+          img.addEventListener('load', () => settle(true), { once: true });
+          img.addEventListener('error', () => settle(false), { once: true });
         }
       });
 
-      function finalize() {
-        const live = Array.from(track.querySelectorAll('.galeria-slide'));
-
-        // Una sola imagen: sin flechas ni puntos.
-        if (live.length <= 1) {
-          root.classList.add('is-single');
-          return;
-        }
-
-        prev.hidden = false;
-        next.hidden = false;
-
-        // Construir los puntos.
-        live.forEach((slide, i) => {
-          const li = document.createElement('li');
-          const b = document.createElement('button');
-          b.type = 'button';
-          b.className = 'galeria-dot' + (i === 0 ? ' is-active' : '');
-          b.setAttribute('aria-label', 'Ir a la foto ' + (i + 1));
-          b.addEventListener('click', () => scrollTo(i));
-          li.appendChild(b);
-          dotsWrap.appendChild(li);
-        });
-        const dots = Array.from(dotsWrap.querySelectorAll('.galeria-dot'));
-
-        function scrollTo(i) {
-          const target = live[Math.max(0, Math.min(i, live.length - 1))];
-          target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        }
-
-        function currentIndex() {
-          const center = track.scrollLeft + track.clientWidth / 2;
-          let best = 0, bestDist = Infinity;
-          live.forEach((s, i) => {
-            const c = s.offsetLeft + s.offsetWidth / 2;
-            const d = Math.abs(c - center);
-            if (d < bestDist) { bestDist = d; best = i; }
-          });
-          return best;
-        }
-
-        function syncDots() {
-          const idx = currentIndex();
-          dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
-        }
-
-        prev.addEventListener('click', () => scrollTo(currentIndex() - 1));
-        next.addEventListener('click', () => scrollTo(currentIndex() + 1));
-
-        let raf = null;
-        track.addEventListener('scroll', () => {
-          if (raf) return;
-          raf = requestAnimationFrame(() => { syncDots(); raf = null; });
-        }, { passive: true });
-
-        // Teclado
-        track.setAttribute('tabindex', '0');
-        track.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') { e.preventDefault(); scrollTo(currentIndex() - 1); }
-          if (e.key === 'ArrowRight') { e.preventDefault(); scrollTo(currentIndex() + 1); }
-        });
-      }
+      if (pending === 0) finalize();
     });
   })();
 </script>
