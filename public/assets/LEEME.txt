@@ -13,6 +13,13 @@ Copiá tus fotos en esta carpeta con exactamente estos nombres:
   (podés agregar slide-5.avif, slide-6.avif, etc.: el hero las
    levanta automáticamente todas las que se llamen slide-*.avif)
 
+── SLIDER DEL HERO DE /nosotros (mismo efecto que el index) ──
+  nosotros-1.avif, nosotros-2.avif, ... → fotos propias de la página
+  Nosotros (equipo, taller, historia). La página las levanta
+  automáticamente; mientras no existan usa las slide-*.avif del index.
+  Si tus fotos están en .jpg/.png, copialas acá con su nombre final
+  y corré `npm run img:avif` para generar los .avif.
+
 ── FOTOS DE PRODUCTOS (aparecen en cada tarjeta) ──
   producto-blindada.avif   → resistencias blindadas
   producto-tubular.avif    → resistencias tubulares

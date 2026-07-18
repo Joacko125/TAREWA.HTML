@@ -17,7 +17,7 @@ export const historia = [
   {
     anio: '1978',
     titulo: 'Mudanza al primer galpón propio',
-    texto: 'La producción supera al taller original y la familia decide invertir en su primer galpón propio en Morón. Llegan las primeras máquinas semi-industriales y arrancan los pedidos de clientes industriales medianos: imprentas, fábricas de plástico y talleres metalúrgicos del oeste.',
+    texto: 'La producción supera al taller original y la familia decide invertir en su primer galpón propio en el oeste del Gran Buenos Aires. Llegan las primeras máquinas semi-industriales y arrancan los pedidos de clientes industriales medianos: imprentas, fábricas de plástico y talleres metalúrgicos del oeste.',
     imagen: '/assets/historia/1978.avif',
   },
   {

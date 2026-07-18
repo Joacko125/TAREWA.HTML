@@ -113,7 +113,7 @@ export const contacto = {
   telefonoLink: '+5491141937728',
   whatsappNumero: '5491141937728',
   email: 'ventas@tarewa.com',
-  direccion: 'Huaura 235, Morón, Buenos Aires',
+  direccion: 'Huaura 235, Buenos Aires, Argentina',
   horario: 'Lunes a viernes · 8:00 a 16:30 hs',
 };
 ```

@@ -13,13 +13,16 @@ interface Props {
   description?: string;
   canonical?: string;
   ogImage?: string;
+  /** Nav oculto al cargar, con reveal al pasar la sección #hero (index y /nosotros). */
+  navReveal?: boolean;
 }
 
 const {
   title = 'Resistencias Eléctricas Industriales | TAREWA Argentina',
-  description = 'TAREWA: fabricantes de resistencias eléctricas industriales en Morón, Buenos Aires. +60 años de experiencia y envíos a todo el país. Pedí tu presupuesto.',
+  description = 'TAREWA: fabricantes de resistencias eléctricas industriales en Buenos Aires, Argentina. +60 años de experiencia y envíos a todo el país. Pedí tu presupuesto.',
   canonical = 'https://tarewa.com/',
   ogImage = 'https://tarewa.com/assets/logo.avif',
+  navReveal = false,
 } = Astro.props;
 ---
 
@@ -62,7 +65,7 @@ const {
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Huaura 235",
-      "addressLocality": "Morón",
+      "addressLocality": "Buenos Aires",
       "addressRegion": "Buenos Aires",
       "postalCode": "1708",
       "addressCountry": "AR"
@@ -89,7 +92,10 @@ const {
         {"@type": "Offer","itemOffered": {"@type": "Product","name": "Accesorios para Resistencias Eléctricas"}}
       ]
     },
-    "sameAs": []
+    "sameAs": [
+      "https://www.linkedin.com/company/tarewa",
+      "https://www.facebook.com/Tarewa1964"
+    ]
   })} />
 
   <link rel="icon" type="image/avif" href="/assets/favicon.avif" />
@@ -97,7 +103,7 @@ const {
 </head>
 <body>
 
-  <Header />
+  <Header reveal={navReveal} />
 
   <slot />
 
@@ -130,6 +136,20 @@ const {
       if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 60);
       if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 400);
     });
+
+    // Nav oculto con reveal al scroll (páginas con data-reveal, index y /nosotros):
+    // arranca oculto sobre el hero de slides y aparece al pasarlo. Progresivo:
+    // la clase .nav-reveal sólo la agrega JS — sin JS el nav queda visible normal.
+    // IntersectionObserver sobre #hero (sin listeners de scroll extra).
+    if (navbar && navbar.dataset.reveal === 'true' && 'IntersectionObserver' in window) {
+      const heroSec = document.querySelector('#hero');
+      if (heroSec) {
+        navbar.classList.add('nav-reveal');
+        new IntersectionObserver((entries) => {
+          navbar.classList.toggle('is-revealed', !entries[0].isIntersecting);
+        }, { threshold: 0 }).observe(heroSec);
+      }
+    }
 
     // Hamburger menu
     const hamburger = document.getElementById('navHamburger');
