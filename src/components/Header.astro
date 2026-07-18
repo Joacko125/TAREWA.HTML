@@ -1,8 +1,11 @@
 ---
 // Header global. Los anchors funcionan desde el index;
 // desde otras páginas anteponen "/" para volver al index y hacer scroll.
+// `reveal`: el nav arranca oculto y aparece al pasar el hero de slides
+// (lo maneja el script de BaseLayout vía data-reveal; ver global.css).
 import { productos } from '../data/productos.js';
 
+const { reveal = false } = Astro.props;
 const isHome = Astro.url.pathname === '/';
 const heroHref = isHome ? '#hero' : '/';
 const contactoHref = isHome ? '#contacto' : '/#contacto';
@@ -20,7 +23,7 @@ const navItems = [
 ---
 
 <!-- NAV -->
-<nav id="navbar">
+<nav id="navbar" data-reveal={reveal ? 'true' : null}>
   <!--
     LOGO: poné tu logo en assets/logo.avif
     Si no existe, muestra el texto TAREWA automáticamente.

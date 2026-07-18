@@ -1,0 +1,52 @@
+---
+// Slideshow incandescente de fondo fijo — el efecto del hero del index,
+// extraído a componente para reutilizarlo con otras fotos (p. ej. /nosotros).
+// Es una capa position:fixed REAL (iOS-safe, sin background-attachment:fixed)
+// a 100vw×100vh detrás de todo (z-index:-1): las secciones opacas siguientes
+// suben por encima y la tapan, dando la sensación de fondo fijo que se descubre.
+// El efecto aplica SÓLO mientras la sección `watch` intersecta el viewport:
+// al pasarla, la capa se apaga (.is-past). Una sola instancia por página.
+//
+// Props:
+//   slides — rutas absolutas (/assets/....avif) de las fotos, en orden.
+//   watch  — selector CSS de la sección que sostiene el efecto (default: #hero).
+interface Props {
+  slides: string[];
+  watch?: string;
+}
+const { slides, watch = '#hero' } = Astro.props;
+---
+
+<div class="hero-bg" aria-hidden="true" data-fondo-slides data-watch={watch}>
+  {slides.map((src, i) => (
+    <div class={`hero-slide${i === 0 ? ' is-active' : ''}`} style={`background-image:url(${src})`}></div>
+  ))}
+  <div class="hero-bg-overlay"></div>
+</div>
+
+<!-- Autoplay del slideshow (crossfade, sin controles) + apagado al pasar la
+     sección `watch`. Corre en DOMContentLoaded porque la sección observada
+     aparece más adelante en el DOM que este script. -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    var bg = document.querySelector('[data-fondo-slides]');
+    if (!bg) return;
+
+    var slides = Array.prototype.slice.call(bg.querySelectorAll('.hero-slide'));
+    if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var i = 0;
+      setInterval(function () {
+        slides[i].classList.remove('is-active');
+        i = (i + 1) % slides.length;
+        slides[i].classList.add('is-active');
+      }, 5500);
+    }
+
+    var sec = document.querySelector(bg.getAttribute('data-watch') || '#hero');
+    if (sec && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        bg.classList.toggle('is-past', !entries[0].isIntersecting);
+      }, { threshold: 0 }).observe(sec);
+    }
+  });
+</script>

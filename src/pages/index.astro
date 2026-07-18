@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FondoSlides from '../components/FondoSlides.astro';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -12,15 +13,11 @@ const slides = fs
   .map((f) => `/assets/${f}`);
 ---
 
-<BaseLayout>
+<BaseLayout navReveal>
 
-  <!-- ══ SLIDESHOW DE FONDO FIJO — capa detrás de todo el contenido ══ -->
-  <div class="hero-bg" aria-hidden="true">
-    {slides.map((src, i) => (
-      <div class={`hero-slide${i === 0 ? ' is-active' : ''}`} style={`background-image:url(${src})`}></div>
-    ))}
-    <div class="hero-bg-overlay"></div>
-  </div>
+  <!-- ══ SLIDESHOW DE FONDO FIJO — capa detrás de todo el contenido.
+       El efecto aplica sólo por encima de catálogo: al pasar #hero se apaga. ══ -->
+  <FondoSlides slides={slides} watch="#hero" />
 
   <!-- ══ FONDO FIJO DE LA SECCIÓN RESUMEN — misma técnica que el slideshow del
        hero: capa position:fixed REAL (iOS-safe, sin background-attachment:fixed).
@@ -36,7 +33,7 @@ const slides = fs
     <div class="filamento"></div>
     <div class="hero-inner wrap">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="brand-dot"></span> Est. 1964 · Morón, Buenos Aires</p>
+        <p class="eyebrow"><span class="brand-dot"></span> Est. 1964 · Buenos Aires, Argentina</p>
         <h1 class="hero-title">El calor que tu <span class="ink">industria</span> necesita</h1>
         <p class="hero-lead">
           Diseñamos y fabricamos <strong>resistencias eléctricas industriales a medida</strong>.
@@ -357,7 +354,7 @@ const slides = fs
       <div class="servicio-card reveal reveal-delay-5">
         <div class="servicio-number">05</div>
         <h3>Retiro en taller</h3>
-        <p>Podés pasar a buscar tu pedido directamente en nuestro taller en Huaura 235, Morón, de lunes a viernes.</p>
+        <p>Podés pasar a buscar tu pedido directamente en nuestro taller en Huaura 235, Buenos Aires, de lunes a viernes.</p>
       </div>
       <div class="servicio-card reveal reveal-delay-6">
         <div class="servicio-number">06</div>
@@ -414,7 +411,7 @@ const slides = fs
         </div>
         <div class="contacto-item-text">
           <strong>Dirección</strong>
-          <span>Huaura 235, Morón, Buenos Aires</span>
+          <span>Huaura 235, Buenos Aires, Argentina</span>
         </div>
       </div>
 
@@ -482,40 +479,15 @@ const slides = fs
   <section id="mapa">
     <div class="filamento"></div>
     <iframe
-      src="https://maps.google.com/maps?q=Huaura+235%2C+Mor%C3%B3n%2C+Buenos+Aires%2C+Argentina&hl=es&z=16&output=embed"
+      src="https://maps.google.com/maps?q=Huaura+235%2C+B1708%2C+Buenos+Aires%2C+Argentina&hl=es&z=16&output=embed"
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"
-      title="Ubicación TAREWA — Huaura 235, Morón, Buenos Aires">
+      title="Ubicación TAREWA — Huaura 235, Buenos Aires, Argentina">
     </iframe>
   </section>
 
-  <!-- Autoplay del slideshow del hero (crossfade). Sin controles manuales. -->
-  <script is:inline>
-    (function () {
-      const slides = Array.from(document.querySelectorAll('.hero-bg .hero-slide'));
-      if (slides.length < 2) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      let i = 0;
-      setInterval(function () {
-        slides[i].classList.remove('is-active');
-        i = (i + 1) % slides.length;
-        slides[i].classList.add('is-active');
-      }, 5500);
-    })();
-  </script>
-
-  <!-- El fondo fijo del hero se apaga al pasar la sección catálogo (productos):
-       el efecto de imagen fija aplica sólo por encima de catálogo. -->
-  <script is:inline>
-    (function () {
-      const heroBg = document.querySelector('.hero-bg');
-      const hero = document.getElementById('hero');
-      if (!heroBg || !hero || !('IntersectionObserver' in window)) return;
-      new IntersectionObserver(function (entries) {
-        heroBg.classList.toggle('is-past', !entries[0].isIntersecting);
-      }, { threshold: 0 }).observe(hero);
-    })();
-  </script>
+  <!-- El autoplay del slideshow del hero y su apagado al pasar #hero viven en
+       el componente FondoSlides (ver src/components/FondoSlides.astro). -->
 
   <!-- Fondo fijo de la sección resumen: misma técnica que el hero. La capa
        fija (.resumen-bg) se enciende sólo mientras la sección intersecta el
