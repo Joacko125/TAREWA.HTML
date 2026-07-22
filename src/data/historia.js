@@ -43,5 +43,7 @@ export const historia = [
     titulo: 'Actualidad',
     texto: 'A mas de 60 años de su fundación, la compañía cuenta con una importante trayectoria en la industria nacional, la cual marca la distinción en la calidad y rendimiento de su amplio espectro de productos de calefacción y control, certificados por normas IRAM y fabricados bajo normas internacionales de estandarización ISO9001, abarcando todas las necesidades del mercado actual.',
     imagen: '/assets/historia/2025.avif',
+    // Foto chica (150×150): se muestra a tamaño natural (sin agrandar), centrada.
+    ajuste: 'scale-down',
   },
 ];

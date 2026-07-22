@@ -7,6 +7,8 @@ interface Hito {
   titulo: string;
   texto: string;
   imagen?: string;
+  /** Override opcional de object-fit (ej. 'scale-down' para fotos chicas). */
+  ajuste?: string;
 }
 const { hitos = [] } = Astro.props as { hitos: Hito[] };
 ---
@@ -23,6 +25,7 @@ const { hitos = [] } = Astro.props as { hitos: Hito[] };
                 src={h.imagen}
                 alt={`${h.anio} — ${h.titulo}`}
                 loading={i === 0 ? 'eager' : 'lazy'}
+                style={h.ajuste ? `object-fit:${h.ajuste}` : undefined}
                 onerror="this.closest('.historia-imagen').classList.add('sin-foto'); this.remove();"
               />
             ) : null}

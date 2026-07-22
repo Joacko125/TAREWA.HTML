@@ -31,6 +31,14 @@ const slides = fs
   <!-- ══ HERO — tesis de marca sobre el slideshow incandescente ══ -->
   <section id="hero">
     <div class="filamento"></div>
+
+    <!-- Logo de marca sobre el hero: centrado arriba, sin fondo y enlazado al
+         inicio. Usa la variante logo-hero.avif (wordmark en blanco + swoosh
+         rojo/amarillo) para que lea sobre el fondo oscuro del slideshow. -->
+    <a href="/" class="hero-logo" aria-label="TAREWA — Inicio">
+      <img src="/assets/logo-hero.avif" alt="TAREWA" width="1174" height="648" />
+    </a>
+
     <div class="hero-inner wrap">
       <div class="hero-copy">
         <p class="eyebrow"><span class="brand-dot"></span> Est. 1964 · Buenos Aires, Argentina</p>
@@ -50,6 +58,11 @@ const slides = fs
         </ul>
       </div>
     </div>
+
+    <!-- Indicador de scroll: filamento vertical (rojo→amarillo) con un brillo
+         que desciende, invitando a scrollear. Sin texto. Se apaga con
+         prefers-reduced-motion (queda una línea estática). -->
+    <div class="hero-scroll" aria-hidden="true"></div>
   </section>
 
   <!-- ══ PRODUCTOS ══ -->
@@ -520,5 +533,32 @@ const slides = fs
       obs.observe(grid);
     })();
   </script>
+
+  <style>
+    /* Logo de marca sobre el hero: centrado arriba, sin fondo, enlazado al inicio.
+       (El indicador de scroll .hero-scroll vive en global.css, compartido con /nosotros.) */
+    .hero-logo {
+      position: absolute;
+      top: clamp(1.6rem, 4vh, 2.8rem);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: inline-flex;
+      line-height: 0;
+      transition: opacity 0.25s var(--ease);
+    }
+    .hero-logo:hover { opacity: 0.85; }
+    .hero-logo img {
+      height: clamp(58px, 9vw, 96px);
+      width: auto;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 18px rgba(20, 14, 12, 0.45));
+    }
+
+    @media (max-width: 900px), (orientation: landscape) and (max-height: 500px) {
+      .hero-logo img { height: clamp(46px, 12vw, 64px); }
+    }
+  </style>
 
 </BaseLayout>

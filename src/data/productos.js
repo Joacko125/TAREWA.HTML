@@ -6,10 +6,10 @@ export const productos = [
   {
     slug: 'resistencias-blindadas',
     nombre: 'Resistencias Blindadas Industriales',
-    codigo: 'RB-001',
+    codigo: 'BL-001',
     imagen: '/assets/producto-blindada.avif',
     badge: 'Por pedido',
-    resumen: 'Tubulares de acero inoxidable o cobre para inmersión y calentamiento de aire. Alta durabilidad en ambientes industriales exigentes.',
+    resumen: 'Blindadas de acero inoxidable o cobre para aire quieto, forzado, sumergidas en agua y aceite o aletadas. Alta durabilidad en ambientes industriales exigentes.',
     descripcion: [
       'Las resistencias blindadas son una de las soluciones más robustas para el calentamiento industrial. Están construidas con un hilo resistivo alojado dentro de una vaina metálica, aislado eléctricamente por óxido de magnesio (MgO) compactado a alta densidad. Esa construcción las hace aptas tanto para inmersión directa en líquidos como para calentamiento de aire o sólidos en contacto.',
       'En TAREWA las fabricamos en vainas de cobre (para calentamiento de agua y aceite), AISI 304 (uso industrial general) y AISI 316 (ambientes más agresivos, con cloruros y mayor exigencia química). La elección del material no es menor: una vaina mal especificada puede fallar en pocos meses por corrosión o por fatiga térmica, mientras que la correcta supera fácilmente las 10.000 horas de servicio continuo.',
@@ -20,10 +20,10 @@ export const productos = [
   {
     slug: 'resistencias-tubulares',
     nombre: 'Resistencias Tubulares Industriales',
-    codigo: 'RT-002',
+    codigo: 'TUB-002',
     imagen: '/assets/producto-tubular.avif',
     badge: 'Por pedido',
-    resumen: 'Diseñadas para aplicaciones compactas en fundiciones y maquinaria. Disponibles en distintos diámetros y longitudes a medida.',
+    resumen: 'Diseñadas para aplicaciones compactas en fundiciones y maquinaria. Disponibles en distintos diámetros y longitudes, a medida y stock.',
     descripcion: [
       'Las resistencias tubulares son la base de muchos equipos industriales por su versatilidad. Las fabricamos en diámetros de 6,5 a 16 mm y largos a medida, con la geometría que necesite tu equipo: rectas, en U, en W, en espiral, formadas en frío para ingresar en alojamientos específicos.',
       'Trabajamos con potencias desde unos pocos cientos de watts hasta varios kilowatts por unidad, con cargas superficiales calculadas para no superar el límite de vida útil del aislante y de la vaina. Esto es lo que diferencia una resistencia fabricada con criterio de una resistencia "que entra y calienta": el cálculo previo de carga superficial es lo que determina si va a durar dos años o dos meses.',
@@ -34,10 +34,10 @@ export const productos = [
   {
     slug: 'resistencias-zuncho',
     nombre: 'Resistencias tipo Zuncho Industriales',
-    codigo: 'RZ-003',
+    codigo: 'SCM-003',
     imagen: '/assets/producto-zuncho.avif',
     badge: 'Por pedido',
-    resumen: 'Para calentamiento perimetral de recipientes, moldes y cañerías. Adaptamos la forma y potencia exacta a tu equipo.',
+    resumen: 'Para calentamiento perimetral de picos de inyección, moldes y distintos cilindros. De chapa y mica y cerámicos de alta potencia. Stock de modelos estándar.',
     descripcion: [
       'Las resistencias tipo zuncho (también conocidas como resistencias de banda o de abrazadera) se ajustan al perímetro exterior de un cilindro: caños, cilindros de inyectoras, cuerpos de extrusoras, sopladores y bocas de descarga. Transfieren el calor por contacto directo con la superficie metálica.',
       'Las fabricamos en dos versiones: zunchos de mica (con elemento resistivo plano aislado entre láminas de mica y cubierta de chapa galvanizada o inoxidable) para temperaturas de hasta 350°C, y zunchos cerámicos (con perlas de óxido de aluminio alta densidad) para temperaturas de hasta 700°C. Cada una para su rango: usar un zuncho de mica en una zona que opera a 450°C es la receta para quemarlo en semanas.',
@@ -48,10 +48,10 @@ export const productos = [
   {
     slug: 'sensores-temperatura',
     nombre: 'Sensores de Temperatura Industriales',
-    codigo: 'ST-004',
+    codigo: 'SEN-004',
     imagen: '/assets/producto-sensor.avif',
-    badge: 'Por pedido',
-    resumen: 'Termocuplas tipo J y K, termoresistencias Pt100, pirómetros y termostatos. Medición precisa para el control de tus procesos industriales.',
+    badge: 'Stock',
+    resumen: 'Termocuplas tipo J, K y sensores Pt100. Pirómetros, termostatos y fichas compensadas. Medición precisa para el control de tus procesos. Stock de modelos estándar.',
     descripcion: [
       'Una resistencia industrial sin un buen sensor es una bomba de tiempo: sin lectura confiable de temperatura no hay control, y sin control la pieza se quema o el producto sale fuera de especificación. Por eso fabricamos también la parte de sensado: termocuplas tipo J (Fe-Cu/Ni) y tipo K (NiCr-NiAl), termoresistencias Pt100 simples y dobles, y armamos pirómetros y termostatos sobre pedido.',
       'Cada sensor se hace a medida del proceso: vaina de protección en AISI 304 o AISI 316 según el medio, longitud de inmersión calculada para no leer la temperatura del cuerpo del equipo en vez de la del producto, conexión por bornera, cable compensado o ficha rápida tipo mini-jack según prefieras.',
@@ -62,10 +62,10 @@ export const productos = [
   {
     slug: 'accesorios',
     nombre: 'Accesorios para Resistencias Eléctricas',
-    codigo: 'PT-005',
+    codigo: 'ACC-005',
     imagen: '/assets/producto-accesorios.avif',
-    badge: 'Por pedido',
-    resumen: 'Accesorios de conexión, aislamiento y protección para tus resistencias, sensores y tableros.',
+    badge: 'Stock',
+    resumen: 'Accesorios de conexión, aislamiento y protección eléctrica. Tu elemento ideal para un trabajo seguro.',
     descripcion: [
       'No alcanza con fabricar bien la resistencia: la conexión también define la vida útil. Por eso ofrecemos toda la línea de accesorios complementarios: terminales de bronce, cobre estañado y acero inoxidable, aisladores cerámicos, prensa-cables, fundas siliconadas para alta temperatura, cubre-bornes y cajas de conexión IP65.',
       'También fabricamos bornes especiales a medida para reemplazo en equipos donde no se consigue el repuesto original, y armamos kits completos de conexión cuando enviamos una resistencia para una zona donde el cliente no consigue fácilmente los accesorios.',
@@ -79,7 +79,7 @@ export const productos = [
     codigo: 'RE-006',
     imagen: '/assets/producto-especial.avif',
     badge: 'A medida',
-    resumen: 'Desarrollo a medida para cualquier proceso industrial. Planas, de banda, infrarrojas cerámicas y cualquier geometría.',
+    resumen: 'Desarrollamos las resistencias que nadie más hace. Para cualquier proceso industrial. Consulta por asesoramiento especial y resolvemos tu problema.',
     descripcion: [
       'Cuando una resistencia estándar no resuelve el problema, fabricamos a medida. Recibimos el plano del equipo, el dato de potencia y tensión, y desarrollamos una solución. Lo hicimos durante 60 años y por eso seguimos teniendo clientes que vienen con problemas que en otro lado les dijeron "no se puede".',
       'Algunos ejemplos reales que hemos fabricado: resistencias en forma de hoja para platos de prensa, espirales abiertas para hornos de tratamiento térmico de tubos, resistencias en herradura para máquinas envasadoras, conjuntos de tres resistencias trifásicas balanceadas en potencia para hornos de fundición, vainas extralargas (más de 3 metros) para tanques verticales.',
@@ -90,10 +90,10 @@ export const productos = [
   {
     slug: 'pantallas-infrarrojas',
     nombre: 'Pantallas Infrarrojas Industriales',
-    codigo: 'PI-007',
+    codigo: 'PC-007',
     imagen: '/assets/producto-infrarroja.avif',
-    badge: 'Por pedido',
-    resumen: 'Emisores cerámicos y cuarzos infrarrojos para secado, barnizado y calentamiento superficial sin contacto. Alta eficiencia energética y respuesta rápida.',
+    badge: 'Stock',
+    resumen: 'Pantallas resistivas fabricadas en ceramico refractario. Calor infrarrojo para calentamiento superficial sin contacto. Alta eficiencia energética y respuesta rápida.',
     descripcion: [
       'El calentamiento por infrarrojo es lejos el método más eficiente cuando hay que calentar una superficie sin contacto: secado de pinturas y barnices, termo-formado de plásticos, deshidratado, pre-calentamiento de moldes, curado de adhesivos. Calienta directo el producto, no el aire alrededor, así que el rendimiento energético es muy alto.',
       'Fabricamos pantallas infrarrojas con dos tipos de emisor: cerámicos (longitud de onda larga, ideales para materiales orgánicos y pinturas) y de cuarzo (longitud de onda corta a media, respuesta más rápida, mayor densidad de potencia). Las montamos en bastidores reflectantes de aluminio anodizado o acero inoxidable, con potencias balanceadas y conexión robusta.',
@@ -104,10 +104,10 @@ export const productos = [
   {
     slug: 'resistencias-planas',
     nombre: 'Resistencias Eléctricas Planas',
-    codigo: 'RP-008',
+    codigo: 'PLA-008',
     imagen: '/assets/producto-plana.avif',
     badge: 'Por pedido',
-    resumen: 'Ideales para calentamiento uniforme de superficies planas: platos, moldes, prensas y selladores. Disponibles en distintos voltajes, potencias y materiales aislantes.',
+    resumen: 'Ideales para calentamiento uniforme de superficies planas: platos, moldes, prensas y selladores. Disponibles en acero inoxidable y chapa galvanizada.',
     descripcion: [
       'Las resistencias planas son el formato a elegir cuando se necesita calentamiento uniforme sobre una superficie plana: platos de prensa, mesas de termo-sellado, planchas de vulcanización, moldes planos, calefactores de chapa.',
       'Las fabricamos con elemento resistivo aislado entre láminas de mica de alta calidad, prensado y enmarcado en chapa de acero o aluminio. La distribución del hilo se calcula para que la temperatura sea homogénea en toda la superficie, evitando puntos calientes que arruinan el producto o el equipo.',
@@ -118,10 +118,10 @@ export const productos = [
   {
     slug: 'resistencias-suspendidas',
     nombre: 'Resistencias Suspendidas Industriales',
-    codigo: 'RS-009',
+    codigo: 'SUS-009',
     imagen: '/assets/producto-suspendida.avif',
     badge: 'Por pedido',
-    resumen: 'Resistencias de hilo expuesto suspendido en soportes cerámicos, pensadas para hornos industriales y cámaras de calentamiento que requieren distribución uniforme del calor.',
+    resumen: 'Resistencias de hilo expuesto suspendido en soportes cerámicos, pensadas para conductos y hornos industriales. Cámaras de calentamiento que requieran distribución uniforme del calor.',
     descripcion: [
       'En los hornos industriales de alta temperatura el calor se transmite principalmente por radiación, y para eso conviene el hilo expuesto: una espiral de aleación resistiva montada sobre soportes cerámicos, suspendida del techo o las paredes del horno.',
       'Las fabricamos con hilo de calibre adaptado a la potencia y a la temperatura de servicio. Los soportes cerámicos son pieza clave: la elección correcta del aislante evita contaminación y deformación a alta temperatura.',

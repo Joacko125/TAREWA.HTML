@@ -614,6 +614,43 @@ img { max-width: 100%; height: auto; }
   text-transform: none;
 }
 
+/* Indicador de scroll del hero (index y /nosotros): filamento vertical
+   (rojo→amarillo) con un brillo que desciende, invitando a scrollear. Sin texto.
+   Se posiciona abajo-centro respecto de #hero (position:relative). */
+.hero-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1.6rem, 4vh, 3rem);
+  transform: translateX(-50%);
+  width: 2px;
+  height: clamp(92px, 14vh, 136px);
+  border-radius: 2px;
+  overflow: hidden;
+  background: rgba(244, 243, 240, 0.16);
+  z-index: 2;
+  pointer-events: none;
+}
+.hero-scroll::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -60%;
+  height: 60%;
+  background: linear-gradient(180deg, rgba(237, 50, 55, 0) 0%, var(--rojo) 45%, var(--amarillo) 100%);
+  animation: hero-scroll-travel 2.4s var(--ease) infinite;
+}
+@keyframes hero-scroll-travel {
+  0%   { transform: translateY(0);    opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateY(267%); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll { background: linear-gradient(180deg, var(--rojo) 0%, var(--amarillo) 100%); opacity: 0.6; }
+  .hero-scroll::after { display: none; }
+}
+
 /* ── FONDO CONFINADO POR SECCIÓN (full-bleed, scrollea con la sección) ──────
    La imagen es fondo ÚNICAMENTE de su sección. La capa se ancla con position
    absolute al recuadro EXACTO de la sección (top/bottom: 0) y se hace full-bleed
