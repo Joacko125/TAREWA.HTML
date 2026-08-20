@@ -559,6 +559,17 @@ const slides = fs
     @media (max-width: 900px), (orientation: landscape) and (max-height: 500px) {
       .hero-logo img { height: clamp(46px, 12vw, 64px); }
     }
+
+    /* Fichas de producto (home): descripción acotada a 3 líneas para que las
+       cards de abajo suban y se reduzca el scrolling de la grilla. Solo afecta
+       a #productos (la home); /productos conserva el texto completo. */
+    #productos .producto-body p {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      overflow: hidden;
+    }
   </style>
 
 </BaseLayout>
