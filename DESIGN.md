@@ -28,7 +28,13 @@ El impacto se gana con la proporción, no con color de más.
 | `--amarillo` | `#FFCC29` | **Marca · energía/destacado** (valor EXACTO del logo) | parte del **10%** |
 | `--rojo-tinta` | `#C2292D` | Derivado accesible: CTA y texto rojo sobre papel (AA) | parte del 10% |
 | `--rojo-hover` | `#A8211F` | Hover del CTA primario | — |
-| `--whatsapp` | `#0F7D41` | Verde profundo para botones WhatsApp (blanco AA 5.2:1) | funcional |
+| `--whatsapp` / `-hover` / `-texto` | `#25D366` / `#21BE5C` / `#FFFFFF` | Botones y enlaces de WhatsApp (verde oficial, texto e ícono blancos) | marca de terceros |
+| `--mercadolibre` / `-hover` / `-texto` | `#FFE600` / `#F0D800` / `#2D3277` | Botones de la tienda de MercadoLibre | marca de terceros |
+| `--exito` | `#0F7D41` | Estado "enviado" del formulario (blanco AA 5.2:1) | funcional |
+
+**WhatsApp y MercadoLibre usan los colores oficiales de cada plataforma.** Es una
+decisión de marca deliberada: no se ajustan por contraste (blanco sobre `#25D366`
+queda por debajo de AA y se acepta así).
 
 **Rojo y amarillo son de marca, no negociables.** Se extrajeron por muestreo de píxeles
 del logo (`public/assets/logo.png`): rojo `#ED3237`, amarillo `#FFCC29`. Como el rojo de
@@ -110,7 +116,8 @@ hover, nav transparente→sólido al scrollear. Todo se desactiva con
 ## 6. Accesibilidad (AA)
 
 - Contraste mínimo AA verificado para texto (acero 5.3:1, acero-claro 7.5:1, blanco sobre
-  rojo-tinta 5.75:1, sobre whatsapp 5.2:1, amarillo sobre grafito 11:1).
+  rojo-tinta 5.75:1, amarillo sobre grafito 11:1). Excepción deliberada: botones de
+  WhatsApp con los colores oficiales de la plataforma (ver §1).
 - Amarillo solo como área/acento sobre oscuro; **nunca** texto fino sobre papel.
 - `:focus-visible` global (outline rojo-tinta 2px). Jerarquía de headings correcta.
   `alt` preservados.

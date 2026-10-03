@@ -27,9 +27,17 @@
   --rojo-tinta:   #C2292D;   /* texto rojo y CTA primario sobre papel (AA)     */
   --rojo-hover:   #A8211F;   /* hover del CTA primario                         */
 
+  /* Marcas de terceros — decisión de marca deliberada: colores oficiales
+     de cada plataforma (no se ajustan por contraste). */
+  --whatsapp:          #25D366;   /* verde WhatsApp oficial                   */
+  --whatsapp-hover:    #21BE5C;   /* mismo verde, apenas más oscuro           */
+  --whatsapp-texto:    #FFFFFF;   /* texto e ícono sobre --whatsapp           */
+  --mercadolibre:      #FFE600;   /* amarillo MercadoLibre oficial            */
+  --mercadolibre-hover:#F0D800;   /* mismo amarillo, apenas más oscuro        */
+  --mercadolibre-texto:#2D3277;   /* azul MercadoLibre: texto e ícono         */
+
   /* Funcionales */
-  --whatsapp:     #0F7D41;   /* verde WhatsApp profundo (texto blanco AA)      */
-  --whatsapp-hover:#0B6735;
+  --exito:        #0F7D41;   /* estado "enviado" del formulario (blanco AA)   */
 
   /* ── FIRMA: filamento incandescente (único degradé) ───────────────────── */
   --filamento: linear-gradient(90deg, var(--rojo) 0%, var(--amarillo) 100%);
@@ -176,13 +184,13 @@ img { max-width: 100%; height: auto; }
 }
 .btn-secondary:hover { border-color: var(--grafito); transform: translateY(-2px); }
 
-/* WhatsApp — afordancia funcional, verde profundo accesible */
+/* WhatsApp — colores oficiales de la plataforma (tokens --whatsapp*) */
 .btn-whatsapp {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   background: var(--whatsapp);
-  color: #fff;
+  color: var(--whatsapp-texto);
   text-decoration: none;
   padding: 0.6rem 1rem;
   border-radius: var(--radius);
@@ -1067,7 +1075,7 @@ section { padding: var(--space-section) var(--gutter); }
   align-items: center;
   gap: 0.6rem;
   background: var(--whatsapp);
-  color: #fff;
+  color: var(--whatsapp-texto);
   text-decoration: none;
   padding: 0.85rem 1.5rem;
   border-radius: var(--radius);
@@ -1133,7 +1141,7 @@ section { padding: var(--space-section) var(--gutter); }
   align-self: flex-start;
 }
 .btn-form:hover { background: var(--rojo-hover); transform: translateY(-2px); }
-.btn-form.is-sent { background: var(--whatsapp); }
+.btn-form.is-sent { background: var(--exito); }
 
 /* ══ FOOTER ═══════════════════════════════════════════════════════════════ */
 footer {
@@ -1266,14 +1274,14 @@ footer p { font-size: var(--fs-sm); color: var(--acero-claro); }
   z-index: 600;
   display: flex; align-items: center; gap: 0;
   background: var(--whatsapp);
-  color: #fff;
+  color: var(--whatsapp-texto);
   text-decoration: none;
   border-radius: 50px;
-  box-shadow: 0 6px 22px rgba(15,125,65,0.4);
+  box-shadow: 0 6px 22px rgba(37,211,102,0.4);
   overflow: hidden;
-  transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+  transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
 }
-.whatsapp-float:hover { box-shadow: 0 8px 28px rgba(15,125,65,0.55); transform: translateY(-2px); }
+.whatsapp-float:hover { background: var(--whatsapp-hover); box-shadow: 0 8px 28px rgba(37,211,102,0.55); transform: translateY(-2px); }
 .wf-icon { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; flex-shrink: 0; }
 .wf-icon svg { width: 28px; height: 28px; }
 .wf-text {
