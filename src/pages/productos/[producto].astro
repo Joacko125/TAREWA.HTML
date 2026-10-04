@@ -110,8 +110,10 @@ const extras = [1, 2, 3, 4, 5, 6];
 </BaseLayout>
 
 <style>
+  /* Mismo contenedor que el resto del sitio (--maxw + gutters): el borde del
+     contenido queda alineado con el nav, las cabeceras y el footer. */
   .breadcrumb {
-    max-width: 1240px;
+    max-width: calc(var(--maxw) + 2 * var(--gutter));
     margin: 0 auto;
     padding: 1.5rem var(--gutter) 0;
     font-family: var(--font-mono);
@@ -123,12 +125,12 @@ const extras = [1, 2, 3, 4, 5, 6];
     align-items: center;
     gap: 0.5rem;
   }
-  .breadcrumb a { color: var(--acero); text-decoration: none; transition: color 0.25s var(--ease); }
+  .breadcrumb a { color: var(--acero); text-decoration: none; padding-block: 0.3rem; transition: color 0.25s var(--ease); }
   .breadcrumb a:hover { color: var(--rojo-tinta); }
   .breadcrumb-current { color: var(--grafito); font-weight: 500; }
 
   .producto-detalle {
-    max-width: 1240px;
+    max-width: calc(var(--maxw) + 2 * var(--gutter));
     margin: 0 auto;
     padding: 2rem var(--gutter) var(--space-section);
   }
@@ -153,19 +155,21 @@ const extras = [1, 2, 3, 4, 5, 6];
     border-radius: var(--radius-sm);
     background: var(--lino);
   }
+  /* Miniaturas en grilla de 7 columnas (principal + hasta 6 extras): entran en
+     una sola fila y del mismo tamaño, con la proporción 4:3 de la principal. */
   .galeria-thumbs {
     list-style: none;
-    margin: 0.9rem 0 0;
+    margin: 0.75rem 0 0;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.6rem;
   }
   .producto-galeria.is-single .galeria-thumbs { display: none; }
   .galeria-thumb {
     display: block;
-    width: 86px;
-    height: 64px;
+    width: 100%;
+    aspect-ratio: 4 / 3;
     padding: 0;
     border: 1px solid var(--linea);
     border-radius: var(--radius-sm);
@@ -251,6 +255,7 @@ const extras = [1, 2, 3, 4, 5, 6];
     font-family: var(--font-display);
     font-size: 1.25rem;
     font-weight: 600;
+    line-height: 1.25;
     letter-spacing: -0.01em;
     color: var(--grafito);
     margin-bottom: 0.5rem;
@@ -281,10 +286,12 @@ const extras = [1, 2, 3, 4, 5, 6];
   .producto-cta-catalogo:hover { color: var(--rojo-tinta); }
 
   /* ══ DESCRIPCIÓN LARGA ══ */
+  /* Es un <section>: se pisa el padding global de section para que el texto
+     arranque al ras de su filete y no quede un hueco enorme debajo. */
   .producto-descripcion {
     max-width: 760px;
     margin: clamp(3.5rem, 7vw, 5.5rem) auto 0;
-    padding-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding: clamp(2.5rem, 5vw, 3.5rem) 0 0;
     border-top: 1px solid var(--linea);
   }
   .producto-descripcion-parrafo {
@@ -294,11 +301,14 @@ const extras = [1, 2, 3, 4, 5, 6];
   }
   .producto-descripcion-parrafo + .producto-descripcion-parrafo { margin-top: 1.2rem; }
 
+  /* Alineado al borde izquierdo de la columna de lectura (760px centrada) */
   .producto-back {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
-    margin-top: 3.5rem;
+    margin-top: 3rem;
+    margin-left: max(0px, calc((100% - 760px) / 2));
+    padding-block: 0.4rem;
     color: var(--rojo-tinta);
     text-decoration: none;
     font-family: var(--font-mono);
@@ -316,11 +326,17 @@ const extras = [1, 2, 3, 4, 5, 6];
     .producto-detalle { padding: 1.5rem var(--gutter) 4.5rem; }
     .producto-layout { grid-template-columns: 1fr; gap: 2rem; }
     .producto-galeria { position: static; }
-    .galeria-thumb { width: 72px; height: 54px; }
     .producto-resumen { margin-bottom: 1.6rem; }
   }
   @media (max-width: 480px) {
+    .galeria-thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .producto-cta-btn { font-size: var(--fs-sm); padding-inline: 1rem; }
+  }
+  /* Por debajo de ~380px el texto de MercadoLibre pasa a 2 líneas: ambos
+     botones alineados a la izquierda (íconos en la misma columna y el texto
+     pegado al ícono, en vez de quedar centrado lejos de él). */
+  @media (max-width: 380px) {
+    .producto-cta-btn { justify-content: flex-start; text-align: left; }
   }
 </style>
 

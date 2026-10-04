@@ -65,7 +65,7 @@ const fmtFecha = (iso) => {
 
 <style>
   .catalogos-section {
-    padding: 4rem var(--gutter) var(--space-section);
+    padding: 3.5rem var(--gutter) var(--space-section);
     background: var(--papel);
   }
   .catalogos-empty {
@@ -74,12 +74,27 @@ const fmtFecha = (iso) => {
     font-size: var(--fs-base);
     padding: 4rem 0;
   }
+  /* Columnas explícitas (3 / 2 / 1) en vez de auto-fit: filas completas y
+     previsibles en todos los anchos. */
   .catalogos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
     max-width: var(--maxw);
     margin: 0 auto;
+  }
+  @media (max-width: 1100px) {
+    .catalogos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    /* Card huérfana de la última fila: centrada, con el ancho de una columna */
+    .catalogo-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc(50% - 0.75rem);
+    }
+  }
+  @media (max-width: 700px) {
+    .catalogos-grid { grid-template-columns: minmax(0, 1fr); }
+    .catalogo-card:last-child:nth-child(odd) { grid-column: auto; width: auto; }
   }
   .catalogo-card {
     background: var(--lino);
@@ -122,7 +137,17 @@ const fmtFecha = (iso) => {
     color: var(--rojo-tinta);
   }
   .catalogo-icon svg { width: 32px; height: 32px; }
-  .catalogo-body { flex: 1; min-width: 0; }
+  /* Columna flexible: fecha/tamaño y botón quedan anclados al pie, a la misma
+     altura en todas las cards de la fila. */
+  .catalogo-body {
+    flex: 1;
+    min-width: 0;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .catalogo-meta { margin-top: auto; }
   .catalogo-cat {
     display: inline-block;
     font-family: var(--font-mono);
@@ -181,7 +206,7 @@ const fmtFecha = (iso) => {
     flex-shrink: 0;
   }
   @media (max-width: 900px), (orientation: landscape) and (max-height: 500px) {
-    .catalogos-section { padding: 3rem var(--gutter) 5rem; }
+    .catalogos-section { padding: 2.5rem var(--gutter) var(--space-section); }
     .catalogo-card { flex-direction: column; gap: 1rem; padding: 1.5rem; }
   }
 </style>

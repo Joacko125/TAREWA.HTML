@@ -85,16 +85,19 @@ const { hitos = [] } = Astro.props as { hitos: Hito[] };
     min-height: 380px;
     touch-action: pan-y;
   }
+  /* Todos los slides comparten la misma celda de la grilla: el alto del
+     carrusel lo define el hito más largo (no se recorta texto en ningún ancho
+     y el bloque no salta de alto al navegar). */
   .historia-track {
     list-style: none;
     margin: 0;
     padding: 0;
-    position: relative;
+    display: grid;
     min-height: 380px;
   }
   .historia-slide {
-    position: absolute;
-    inset: 0;
+    grid-area: 1 / 1;
+    position: relative;
     display: grid;
     grid-template-columns: 0.95fr 1.05fr;
     gap: 0;
@@ -113,7 +116,11 @@ const { hitos = [] } = Astro.props as { hitos: Hito[] };
     overflow: hidden;
     background: var(--lino);
   }
+  /* Fuera del flujo: la foto llena su celda pero no define el alto del
+     carrusel (una foto cuadrada lo estiraba de más). */
   .historia-imagen img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -137,8 +144,9 @@ const { hitos = [] } = Astro.props as { hitos: Hito[] };
   .historia-imagen.sin-foto .historia-imagen-placeholder { display: flex; }
 
   /* TEXTO */
+  /* Derecha: aire extra para que la flecha "siguiente" (44px) no pise el texto */
   .historia-texto {
-    padding: 2.5rem 2.5rem 3rem;
+    padding: 2.5rem 4.75rem 2.75rem 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -233,7 +241,7 @@ const { hitos = [] } = Astro.props as { hitos: Hito[] };
   @media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
     .historia-viewport { min-height: 0; }
     .historia-track { min-height: 0; }
-    .historia-slide { grid-template-columns: 1fr; position: relative; }
+    .historia-slide { grid-template-columns: 1fr; }
     .historia-slide:not(.is-active) { display: none; }
     .historia-slide.is-active { display: grid; }
     .historia-imagen { aspect-ratio: 4 / 3; }
@@ -242,6 +250,18 @@ const { hitos = [] } = Astro.props as { hitos: Hito[] };
     .historia-flecha svg { width: 18px; height: 18px; }
     .historia-flecha-prev { left: 0.5rem; }
     .historia-flecha-next { right: 0.5rem; }
+    /* Flechas centradas sobre la foto 4:3 (no sobre el año del texto) */
+    .historia-viewport { container-type: inline-size; }
+    .historia-flecha { top: 37.5cqw; }
+  }
+  /* Años en 2 filas parejas de 3 (antes 5 + 1 suelto) */
+  @media (max-width: 480px) {
+    .historia-dots {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+    .historia-dot { width: 100%; padding-block: 0.5rem; }
   }
 </style>
 
