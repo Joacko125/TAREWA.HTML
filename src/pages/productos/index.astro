@@ -77,17 +77,23 @@ import { whatsappLink } from '../../data/contacto.js';
   /* La imagen es un enlace: mantener el comportamiento visual de .producto-img */
   .producto-img-link { display: block; text-decoration: none; }
 
+  /* Las dos acciones con el mismo ancho y alto: lado a lado si entran,
+     apiladas a todo el ancho de la card si no (5 columnas en desktop). */
   .producto-card-acciones {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 0.6rem;
     margin-top: auto;
+  }
+  .producto-card-acciones > a {
+    justify-content: center;
+    min-height: 2.75rem;
+    align-self: stretch;
   }
   .producto-ver {
     display: inline-flex;
     align-items: center;
-    padding: 0.6rem 1.1rem;
+    padding: 0.6rem 1rem;
     border: 1px solid var(--linea);
     border-radius: var(--radius);
     color: var(--grafito);
@@ -112,6 +118,6 @@ import { whatsappLink } from '../../data/contacto.js';
   }
 
   @media (max-width: 900px), (orientation: landscape) and (max-height: 500px) {
-    .productos-page-section { padding: 2.5rem var(--gutter) 4.5rem; }
+    .productos-page-section { padding: 2.5rem var(--gutter) var(--space-section); }
   }
 </style>

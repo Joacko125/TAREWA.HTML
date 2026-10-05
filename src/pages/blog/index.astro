@@ -53,22 +53,29 @@ const fmtFecha = (d: Date) =>
 </BaseLayout>
 
 <style>
-  .blog-list { padding: 4rem var(--gutter) var(--space-section); background: var(--papel); }
+  .blog-list { padding: 3.5rem var(--gutter) var(--space-section); background: var(--papel); }
   .blog-empty { text-align: center; color: var(--acero); padding: 4rem 0; }
+  /* Grilla al ancho del contenido, alineada con la cabecera de la página
+     (antes era una columna de 820px centrada, corrida respecto del título). */
   .blog-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    max-width: 820px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    max-width: var(--maxw);
     margin: 0 auto;
   }
+  @media (max-width: 1023px) { .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px)  { .blog-grid { grid-template-columns: minmax(0, 1fr); } }
   .blog-card {
     background: var(--lino);
     border: 1px solid var(--linea);
     border-radius: var(--radius-sm);
-    padding: 2.2rem 2.4rem;
+    padding: 2rem;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     transition: border-color 0.35s var(--ease), transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
   }
   .blog-card::after {
@@ -117,10 +124,13 @@ const fmtFecha = (d: Date) =>
     line-height: 1.7;
     margin-bottom: 1.2rem;
   }
+  /* "Leer artículo" anclado al pie: misma altura en toda la fila */
   .blog-readmore {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    margin-top: auto;
+    padding-block: 0.4rem;
     color: var(--rojo-tinta);
     text-decoration: none;
     font-family: var(--font-mono);
@@ -133,7 +143,7 @@ const fmtFecha = (d: Date) =>
   .blog-readmore svg { width: 18px; height: 18px; }
   .blog-readmore:hover { color: var(--grafito); gap: 0.85rem; }
   @media (max-width: 900px), (orientation: landscape) and (max-height: 500px) {
-    .blog-list { padding: 3rem var(--gutter) 5rem; }
+    .blog-list { padding: 2.5rem var(--gutter) var(--space-section); }
     .blog-card { padding: 1.6rem 1.5rem; }
   }
 </style>

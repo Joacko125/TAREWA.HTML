@@ -146,7 +146,11 @@ const {
       if (heroSec) {
         navbar.classList.add('nav-reveal');
         new IntersectionObserver((entries) => {
-          navbar.classList.toggle('is-revealed', !entries[0].isIntersecting);
+          const revealed = !entries[0].isIntersecting;
+          navbar.classList.toggle('is-revealed', revealed);
+          // Si vuelve a ocultarse con el menú mobile abierto, se cierra
+          // (no queda un panel invisible con aria-expanded="true").
+          if (!revealed && navbar.classList.contains('nav-open')) closeMenu();
         }, { threshold: 0 }).observe(heroSec);
       }
     }
