@@ -37,11 +37,11 @@ import { whatsappLink } from '../../data/contacto.js';
                   <line x1="32" y1="18" x2="32" y2="30"/><line x1="6" y1="24" x2="2" y2="24"/>
                   <line x1="42" y1="24" x2="46" y2="24"/>
                 </svg>
-                <span class="producto-badge">{p.badge}</span>
+                {p.badge && <span class="producto-badge">{p.badge}</span>}
               </div>
             </a>
             <div class="producto-body">
-              <span class="producto-cod">Cód: {p.codigo}</span>
+              <span class="producto-cod">{p.codigo ? `Cód: ${p.codigo}` : `Marca: ${p.marca}`}</span>
               <h3><a class="producto-link" href={`/productos/${p.slug}`}>{p.nombre}</a></h3>
               <p>{p.resumen}</p>
               <div class="producto-card-acciones">

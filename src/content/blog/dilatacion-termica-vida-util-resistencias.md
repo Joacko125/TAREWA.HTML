@@ -4,7 +4,6 @@ description: "Una resistencia que calienta bien pero está montada mal se rompe 
 publishDate: 2026-04-27
 author: "TAREWA"
 draft: false
-image: "/assets/blog/dilatacion-termica-vida-util-resistencias.jpg"
 ---
 
 Cuando se piensa en la vida útil de una resistencia industrial, la atención se concentra casi siempre en lo eléctrico: potencia, tensión, carga superficial, material de vaina. Todo eso es real e importante, pero hay un factor que actúa silenciosamente y que define cuánto va a durar la pieza en servicio: la **dilatación térmica**.

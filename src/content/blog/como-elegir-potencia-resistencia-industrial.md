@@ -4,7 +4,6 @@ description: "Calcular la potencia de una resistencia no es estimar a ojo. Te ex
 publishDate: 2026-05-25
 author: "TAREWA"
 draft: false
-image: "/assets/blog/como-elegir-potencia-resistencia-industrial.jpg"
 ---
 
 Una de las consultas más frecuentes que recibimos en TAREWA es la misma: *"Necesito una resistencia, ¿de cuántos watts?"*. La respuesta honesta nunca es un número directo. La potencia correcta de una resistencia depende de varios factores que conviene conocer antes de hacer un pedido, porque elegir mal cuesta dinero y, sobre todo, cuesta tiempo de producción.

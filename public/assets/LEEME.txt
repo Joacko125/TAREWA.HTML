@@ -23,7 +23,8 @@ Copiá tus fotos en esta carpeta con exactamente estos nombres:
 ── FOTOS DE PRODUCTOS (aparecen en cada tarjeta) ──
   producto-blindada.avif   → resistencias blindadas
   producto-tubular.avif    → resistencias tubulares
-  producto-zuncho.avif     → resistencias de zuncho
+  producto-bandas.avif     → bandas calefactoras (zunchos y planas)
+  producto-caloventor.avif → caloventores SCIROCCO
   producto-sensor.avif     → sensores de temperatura
   producto-pirometro.avif  → pirómetros y termostatos
   producto-especial.avif   → resistencias especiales

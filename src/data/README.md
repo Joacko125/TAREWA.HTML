@@ -73,11 +73,13 @@ Cada entrada de `productos.js` genera automáticamente:
    - `nombre`: el título visible (en `<h1>`, en el listado y en el menú desplegable).
    - `codigo`: opcional pero usado en la página y en SEO.
    - `imagen`: ruta a la foto principal (primera del carrusel y card del listado).
-   - `badge`: etiqueta flotante sobre la imagen (ej: "Por pedido", "A medida").
+   - `badge`: etiqueta flotante sobre la imagen (ej: "Por pedido", "A medida"). Opcional.
    - `descripcion`: array de párrafos. Se renderizan uno abajo del otro.
    - `whatsappTexto`: el mensaje pre-cargado cuando el cliente clickea el botón.
+   - `marca` (opcional): para líneas de otra marca del grupo sin código interno (ej. `'SCIROCCO'`). Se muestra en lugar del código.
+   - `enlaceExterno` (opcional): `{ href, texto }`. Reemplaza el botón de MercadoLibre por uno al sitio indicado (ej. caloventores → scirocco.com.ar). El link de MercadoLibre de todos los demás productos está en `contacto.js` (`mercadoLibreUrl`).
 
-2. **Fotos del carrusel.** La primera foto es la del campo `imagen`. Para sumar más, creá la carpeta `public/assets/productos/mi-producto-nuevo/` y subí `1.jpg`, `2.jpg`, … (hasta `6.jpg`); aparecen automáticamente en el carrusel. Las que no existan se ocultan solas.
+2. **Fotos del carrusel.** La primera foto es la del campo `imagen`. Para sumar más, creá la carpeta `public/assets/productos/mi-producto-nuevo/` y subí `1.avif`, `2.avif`, `3.avif`, …; en el próximo build aparecen todas en el carrusel, en orden numérico (no hay tope de cantidad).
 
 3. **(Opcional) Destacarlo en el home.** El producto ya aparece solo en `/productos` y en el menú desplegable. Si además querés mostrarlo en la sección de la portada, copiá una `.producto-card` existente en `src/pages/index.astro` y apuntá el `<h3>` a `<a class="producto-link" href="/productos/mi-producto-nuevo">`.
 

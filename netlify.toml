@@ -2,6 +2,44 @@
   command = "npm run build"
   publish = "dist"
 
+# Zunchos y planas se fusionaron en /productos/bandas-calefactoras.
+# force = true: prioridad sobre la página de fallback que genera Astro por
+# `redirects` (astro.config.mjs). Van antes del /catalogos/* para que las URLs
+# viejas de /catalogos/ también lleguen directo, sin redirección en cadena.
+[[redirects]]
+  from = "/productos/resistencias-zuncho"
+  to = "/productos/bandas-calefactoras"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/productos/resistencias-zuncho/"
+  to = "/productos/bandas-calefactoras"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/productos/resistencias-planas"
+  to = "/productos/bandas-calefactoras"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/productos/resistencias-planas/"
+  to = "/productos/bandas-calefactoras"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/catalogos/resistencias-zuncho"
+  to = "/productos/bandas-calefactoras"
+  status = 301
+
+[[redirects]]
+  from = "/catalogos/resistencias-planas"
+  to = "/productos/bandas-calefactoras"
+  status = 301
+
 # Las páginas de producto se movieron de /catalogos/[slug] a /productos/[slug].
 # Redirige las URLs viejas (solo subrutas; /catalogos sigue siendo la página de PDFs).
 [[redirects]]

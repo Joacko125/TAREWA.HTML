@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { productos } from '../../data/productos.js';
-import { contacto, whatsappLink } from '../../data/contacto.js';
+import { contacto, whatsappLink, mercadoLibreUrl } from '../../data/contacto.js';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export async function getStaticPaths() {
   return productos.map((p) => ({
@@ -13,10 +15,25 @@ export async function getStaticPaths() {
 const { producto } = Astro.props;
 const descBreve = producto.descripcion[0];
 const waHref = whatsappLink(producto.whatsappTexto);
+// Código interno del producto o, si no tiene (línea de otra marca), la marca.
+const etiqueta = producto.codigo ?? producto.marca;
 
-// Galería: imagen principal + fotos numeradas opcionales en
-// /assets/productos/[slug]/1.avif ... 6.avif (se ocultan solas si no existen).
-const extras = [1, 2, 3, 4, 5, 6];
+// Galería: imagen principal + fotos numeradas de /assets/productos/[slug]/
+// (1.avif, 2.avif, …). Se levantan en build todas las que existan —sin tope
+// fijo y sin pedir archivos que no están—, igual que las slides del hero.
+const dirGaleria = path.resolve('public/assets/productos', producto.slug);
+const extras = fs.existsSync(dirGaleria)
+  ? fs
+      .readdirSync(dirGaleria)
+      .filter((f) => /^\d+\.avif$/i.test(f))
+      .sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
+      .map((f) => `/assets/productos/${producto.slug}/${f}`)
+  : [];
+const totalFotos = extras.length + 1;
+// Miniaturas: hasta 7 fotos van en una fila de 7 (mismo tamaño en todos los
+// productos); con más, filas parejas de hasta 8 (16 fotos = 2 × 8).
+const thumbCols = totalFotos <= 7 ? 7 : Math.ceil(totalFotos / Math.ceil(totalFotos / 8));
+const thumbColsSm = totalFotos <= 7 ? 4 : thumbCols > 5 ? Math.ceil(thumbCols / 2) : thumbCols;
 ---
 
 <BaseLayout
@@ -40,20 +57,20 @@ const extras = [1, 2, 3, 4, 5, 6];
       <!-- ══ 2 COLUMNAS: GALERÍA | INFO ══ -->
       <div class="producto-layout">
 
-        <div class="producto-galeria reveal" data-galeria>
+        <div class:list={['producto-galeria reveal', { 'is-single': totalFotos === 1 }]} data-galeria>
           <figure class="galeria-main">
             <img data-galeria-main src={producto.imagen} alt={`${producto.nombre} — foto principal`} loading="eager" />
           </figure>
-          <ul class="galeria-thumbs" aria-label="Fotos del producto">
+          <ul class="galeria-thumbs" aria-label="Fotos del producto" style={`--thumb-cols:${thumbCols};--thumb-cols-sm:${thumbColsSm}`}>
             <li>
               <button class="galeria-thumb is-active" type="button" aria-label="Ver foto principal" aria-current="true">
                 <img src={producto.imagen} alt="" loading="eager" decoding="async" data-alt={`${producto.nombre} — foto principal`} />
               </button>
             </li>
-            {extras.map((n) => (
-              <li data-extra hidden>
-                <button class="galeria-thumb" type="button" aria-label={`Ver foto ${n + 1}`}>
-                  <img src={`/assets/productos/${producto.slug}/${n}.avif`} alt="" loading="eager" decoding="async" data-alt={`${producto.nombre} — foto ${n + 1}`} />
+            {extras.map((src, i) => (
+              <li>
+                <button class="galeria-thumb" type="button" aria-label={`Ver foto ${i + 2}`}>
+                  <img src={src} alt="" loading="lazy" decoding="async" data-alt={`${producto.nombre} — foto ${i + 2}`} />
                 </button>
               </li>
             ))}
@@ -61,7 +78,7 @@ const extras = [1, 2, 3, 4, 5, 6];
         </div>
 
         <div class="producto-head reveal reveal-delay-1">
-          <p class="section-label"><span class="brand-dot"></span> Producto · <span class="producto-head-cod">{producto.codigo}</span></p>
+          <p class="section-label"><span class="brand-dot"></span> Producto · <span class="producto-head-cod">{etiqueta}</span></p>
           <h1>{producto.nombre}</h1>
           <p class="producto-resumen">{producto.resumen}</p>
 
@@ -72,10 +89,17 @@ const extras = [1, 2, 3, 4, 5, 6];
               Consultar por WhatsApp
             </a>
 
-            <a href="https://www.mercadolibre.com.ar/pagina/tarewacalefactoresindustriales" target="_blank" rel="noopener" class="producto-cta-btn producto-cta-ml">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              Conseguí modelos standard en stock acá
-            </a>
+            {producto.enlaceExterno ? (
+              <a href={producto.enlaceExterno.href} target="_blank" rel="noopener" class="producto-cta-btn producto-cta-externo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                {producto.enlaceExterno.texto}
+              </a>
+            ) : (
+              <a href={mercadoLibreUrl} target="_blank" rel="noopener" class="producto-cta-btn producto-cta-ml">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                Conseguí modelos standard en stock acá
+              </a>
+            )}
           </div>
 
           <aside class="producto-cta-card">
@@ -156,13 +180,14 @@ const extras = [1, 2, 3, 4, 5, 6];
     background: var(--lino);
   }
   /* Miniaturas en grilla de 7 columnas (principal + hasta 6 extras): entran en
-     una sola fila y del mismo tamaño, con la proporción 4:3 de la principal. */
+     una sola fila y del mismo tamaño, con la proporción 4:3 de la principal.
+     Galerías más grandes: filas parejas (--thumb-cols se calcula en el build). */
   .galeria-thumbs {
     list-style: none;
     margin: 0.75rem 0 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--thumb-cols, 7), minmax(0, 1fr));
     gap: 0.6rem;
   }
   .producto-galeria.is-single .galeria-thumbs { display: none; }
@@ -233,6 +258,10 @@ const extras = [1, 2, 3, 4, 5, 6];
   /* Tienda de MercadoLibre (modelos estándar en stock): colores de marca ML */
   .producto-cta-ml { background: var(--mercadolibre); color: var(--mercadolibre-texto); }
   .producto-cta-ml:hover { background: var(--mercadolibre-hover); }
+
+  /* Sitio de otra marca del grupo (ej. SCIROCCO): botón grafito del sistema */
+  .producto-cta-externo { background: var(--grafito); color: var(--papel); }
+  .producto-cta-externo:hover { background: var(--grafito-2); }
 
   /* ══ Card de contacto secundario (filamento arriba) ══ */
   .producto-cta-card {
@@ -329,7 +358,7 @@ const extras = [1, 2, 3, 4, 5, 6];
     .producto-resumen { margin-bottom: 1.6rem; }
   }
   @media (max-width: 480px) {
-    .galeria-thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .galeria-thumbs { grid-template-columns: repeat(var(--thumb-cols-sm, 4), minmax(0, 1fr)); }
     .producto-cta-btn { font-size: var(--fs-sm); padding-inline: 1rem; }
   }
   /* Por debajo de ~380px el texto de MercadoLibre pasa a 2 líneas: ambos
@@ -361,38 +390,8 @@ const extras = [1, 2, 3, 4, 5, 6];
         });
       }
 
-      // Las fotos extra son opcionales: se muestran solo si el archivo existe.
-      let pending = 0;
-
-      function finalize() {
-        if (thumbsWrap.querySelectorAll('.galeria-thumb').length <= 1) {
-          root.classList.add('is-single');
-        }
-      }
-
-      thumbs.forEach((btn) => {
-        btn.addEventListener('click', () => activate(btn));
-
-        const li = btn.closest('li');
-        if (!li || !li.hasAttribute('data-extra')) return;
-
-        const img = btn.querySelector('img');
-        pending++;
-        const settle = (ok) => {
-          if (ok) li.removeAttribute('hidden');
-          else li.remove();
-          if (--pending === 0) finalize();
-        };
-        if (!img) { settle(false); return; }
-        if (img.complete) {
-          settle(img.naturalWidth > 0);
-        } else {
-          img.addEventListener('load', () => settle(true), { once: true });
-          img.addEventListener('error', () => settle(false), { once: true });
-        }
-      });
-
-      if (pending === 0) finalize();
+      // Las fotos extra ya vienen filtradas desde el build (solo las que existen).
+      thumbs.forEach((btn) => btn.addEventListener('click', () => activate(btn)));
     });
   })();
 </script>

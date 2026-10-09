@@ -1,6 +1,10 @@
 // Catálogo de productos TAREWA.
-// Cada entrada genera automáticamente una página en /catalogos/[slug].
+// Cada entrada genera automáticamente una página en /productos/[slug].
 // Para agregar un producto nuevo leé src/data/README.md.
+//
+// El orden del array es el orden de /productos y del menú desplegable, y
+// replica el de la grilla del index: fila de arriba blindadas, cartuchos
+// (tubulares), bridas (especiales), pantallas y caloventores; el resto abajo.
 
 export const productos = [
   {
@@ -32,48 +36,6 @@ export const productos = [
     whatsappTexto: 'Hola TAREWA, quería consultar por Resistencias Tubulares Industriales (RT-002).',
   },
   {
-    slug: 'resistencias-zuncho',
-    nombre: 'Resistencias tipo Zuncho Industriales',
-    codigo: 'SCM-003',
-    imagen: '/assets/producto-zuncho.avif',
-    badge: 'Por pedido',
-    resumen: 'Para calentamiento perimetral de picos de inyección, moldes y distintos cilindros. De chapa y mica y cerámicos de alta potencia. Stock de modelos estándar.',
-    descripcion: [
-      'Las resistencias tipo zuncho (también conocidas como resistencias de banda o de abrazadera) se ajustan al perímetro exterior de un cilindro: caños, cilindros de inyectoras, cuerpos de extrusoras, sopladores y bocas de descarga. Transfieren el calor por contacto directo con la superficie metálica.',
-      'Las fabricamos en dos versiones: zunchos de mica (con elemento resistivo plano aislado entre láminas de mica y cubierta de chapa galvanizada o inoxidable) para temperaturas de hasta 350°C, y zunchos cerámicos (con perlas de óxido de aluminio alta densidad) para temperaturas de hasta 700°C. Cada una para su rango: usar un zuncho de mica en una zona que opera a 450°C es la receta para quemarlo en semanas.',
-      'Ajustamos diámetros, anchos, potencias y posición de la conexión. También fabricamos variantes con termocupla integrada para control directo desde el tablero.',
-    ],
-    whatsappTexto: 'Hola TAREWA, quería consultar por Resistencias tipo Zuncho Industriales (RZ-003).',
-  },
-  {
-    slug: 'sensores-temperatura',
-    nombre: 'Sensores de Temperatura Industriales',
-    codigo: 'SEN-004',
-    imagen: '/assets/producto-sensor.avif',
-    badge: 'Stock',
-    resumen: 'Termocuplas tipo J, K y sensores Pt100. Pirómetros, termostatos y fichas compensadas. Medición precisa para el control de tus procesos. Stock de modelos estándar.',
-    descripcion: [
-      'Una resistencia industrial sin un buen sensor es una bomba de tiempo: sin lectura confiable de temperatura no hay control, y sin control la pieza se quema o el producto sale fuera de especificación. Por eso fabricamos también la parte de sensado: termocuplas tipo J (Fe-Cu/Ni) y tipo K (NiCr-NiAl), termoresistencias Pt100 simples y dobles, y armamos pirómetros y termostatos sobre pedido.',
-      'Cada sensor se hace a medida del proceso: vaina de protección en AISI 304 o AISI 316 según el medio, longitud de inmersión calculada para no leer la temperatura del cuerpo del equipo en vez de la del producto, conexión por bornera, cable compensado o ficha rápida tipo mini-jack según prefieras.',
-      'Asesoramos sobre qué tipo de sensor conviene en cada caso. Para un horno de tratamiento térmico hasta 1000°C la opción suele ser termocupla K; para una mezcla pasteurizada a 70°C es una Pt100 que da menos del 0,3°C de error. La diferencia entre el sensor adecuado y uno mal elegido se mide en pérdidas operativas.',
-    ],
-    whatsappTexto: 'Hola TAREWA, quería consultar por Sensores de Temperatura Industriales (ST-004).',
-  },
-  {
-    slug: 'accesorios',
-    nombre: 'Accesorios para Resistencias Eléctricas',
-    codigo: 'ACC-005',
-    imagen: '/assets/producto-accesorios.avif',
-    badge: 'Stock',
-    resumen: 'Accesorios de conexión, aislamiento y protección eléctrica. Tu elemento ideal para un trabajo seguro.',
-    descripcion: [
-      'No alcanza con fabricar bien la resistencia: la conexión también define la vida útil. Por eso ofrecemos toda la línea de accesorios complementarios: terminales de bronce, cobre estañado y acero inoxidable, aisladores cerámicos, prensa-cables, fundas siliconadas para alta temperatura, cubre-bornes y cajas de conexión IP65.',
-      'También fabricamos bornes especiales a medida para reemplazo en equipos donde no se consigue el repuesto original, y armamos kits completos de conexión cuando enviamos una resistencia para una zona donde el cliente no consigue fácilmente los accesorios.',
-      'Si tu equipo tiene un punto recurrente de falla en la conexión (terminal quemado, cable derretido, aisladores rotos), traenos una muestra o foto y te armamos un kit que resuelva el problema de raíz.',
-    ],
-    whatsappTexto: 'Hola TAREWA, quería consultar por Accesorios para resistencias (PT-005).',
-  },
-  {
     slug: 'resistencias-especiales',
     nombre: 'Resistencias Eléctricas Especiales a Medida',
     codigo: 'RE-006',
@@ -102,18 +64,70 @@ export const productos = [
     whatsappTexto: 'Hola TAREWA, quería consultar por Pantallas Infrarrojas Industriales (PI-007).',
   },
   {
-    slug: 'resistencias-planas',
-    nombre: 'Resistencias Eléctricas Planas',
-    codigo: 'PLA-008',
-    imagen: '/assets/producto-plana.avif',
-    badge: 'Por pedido',
-    resumen: 'Ideales para calentamiento uniforme de superficies planas: platos, moldes, prensas y selladores. Disponibles en acero inoxidable y chapa galvanizada.',
+    // Línea de la marca SCIROCCO (otra marca del grupo, ver Footer). No lleva
+    // código interno ni badge de stock: se muestra la marca en su lugar y el
+    // botón de tienda lleva al sitio de SCIROCCO en vez de a MercadoLibre.
+    slug: 'caloventores-industriales',
+    nombre: 'Caloventores industriales SCIROCCO',
+    marca: 'SCIROCCO',
+    imagen: '/assets/producto-caloventor.avif',
+    resumen: 'Calefacción eléctrica segura y eficiente para grandes espacios y procesos productivos. Equipos robustos, portátiles y customizables, sin necesidad de conexión a gas.',
     descripcion: [
-      'Las resistencias planas son el formato a elegir cuando se necesita calentamiento uniforme sobre una superficie plana: platos de prensa, mesas de termo-sellado, planchas de vulcanización, moldes planos, calefactores de chapa.',
-      'Las fabricamos con elemento resistivo aislado entre láminas de mica de alta calidad, prensado y enmarcado en chapa de acero o aluminio. La distribución del hilo se calcula para que la temperatura sea homogénea en toda la superficie, evitando puntos calientes que arruinan el producto o el equipo.',
-      'Trabajamos potencias desde 500 W hasta más de 10 kW por unidad, con cargas superficiales adaptadas a la temperatura de trabajo. Si la pieza original que tenés se quemó, podés mandarnos la dañada o el plano y la replicamos exactamente, con mejor calidad de aislantes que la original.',
+      'Los caloventores SCIROCCO son equipos de calefacción eléctrica seguros y eficientes, pensados para calefaccionar grandes espacios y acompañar procesos industriales. Un ventilador impulsa el aire a través de las resistencias y reparte el calor en el ambiente, sin necesidad de conexión a gas.',
+      'SCIROCCO es otra de nuestras marcas. Sus caloventores se destacan por la robustez para el uso industrial, la portabilidad para llevar el calor adonde haga falta y la posibilidad de customizarlos según cada instalación, tanto para la calefacción de ambientes como para procesos productivos.',
+      'Contanos qué espacio o proceso necesitás calefaccionar y te asesoramos para elegir el equipo adecuado. También podés conocer la línea completa en el sitio de SCIROCCO.',
     ],
-    whatsappTexto: 'Hola TAREWA, quería consultar por Resistencias Planas (RP-008).',
+    whatsappTexto: 'Hola TAREWA, quería consultar por Caloventores industriales SCIROCCO.',
+    enlaceExterno: {
+      href: 'https://scirocco.com.ar/',
+      texto: 'Ver la línea completa en SCIROCCO',
+    },
+  },
+  {
+    // Fusión de los ex "Resistencias tipo Zuncho" (SCM-003) y "Resistencias
+    // Planas" (PLA-008): queda el código de zunchos. Las URLs viejas
+    // /productos/resistencias-zuncho y /productos/resistencias-planas redirigen
+    // acá (astro.config.mjs + netlify.toml).
+    slug: 'bandas-calefactoras',
+    nombre: 'Bandas calefactoras industriales',
+    codigo: 'SCM-003',
+    imagen: '/assets/producto-bandas.avif',
+    badge: 'Por pedido',
+    resumen: 'Zunchos y resistencias planas para calentamiento por contacto: perimetral en picos de inyección, moldes y cilindros, o uniforme en platos, prensas y selladores. De mica o cerámicas de alta potencia. Stock de modelos estándar.',
+    descripcion: [
+      'Las bandas calefactoras reúnen dos familias que fabricamos de manera muy similar. Los zunchos (también conocidos como resistencias de banda o de abrazadera) se ajustan al perímetro exterior de un cilindro: caños, cilindros de inyectoras, cuerpos de extrusoras, sopladores y bocas de descarga. Las planas son el formato a elegir cuando se necesita calentamiento uniforme sobre una superficie plana: platos de prensa, mesas de termo-sellado, planchas de vulcanización, moldes planos y calefactores de chapa. En los dos casos el calor se transfiere por contacto directo con la superficie metálica.',
+      'La base constructiva es la misma: un elemento resistivo plano aislado entre láminas de mica de alta calidad, prensado y cubierto o enmarcado en chapa galvanizada, acero inoxidable o aluminio, con la distribución del hilo calculada para que la temperatura sea homogénea en toda la superficie, evitando puntos calientes que arruinan el producto o el equipo. En zunchos, la versión de mica trabaja hasta 350°C; para zonas más exigentes fabricamos zunchos cerámicos, con perlas de óxido de aluminio alta densidad, para temperaturas de hasta 700°C. Cada una para su rango: usar un zuncho de mica en una zona que opera a 450°C es la receta para quemarlo en semanas.',
+      'Ajustamos diámetros, anchos, medidas, potencias y posición de la conexión. En planas trabajamos potencias desde 500 W hasta más de 10 kW por unidad, con cargas superficiales adaptadas a la temperatura de trabajo, y en zunchos también fabricamos variantes con termocupla integrada para control directo desde el tablero. Si la pieza original que tenés se quemó, podés mandarnos la dañada o el plano y la replicamos exactamente, con mejor calidad de aislantes que la original.',
+    ],
+    whatsappTexto: 'Hola TAREWA, quería consultar por Bandas calefactoras industriales (zunchos y planas, SCM-003).',
+  },
+  {
+    slug: 'sensores-temperatura',
+    nombre: 'Sensores de Temperatura Industriales',
+    codigo: 'SEN-004',
+    imagen: '/assets/producto-sensor.avif',
+    badge: 'Stock',
+    resumen: 'Termocuplas tipo J, K y sensores Pt100. Pirómetros, termostatos y fichas compensadas. Medición precisa para el control de tus procesos. Stock de modelos estándar.',
+    descripcion: [
+      'Una resistencia industrial sin un buen sensor es una bomba de tiempo: sin lectura confiable de temperatura no hay control, y sin control la pieza se quema o el producto sale fuera de especificación. Por eso fabricamos también la parte de sensado: termocuplas tipo J (Fe-Cu/Ni) y tipo K (NiCr-NiAl), termoresistencias Pt100 simples y dobles, y armamos pirómetros y termostatos sobre pedido.',
+      'Cada sensor se hace a medida del proceso: vaina de protección en AISI 304 o AISI 316 según el medio, longitud de inmersión calculada para no leer la temperatura del cuerpo del equipo en vez de la del producto, conexión por bornera, cable compensado o ficha rápida tipo mini-jack según prefieras.',
+      'Asesoramos sobre qué tipo de sensor conviene en cada caso. Para un horno de tratamiento térmico hasta 1000°C la opción suele ser termocupla K; para una mezcla pasteurizada a 70°C es una Pt100 que da menos del 0,3°C de error. La diferencia entre el sensor adecuado y uno mal elegido se mide en pérdidas operativas.',
+    ],
+    whatsappTexto: 'Hola TAREWA, quería consultar por Sensores de Temperatura Industriales (ST-004).',
+  },
+  {
+    slug: 'accesorios',
+    nombre: 'Accesorios para Resistencias Eléctricas',
+    codigo: 'ACC-005',
+    imagen: '/assets/producto-accesorios.avif',
+    badge: 'Stock',
+    resumen: 'Accesorios de conexión, aislamiento y protección eléctrica. Tu elemento ideal para un trabajo seguro.',
+    descripcion: [
+      'No alcanza con fabricar bien la resistencia: la conexión también define la vida útil. Por eso ofrecemos toda la línea de accesorios complementarios: terminales de bronce, cobre estañado y acero inoxidable, aisladores cerámicos, prensa-cables, fundas siliconadas para alta temperatura, cubre-bornes y cajas de conexión IP65.',
+      'También fabricamos bornes especiales a medida para reemplazo en equipos donde no se consigue el repuesto original, y armamos kits completos de conexión cuando enviamos una resistencia para una zona donde el cliente no consigue fácilmente los accesorios.',
+      'Si tu equipo tiene un punto recurrente de falla en la conexión (terminal quemado, cable derretido, aisladores rotos), traenos una muestra o foto y te armamos un kit que resuelva el problema de raíz.',
+    ],
+    whatsappTexto: 'Hola TAREWA, quería consultar por Accesorios para resistencias (PT-005).',
   },
   {
     slug: 'resistencias-suspendidas',
