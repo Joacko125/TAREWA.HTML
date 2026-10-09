@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FondoSlides from '../components/FondoSlides.astro';
 import CarruselHistoria from '../components/CarruselHistoria.astro';
+import QuienesSomos from '../components/QuienesSomos.astro';
 import { historia } from '../data/historia.js';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -50,7 +51,7 @@ const slides = slidesNosotros.length ? slidesNosotros : levantar(/^slide-\d+\.av
       <div class="hero-inner wrap">
         <div class="hero-copy">
           <p class="eyebrow"><span class="brand-dot"></span> Quiénes somos</p>
-          <h1 class="hero-title">Sobre <span class="ink">TAREWA</span></h1>
+          <h1 class="hero-title">Sobre <a href="/" class="ink marca-link">TAREWA</a></h1>
           <p class="hero-lead">Más de 60 años fabricando resistencias eléctricas industriales en Argentina. Una empresa familiar, con producción propia y atención personalizada.</p>
         </div>
       </div>
@@ -66,35 +67,12 @@ const slides = slidesNosotros.length ? slidesNosotros : levantar(/^slide-\d+\.av
       </div>
       <div class="nosotros-grid">
       <div class="nosotros-visual">
-        <div class="nosotros-box reveal left">
-          <p class="section-label">Quiénes somos</p>
-          <h2 class="section-title" style="font-size:1.8rem; margin-bottom:0.5rem;">
-            Industria <span>argentina</span>,<br>calidad que se siente
-          </h2>
-          <div class="stat-grid">
-            <div class="stat">
-              <div class="stat-number">100<span>%</span></div>
-              <div class="stat-label">Fabricación propia</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number">+<span>62</span></div>
-              <div class="stat-label">Años en el rubro</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number"><span>∞</span></div>
-              <div class="stat-label">Variedad de modelos</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number">ARG</div>
-              <div class="stat-label">Envíos a todo el país</div>
-            </div>
-          </div>
-        </div>
+        <QuienesSomos />
       </div>
 
       <div class="nosotros-text">
         <p class="section-label reveal">Nuestra historia</p>
-        <h2 class="section-title reveal reveal-delay-1">¿Por qué elegir <span>TAREWA</span>?</h2>
+        <h2 class="section-title reveal reveal-delay-1">¿Por qué elegir <span><a href="/" class="marca-link">TAREWA</a></span>?</h2>
         <p class="section-subtitle reveal reveal-delay-2">
           Desde 1964, somos una empresa argentina especializada en la fabricación de resistencias eléctricas industriales y contamos con certificación ISO 9001:2015. Trabajamos con industrias de todos los rubros, brindando soluciones de calefacción eficientes y duraderas.
         </p>
@@ -121,7 +99,7 @@ const slides = slidesNosotros.length ? slidesNosotros : levantar(/^slide-\d+\.av
     <section id="historia" class="historia-section">
       <header class="historia-section-header reveal">
         <p class="section-label">Nuestra historia</p>
-        <h2 class="section-title">60 años de <span>TAREWA</span></h2>
+        <h2 class="section-title">60 años de <span><a href="/" class="marca-link">TAREWA</a></span></h2>
         <p class="section-subtitle">
           Una empresa familiar argentina, tres generaciones trabajando con resistencias industriales. Estos son algunos momentos clave del recorrido.
         </p>
@@ -150,6 +128,15 @@ const slides = slidesNosotros.length ? slidesNosotros : levantar(/^slide-\d+\.av
 </BaseLayout>
 
 <style>
+  /* "TAREWA" enlaza al inicio sin cambiar tipografía ni color: hereda el del
+     span que lo envuelve (o el filamento de .ink en el hero). */
+  .marca-link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.25s var(--ease);
+  }
+  .marca-link:hover { opacity: 0.8; }
+
   .historia-section {
     padding: var(--space-section) var(--gutter);
     background: var(--lino);

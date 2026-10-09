@@ -4,7 +4,6 @@ description: "Tres familias de resistencias industriales que suelen confundirse 
 publishDate: 2026-05-18
 author: "TAREWA"
 draft: false
-image: "/assets/blog/resistencias-blindadas-tubulares-abrazaderas-cuando-usar.jpg"
 ---
 
 En el mundo de las resistencias industriales hay tres familias que aparecen una y otra vez: las **blindadas**, las **tubulares** y las **abrazaderas** (también llamadas resistencias tipo zuncho o de banda). Si bien comparten algunos elementos constructivos, resuelven problemas diferentes y elegir la incorrecta para una aplicación es una de las causas más frecuentes de fallas tempranas.

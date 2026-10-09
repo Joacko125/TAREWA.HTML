@@ -4,7 +4,6 @@ description: "Una resistencia que falla a los meses no es mala calidad: casi sie
 publishDate: 2026-05-04
 author: "TAREWA"
 draft: false
-image: "/assets/blog/por-que-se-queman-las-resistencias-antes-de-tiempo.jpg"
 ---
 
 Una de las consultas más recurrentes que recibimos en TAREWA viene del lado de mantenimiento industrial: *"Compramos una resistencia hace seis meses y ya se quemó. ¿Es de mala calidad?"*. La respuesta, en la gran mayoría de los casos, es no. Una resistencia bien fabricada con materiales correctos debe durar varios miles de horas. Cuando falla antes, hay una causa concreta que casi siempre se puede identificar y corregir.

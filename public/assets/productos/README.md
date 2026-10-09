@@ -11,7 +11,7 @@ Por cada producto, dentro de su carpeta (por ejemplo `resistencias-blindadas/`),
 - `3.avif`
 - `4.avif`
 
-La cantidad esperada por defecto es **4 fotos** (la galería admite hasta 6), pero la página de producto está preparada para mostrar un placeholder elegante en los lugares donde falte una. O sea: podés arrancar con una sola foto y agregar el resto cuando las tengas.
+No hay cantidad fija: la página de producto levanta en el build todas las fotos numeradas que haya en la carpeta, en orden (la de `imagen` en `productos.js` va siempre primera). Podés arrancar con una sola foto y agregar el resto cuando las tengas.
 
 ## Recomendaciones
 
@@ -22,4 +22,4 @@ La cantidad esperada por defecto es **4 fotos** (la galería admite hasta 6), pe
 
 ## Si querés agregar más fotos por producto
 
-Editá el archivo `src/pages/productos/[producto].astro` y modificá la constante `extras = [1, 2, 3, 4, 5, 6]` agregando más números. Después subí `7.avif`, `8.avif`, etc. en la carpeta del producto correspondiente.
+Subí `7.avif`, `8.avif`, etc. en la carpeta del producto correspondiente: no hace falta tocar código. Las miniaturas se acomodan solas en filas parejas.

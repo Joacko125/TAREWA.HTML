@@ -67,6 +67,9 @@ Usos disciplinados (clase utilitaria `.filamento`, 2px):
 - Tick decorativo bajo el nav al scrollear (`nav.scrolled::after`).
 - Subrayado que "se enciende" en hover de links del nav y bordes de tarjetas
   (producto, servicio, catálogo, blog).
+- Destello que recorre el borde del CTA "Ver productos" del hero (`.btn-destello`):
+  anillo de 1px con el degradé de firma corriéndose + halo ámbar tenue. Sin
+  animación con `prefers-reduced-motion`.
 
 ---
 
@@ -108,8 +111,9 @@ La **mono en fichas técnicas y números** es clave: grita "ingeniería" y se ve
 ## 5. Movimiento
 
 Reveal on-scroll suave (`.reveal` + IntersectionObserver), filamento que se enciende en
-hover, nav transparente→sólido al scrollear. Todo se desactiva con
-`@media (prefers-reduced-motion: reduce)`.
+hover, nav transparente→sólido al scrollear, carrusel continuo de logos de las otras
+marcas en el footer (pausa con hover/foco). Todo se desactiva con
+`@media (prefers-reduced-motion: reduce)` (el carrusel queda como grilla quieta).
 
 ---
 

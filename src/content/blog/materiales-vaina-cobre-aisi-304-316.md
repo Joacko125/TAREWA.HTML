@@ -4,7 +4,6 @@ description: "El material de la vaina define la vida útil de una resistencia mu
 publishDate: 2026-05-11
 author: "TAREWA"
 draft: false
-image: "/assets/blog/materiales-vaina-cobre-aisi-304-316.jpg"
 ---
 
 La vaina es la "piel" de una resistencia industrial: lo único que separa al elemento resistivo del medio que está calentando. Por eso elegir bien el material no es un detalle de catálogo, es una decisión técnica que define si la pieza dura años o falla en meses.

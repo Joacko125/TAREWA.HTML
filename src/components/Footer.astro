@@ -3,13 +3,20 @@
 // El logo (logo.avif) va sobre un chip claro: su tinta oscura no leería
 // directamente sobre el grafito del footer, y así conserva los colores de marca.
 // Tres columnas sobrias: marca · otras marcas del grupo · redes sociales.
+// Otras marcas: carrusel continuo de logos en cajas iguales (estilos y
+// animación en global.css). `url: null` = marca sin sitio cargado: se muestra
+// el logo sin enlace (hoy Fusionar).
 const anio = new Date().getFullYear();
 
 const otrasMarcas = [
-  { nombre: 'Bancos de Carga', url: 'https://www.bancosdecarga.com.ar/' },
-  { nombre: 'Instafire', url: 'https://instafire.com.ar/' },
-  { nombre: 'Scirocco', url: 'https://scirocco.com.ar/' },
+  { nombre: 'Bancos de Carga', url: 'https://www.bancosdecarga.com.ar/', logo: '/assets/marcas/logo-bancos-de-carga.avif', ancho: 300, alto: 67 },
+  { nombre: 'Fusionar', url: null, logo: '/assets/marcas/logo-fusionar.avif', ancho: 300, alto: 48 },
+  { nombre: 'Instafire', url: 'https://instafire.com.ar/', logo: '/assets/marcas/logo-instafire.avif', ancho: 300, alto: 98 },
+  { nombre: 'Scirocco', url: 'https://scirocco.com.ar/', logo: '/assets/marcas/logo-scirocco.avif', ancho: 300, alto: 65 },
 ];
+// La lista va dos veces para que el loop sea continuo (translateX -50%). La
+// copia es decorativa: oculta a lectores de pantalla y fuera del tabulado.
+const copias = [false, true];
 
 const redes = [
   { nombre: 'LinkedIn', url: 'https://www.linkedin.com/company/tarewa' },
@@ -30,13 +37,25 @@ const redes = [
         <p class="footer-desc">Fabricantes de resistencias eléctricas industriales desde 1964. Buenos Aires, Argentina.</p>
       </div>
 
-      <nav class="footer-col" aria-label="Nuestras otras marcas">
+      <nav class="footer-col footer-col-marcas" aria-label="Nuestras otras marcas">
         <p class="footer-title">Nuestras otras marcas</p>
-        <ul class="footer-links">
-          {otrasMarcas.map((marca) => (
-            <li><a href={marca.url} target="_blank" rel="noopener">{marca.nombre}</a></li>
-          ))}
-        </ul>
+        <div class="footer-marcas">
+          <ul class="footer-marcas-track">
+            {copias.map((esCopia) => otrasMarcas.map((marca) => (
+              <li class="footer-marcas-item" aria-hidden={esCopia ? 'true' : undefined}>
+                {marca.url ? (
+                  <a class="footer-marca" href={marca.url} target="_blank" rel="noopener" tabindex={esCopia ? -1 : undefined}>
+                    <img src={marca.logo} alt={marca.nombre} width={marca.ancho} height={marca.alto} loading="lazy" decoding="async" />
+                  </a>
+                ) : (
+                  <span class="footer-marca">
+                    <img src={marca.logo} alt={marca.nombre} width={marca.ancho} height={marca.alto} loading="lazy" decoding="async" />
+                  </span>
+                )}
+              </li>
+            )))}
+          </ul>
+        </div>
       </nav>
 
       <div class="footer-col">

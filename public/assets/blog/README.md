@@ -12,7 +12,7 @@ Por ejemplo, para el post `src/content/blog/como-elegir-potencia-resistencia-ind
 public/assets/blog/como-elegir-potencia-resistencia-industrial.avif
 ```
 
-En cada post, el campo `image:` del frontmatter ya apunta a esa ruta. Cuando subas la foto, se usa automáticamente como **og:image** para redes sociales (link previews de WhatsApp, Twitter, LinkedIn, etc.).
+Cuando subas la foto, agregá en el frontmatter del post `image: "/assets/blog/<slug>.avif"`: se usa automáticamente como **og:image** para redes sociales (link previews de WhatsApp, Twitter, LinkedIn, etc.). Sin `image:`, el post usa el logo de TAREWA. No dejes el campo apuntando a una foto que todavía no existe.
 
 ## Recomendaciones
 

@@ -11,6 +11,9 @@ export const contacto = {
   horario: 'Lunes a viernes · 8:00 a 16:30 hs',
 };
 
+// Tienda de MercadoLibre (modelos estándar en stock): botón de las páginas de producto.
+export const mercadoLibreUrl = 'https://listado.mercadolibre.com.ar/_CustId_1684051981';
+
 // Devuelve el link wa.me con texto pre-cargado correctamente URL-encoded.
 export function whatsappLink(texto = 'Hola TAREWA, quería consultar.') {
   return `https://wa.me/${contacto.whatsappNumero}?text=${encodeURIComponent(texto)}`;

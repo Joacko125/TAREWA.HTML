@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { productos } from '../data/productos.js';
 // Fuentes self-hosted (Fontsource, variables, font-display: swap)
 import '@fontsource-variable/space-grotesk'; // Display / títulos
 import '@fontsource-variable/inter';         // Cuerpo
@@ -79,18 +80,9 @@ const {
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Resistencias Eléctricas",
-      "itemListElement": [
-        {"@type": "Offer","itemOffered": {"@type": "Product","name": "Resistencias Blindadas Industriales"}},
-        {"@type": "Offer","itemOffered": {"@type": "Product","name": "Resistencias Tubulares Industriales"}},
-        {"@type": "Offer","itemOffered": {"@type": "Product","name": "Resistencias tipo Zuncho Industriales"}},
-        {"@type": "Offer","itemOffered": {"@type": "Product","name": "Sensores de Temperatura Industriales"}},
-        {"@type": "Offer","itemOffered": {"@type": "Product","name": "Pantallas Infrarrojas Industriales"}},
-        {"@type": "Offer","itemOffered": {"@type": "Product","name": "Resistencias Eléctricas Planas"}},
-        {"@type": "Offer","itemOffered": {"@type": "Product","name": "Resistencias Suspendidas Industriales"}},
-        {"@type": "Offer","itemOffered": {"@type": "Product","name": "Bancos de Carga Resistivos Industriales"}},
-        {"@type": "Offer","itemOffered": {"@type": "Product","name": "Resistencias Eléctricas Especiales a Medida"}},
-        {"@type": "Offer","itemOffered": {"@type": "Product","name": "Accesorios para Resistencias Eléctricas"}}
-      ]
+      "itemListElement": productos.map((p) => (
+        {"@type": "Offer","itemOffered": {"@type": "Product","name": p.nombre}}
+      ))
     },
     "sameAs": [
       "https://www.linkedin.com/company/tarewa",

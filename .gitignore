@@ -36,3 +36,6 @@ _astro_tmp/
 
 # Claude Code local config
 .claude/
+
+# Fotos/logos originales (fuente de las .avif de public/assets; pesan ~80 MB)
+assets-fuente/

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FondoSlides from '../components/FondoSlides.astro';
+import QuienesSomos from '../components/QuienesSomos.astro';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -44,12 +45,12 @@ const slides = fs
         <p class="eyebrow"><span class="brand-dot"></span> Est. 1964 · Buenos Aires, Argentina</p>
         <h1 class="hero-title">El calor que tu <span class="ink">industria</span> necesita</h1>
         <p class="hero-lead">
-          Diseñamos y fabricamos <strong>resistencias eléctricas industriales a medida</strong>.
+          Diseñamos y fabricamos <strong>resistencias eléctricas industriales a medida</strong> bajo normas de calidad ISO 9001.
           Sesenta años de ingeniería térmica, asesoramiento real y entrega a todo el país.
         </p>
         <div class="hero-actions">
           <a href="#contacto" class="btn btn-primary">Pedí tu cotización</a>
-          <a href="/productos" class="btn btn-secondary">Ver productos</a>
+          <a href="/productos" class="btn btn-secondary btn-destello">Ver productos</a>
         </div>
         <ul class="hero-specs">
           <li><span>+62</span> años de fábrica</li>
@@ -125,20 +126,79 @@ const slides = fs
         </div>
       </div>
 
-      <!-- Resistencias de Zuncho -->
+      <!-- Resistencias Especiales -->
       <div class="producto-card">
-        <a class="producto-img-link" href="/productos/resistencias-zuncho" aria-label="Resistencias tipo Zuncho Industriales">
-          <div class="producto-img" id="img-zuncho">
-            <img src="/assets/producto-zuncho.avif" alt="Resistencias tipo Zuncho Industriales" loading="lazy" width="900" height="597"
-                 onerror="document.getElementById('img-zuncho').classList.add('sin-foto'); this.remove()" />
+        <a class="producto-img-link" href="/productos/resistencias-especiales" aria-label="Resistencias Eléctricas Especiales">
+          <div class="producto-img" id="img-especial">
+            <img src="/assets/producto-especial.avif" alt="Resistencias Eléctricas Especiales a Medida" loading="lazy" width="831" height="623"
+                 onerror="document.getElementById('img-especial').classList.add('sin-foto'); this.remove()" />
+            <span class="producto-badge">A medida</span>
+          </div>
+        </a>
+        <div class="producto-body">
+          <span class="producto-cod">Cód: RE-006</span>
+          <h3><a class="producto-link" href="/productos/resistencias-especiales">Resistencias Eléctricas Especiales</a></h3>
+          <p>Desarrollamos las resistencias que nadie más hace. Para cualquier proceso industrial. Consulta por asesoramiento especial y resolvemos tu problema.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Especiales%20a%20medida%20(C%C3%B3d%3A%20RE-006)" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Pantallas Infrarrojas -->
+      <div class="producto-card">
+        <a class="producto-img-link" href="/productos/pantallas-infrarrojas" aria-label="Pantallas Infrarrojas Industriales">
+          <div class="producto-img" id="img-infrarroja">
+            <img src="/assets/producto-infrarroja.avif" alt="Pantallas Infrarrojas Industriales" loading="lazy" width="900" height="601"
+                 onerror="document.getElementById('img-infrarroja').classList.add('sin-foto'); this.remove()" />
+            <span class="producto-badge">Stock</span>
+          </div>
+        </a>
+        <div class="producto-body">
+          <span class="producto-cod">Cód: PC-007</span>
+          <h3><a class="producto-link" href="/productos/pantallas-infrarrojas">Pantallas Infrarrojas Industriales</a></h3>
+          <p>Pantallas resistivas fabricadas en ceramico refractario. Calor infrarrojo para calentamiento superficial sin contacto. Alta eficiencia energética y respuesta rápida.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Pantallas%20Infrarrojas%20(C%C3%B3d%3A%20PI-007)" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Caloventores SCIROCCO -->
+      <div class="producto-card">
+        <a class="producto-img-link" href="/productos/caloventores-industriales" aria-label="Caloventores industriales SCIROCCO">
+          <div class="producto-img" id="img-caloventor">
+            <img src="/assets/producto-caloventor.avif" alt="Caloventores industriales SCIROCCO" loading="lazy" width="720" height="540"
+                 onerror="document.getElementById('img-caloventor').classList.add('sin-foto'); this.remove()" />
+          </div>
+        </a>
+        <div class="producto-body">
+          <span class="producto-cod">Marca: SCIROCCO</span>
+          <h3><a class="producto-link" href="/productos/caloventores-industriales">Caloventores industriales SCIROCCO</a></h3>
+          <p>Calefacción eléctrica segura y eficiente para grandes espacios y procesos productivos. Equipos robustos, portátiles y customizables, sin necesidad de conexión a gas.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Caloventores%20industriales%20SCIROCCO" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Bandas calefactoras (fusión de zunchos y planas) -->
+      <div class="producto-card">
+        <a class="producto-img-link" href="/productos/bandas-calefactoras" aria-label="Bandas calefactoras industriales">
+          <div class="producto-img" id="img-bandas">
+            <img src="/assets/producto-bandas.avif" alt="Bandas calefactoras industriales: zunchos y resistencias planas" loading="lazy" width="900" height="598"
+                 onerror="document.getElementById('img-bandas').classList.add('sin-foto'); this.remove()" />
             <span class="producto-badge">Por pedido</span>
           </div>
         </a>
         <div class="producto-body">
           <span class="producto-cod">Cód: SCM-003</span>
-          <h3><a class="producto-link" href="/productos/resistencias-zuncho">Resistencias tipo Zuncho Industriales</a></h3>
-          <p>Para calentamiento perimetral de picos de inyección, moldes y distintos cilindros. De chapa y mica y cerámicos de alta potencia. Stock de modelos estándar.</p>
-          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20tipo%20Zuncho%20(C%C3%B3d%3A%20RZ-003)" target="_blank" rel="noopener" class="btn-whatsapp">
+          <h3><a class="producto-link" href="/productos/bandas-calefactoras">Bandas calefactoras industriales</a></h3>
+          <p>Zunchos y resistencias planas para calentamiento por contacto: perimetral en picos de inyección, moldes y cilindros, o uniforme en platos, prensas y selladores. De mica o cerámicas de alta potencia. Stock de modelos estándar.</p>
+          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Bandas%20calefactoras%20(C%C3%B3d%3A%20SCM-003)" target="_blank" rel="noopener" class="btn-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
             Consultar por WhatsApp
           </a>
@@ -181,66 +241,6 @@ const slides = fs
           <h3><a class="producto-link" href="/productos/accesorios">Accesorios para Resistencias Eléctricas</a></h3>
           <p>Accesorios de conexión, aislamiento y protección eléctrica. Tu elemento ideal para un trabajo seguro.</p>
           <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Accesorios%20(C%C3%B3d%3A%20PT-005)" target="_blank" rel="noopener" class="btn-whatsapp">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
-            Consultar por WhatsApp
-          </a>
-        </div>
-      </div>
-
-      <!-- Resistencias Especiales -->
-      <div class="producto-card">
-        <a class="producto-img-link" href="/productos/resistencias-especiales" aria-label="Resistencias Eléctricas Especiales">
-          <div class="producto-img" id="img-especial">
-            <img src="/assets/producto-especial.avif" alt="Resistencias Eléctricas Especiales a Medida" loading="lazy" width="831" height="623"
-                 onerror="document.getElementById('img-especial').classList.add('sin-foto'); this.remove()" />
-            <span class="producto-badge">A medida</span>
-          </div>
-        </a>
-        <div class="producto-body">
-          <span class="producto-cod">Cód: RE-006</span>
-          <h3><a class="producto-link" href="/productos/resistencias-especiales">Resistencias Eléctricas Especiales</a></h3>
-          <p>Desarrollamos las resistencias que nadie más hace. Para cualquier proceso industrial. Consulta por asesoramiento especial y resolvemos tu problema.</p>
-          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Especiales%20a%20medida%20(C%C3%B3d%3A%20RE-006)" target="_blank" rel="noopener" class="btn-whatsapp">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
-            Consultar por WhatsApp
-          </a>
-        </div>
-      </div>
-
-      <!-- Pantallas Infrarrojas -->
-      <div class="producto-card">
-        <a class="producto-img-link" href="/productos/pantallas-infrarrojas" aria-label="Pantallas Infrarrojas Industriales">
-          <div class="producto-img" id="img-infrarroja">
-            <img src="/assets/producto-infrarroja.avif" alt="Pantallas Infrarrojas Industriales" loading="lazy" width="900" height="601"
-                 onerror="document.getElementById('img-infrarroja').classList.add('sin-foto'); this.remove()" />
-            <span class="producto-badge">Stock</span>
-          </div>
-        </a>
-        <div class="producto-body">
-          <span class="producto-cod">Cód: PC-007</span>
-          <h3><a class="producto-link" href="/productos/pantallas-infrarrojas">Pantallas Infrarrojas Industriales</a></h3>
-          <p>Pantallas resistivas fabricadas en ceramico refractario. Calor infrarrojo para calentamiento superficial sin contacto. Alta eficiencia energética y respuesta rápida.</p>
-          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Pantallas%20Infrarrojas%20(C%C3%B3d%3A%20PI-007)" target="_blank" rel="noopener" class="btn-whatsapp">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
-            Consultar por WhatsApp
-          </a>
-        </div>
-      </div>
-
-      <!-- Resistencias Planas -->
-      <div class="producto-card">
-        <a class="producto-img-link" href="/productos/resistencias-planas" aria-label="Resistencias Eléctricas Planas">
-          <div class="producto-img" id="img-plana">
-            <img src="/assets/producto-plana.avif" alt="Resistencias Eléctricas Planas" loading="lazy" width="900" height="597"
-                 onerror="document.getElementById('img-plana').classList.add('sin-foto'); this.remove()" />
-            <span class="producto-badge">Por pedido</span>
-          </div>
-        </a>
-        <div class="producto-body">
-          <span class="producto-cod">Cód: PLA-008</span>
-          <h3><a class="producto-link" href="/productos/resistencias-planas">Resistencias Eléctricas Planas</a></h3>
-          <p>Ideales para calentamiento uniforme de superficies planas: platos, moldes, prensas y selladores. Disponibles en acero inoxidable y chapa galvanizada.</p>
-          <a href="https://wa.me/5491141937728?text=Hola!%20Quiero%20consultar%20sobre%20Resistencias%20Planas%20(C%C3%B3d%3A%20RP-008)" target="_blank" rel="noopener" class="btn-whatsapp">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 1.998C6.477 1.998 2 6.476 2 12c0 1.89.523 3.659 1.435 5.173L2 22l4.978-1.31C8.41 21.536 10.163 22 12 22c5.522 0 10-4.478 10-10S17.521 1.998 12 1.998zm0 18c-1.72 0-3.329-.476-4.703-1.302l-.337-.2-3.498.921.936-3.41-.22-.35A7.95 7.95 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
             Consultar por WhatsApp
           </a>
@@ -298,30 +298,7 @@ const slides = fs
     </div>
     <div class="index-summary-grid">
       <div class="nosotros-visual">
-        <div class="nosotros-box reveal left">
-          <p class="section-label">Quiénes somos</p>
-          <h2 class="section-title" style="font-size:1.8rem; margin-bottom:0.5rem;">
-            Industria <span>argentina</span>,<br>calidad que se siente
-          </h2>
-          <div class="stat-grid">
-            <div class="stat">
-              <div class="stat-number">100<span>%</span></div>
-              <div class="stat-label">Fabricación propia</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number">+<span>62</span></div>
-              <div class="stat-label">Años en el rubro</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number"><span>∞</span></div>
-              <div class="stat-label">Variedad de modelos</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number">ARG</div>
-              <div class="stat-label">Envíos a todo el país</div>
-            </div>
-          </div>
-        </div>
+        <QuienesSomos />
       </div>
       <div class="index-summary-text">
         <p class="section-label reveal">Nuestra historia</p>
@@ -471,14 +448,14 @@ const slides = fs
             <option value="">Seleccioná un producto</option>
             <option>Resistencias blindadas</option>
             <option>Resistencias tubulares</option>
-            <option>Resistencias de zuncho</option>
+            <option>Bandas calefactoras (zunchos y planas)</option>
             <option>Sensores de temperatura</option>
             <option>Pirómetros y termostatos</option>
             <option>Resistencias especiales / a medida</option>
             <option>Pantallas infrarrojas</option>
-            <option>Resistencias planas</option>
             <option>Resistencias suspendidas</option>
             <option>Bancos de carga resistivos</option>
+            <option>Caloventores SCIROCCO</option>
             <option>Otro</option>
           </select>
         </div>
@@ -585,10 +562,31 @@ const slides = fs
       margin: 0 auto 0.5rem;
     }
 
-    /* Contacto: badge "Tu cotización en menos de 24 hs" bajo el subtítulo. */
+    /* Contacto: el recuadro "24 hs" mide lo mismo que el título "Pedí tu
+       cotización" y queda alineado con él, en cualquier ancho. Grilla
+       1fr | auto | 1fr: la columna central toma el ancho del título; label y
+       subtítulo ocupan las tres columnas y su ancho se reparte sólo entre las
+       flexibles, así no agrandan la del medio. */
+    #contacto .contacto-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      justify-items: center;
+      width: 100%;
+    }
+    #contacto .contacto-header > * { grid-column: 1 / -1; }
+    #contacto .contacto-header > .section-title,
+    #contacto .contacto-header > .contacto-badge-24h { grid-column: 2; }
+
+    /* Contacto: badge "Tu cotización en menos de 24 hs" bajo el subtítulo.
+       contain: inline-size → su texto no ensancha la columna: el ancho lo
+       define siempre el título y el badge se estira a ese ancho. */
     #contacto .contacto-badge-24h {
       display: inline-flex;
+      justify-self: stretch;
+      justify-content: center;
       align-items: center;
+      text-align: center;
+      contain: inline-size;
       gap: 0.5rem;
       margin-top: 1rem;
       padding: 0.4rem 0.9rem;
@@ -603,9 +601,21 @@ const slides = fs
       border-radius: 999px;
     }
     #contacto .contacto-badge-24h svg {
+      flex-shrink: 0;
       width: 15px;
       height: 15px;
       color: var(--rojo-tinta);
+    }
+    /* Mobile: el título se achica (hasta 32px) y queda más angosto que el badge
+       a escala normal; el badge se compacta para entrar en una línea. */
+    @media (max-width: 560px) {
+      #contacto .contacto-badge-24h {
+        gap: 0.4rem;
+        padding-inline: 0.5rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.02em;
+      }
+      #contacto .contacto-badge-24h svg { width: 14px; height: 14px; }
     }
   </style>
 

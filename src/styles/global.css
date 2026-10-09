@@ -619,6 +619,48 @@ img { max-width: 100%; height: auto; }
   color: var(--amarillo);
 }
 
+/* "Ver productos" (hero): mismo vidrio + un destello de filamento (rojo→
+   amarillo) que recorre el borde cada pocos segundos y un halo ámbar tenue
+   que acompaña el pasaje. El destello es un anillo de 1px (máscara
+   content-box/exclude) con el degradé de firma corriéndose de izquierda a
+   derecha. Solo CSS; se apaga con prefers-reduced-motion. */
+#hero .btn-destello {
+  position: relative;
+  animation: destello-halo 5s var(--ease) infinite;
+}
+#hero .btn-destello::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent 0%, transparent 38%, var(--rojo) 47%, var(--amarillo) 55%, transparent 64%, transparent 100%);
+  background-size: 300% 100%;
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+          mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  animation: destello-borde 5s var(--ease) infinite;
+}
+@keyframes destello-borde {
+  0%        { background-position: 100% 0; opacity: 0; }
+  6%        { opacity: 1; }
+  38%       { opacity: 1; }
+  44%, 100% { background-position: 0% 0; opacity: 0; }
+}
+@keyframes destello-halo {
+  0%, 12%, 62%, 100% { box-shadow: 0 0 0 0 rgba(255, 204, 41, 0); }
+  30% { box-shadow: 0 0 20px -2px rgba(255, 204, 41, 0.28), 0 0 6px 0 rgba(237, 50, 55, 0.16); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #hero .btn-destello { animation: none; }
+  #hero .btn-destello::before { animation: none; opacity: 0; }
+}
+
 .hero-specs {
   display: flex;
   flex-wrap: wrap;
@@ -982,7 +1024,17 @@ section { padding: var(--space-section) var(--gutter); }
   background: var(--filamento);
 }
 
-.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; margin-top: 2rem; }
+/* Sello ISO 9001 del recuadro "Quiénes somos" (componente QuienesSomos):
+   flota arriba a la derecha y el label + título lo rodean, así nunca empuja
+   el bloque de texto ni desborda la caja. ≈52 px en mobile → 80 px en desktop. */
+.nosotros-box-iso {
+  float: right;
+  width: clamp(52px, 4vw + 1.5rem, 80px);
+  height: auto;
+  margin: 0 0 0.75rem 1rem;
+}
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; margin-top: 2rem; clear: both; }
 .stat { border-top: 1px solid var(--linea-dark); padding-top: 1rem; }
 .stat-number {
   font-family: var(--font-mono);
@@ -1257,27 +1309,61 @@ footer p { font-size: var(--fs-sm); color: var(--acero-claro); }
   margin-bottom: 1.1rem;
 }
 
-.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
-.footer-links a {
-  position: relative;
-  color: var(--acero-claro);
-  text-decoration: none;
-  font-size: var(--fs-sm);
-  transition: color 0.25s var(--ease);
+/* ── Otras marcas: carrusel continuo de logos ──
+   Cajas idénticas (mismo ancho y alto, logo centrado con object-fit: contain)
+   con el mismo espacio entre todas. El espacio es el margen derecho de cada
+   ítem (no `gap`): así las dos mitades del track miden exactamente lo mismo y
+   el loop a -50% no salta. min-width: 0 evita que el track (max-content)
+   ensanche la columna. Pausa con hover/foco; quieto con prefers-reduced-motion. */
+.footer-col-marcas { min-width: 0; }
+.footer-marcas {
+  width: 100%;
+  max-width: 26rem;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, black 1.5rem, black calc(100% - 1.5rem), transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, black 1.5rem, black calc(100% - 1.5rem), transparent 100%);
 }
-/* mismo subrayado-filamento del nav, en hover */
-.footer-links a::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; bottom: -4px;
-  height: 2px;
-  background: var(--filamento);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s var(--ease);
+.footer-marcas-track {
+  display: flex;
+  width: max-content;
+  list-style: none;
+  animation: marcas-desplazar 26s linear infinite;
 }
-.footer-links a:hover { color: var(--papel); }
-.footer-links a:hover::after { transform: scaleX(1); }
+.footer-marcas:hover .footer-marcas-track,
+.footer-marcas:focus-within .footer-marcas-track { animation-play-state: paused; }
+.footer-marcas-item { flex-shrink: 0; margin-right: 1rem; }
+.footer-marca {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 9.25rem;
+  height: 3.25rem; /* mismo alto que el chip del logo TAREWA (.footer-brand) */
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--linea-dark);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.25s var(--ease);
+}
+.footer-marca img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.25s var(--ease);
+}
+a.footer-marca:hover { border-color: var(--amarillo); }
+a.footer-marca:hover img { opacity: 1; }
+@keyframes marcas-desplazar {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+/* Sin movimiento: los cuatro logos quietos en grilla (2 × 2), sin la copia. */
+@media (prefers-reduced-motion: reduce) {
+  .footer-marcas { -webkit-mask-image: none; mask-image: none; }
+  .footer-marcas-track { animation: none; width: auto; flex-wrap: wrap; gap: 1rem; }
+  .footer-marcas-item { margin-right: 0; }
+  .footer-marcas-item[aria-hidden="true"] { display: none; }
+}
 
 .footer-social { display: flex; gap: 0.8rem; }
 .footer-social a {
@@ -1389,8 +1475,7 @@ footer p { font-size: var(--fs-sm); color: var(--acero-claro); }
   .footer-col, .footer-brand { align-items: center; align-self: center; }
   .footer-desc { max-width: 420px; }
   .footer-social { justify-content: center; }
-  .footer-links { gap: 0.15rem; }
-  .footer-links a { display: inline-block; padding: 0.4rem 0; } /* área táctil */
+  .footer-marcas-track { justify-content: center; } /* grilla quieta (reduced-motion) centrada */
   .footer-bottom { text-align: center; }
   .form-row { grid-template-columns: minmax(0, 1fr); }
 }
