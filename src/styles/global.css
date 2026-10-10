@@ -643,13 +643,13 @@ img { max-width: 100%; height: auto; }
 }
 
 /* "Ver productos" (hero): mismo vidrio + un destello de filamento (rojo→
-   amarillo) que recorre el borde cada pocos segundos y un halo ámbar tenue
+   amarillo) que recorre el borde cada 2,5 s y un halo ámbar tenue
    que acompaña el pasaje. El destello es un anillo de 1px (máscara
    content-box/exclude) con el degradé de firma corriéndose de izquierda a
    derecha. Solo CSS; se apaga con prefers-reduced-motion. */
 #hero .btn-destello {
   position: relative;
-  animation: destello-halo 5s var(--ease) infinite;
+  animation: destello-halo 2.5s var(--ease) infinite;
 }
 #hero .btn-destello::before {
   content: '';
@@ -667,7 +667,7 @@ img { max-width: 100%; height: auto; }
           mask-composite: exclude;
   opacity: 0;
   pointer-events: none;
-  animation: destello-borde 5s var(--ease) infinite;
+  animation: destello-borde 2.5s var(--ease) infinite;
 }
 @keyframes destello-borde {
   0%        { background-position: 100% 0; opacity: 0; }
