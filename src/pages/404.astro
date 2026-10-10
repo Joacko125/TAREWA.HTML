@@ -1,0 +1,36 @@
+---
+// Página de error 404 (dist/404.html). En el hosting la sirve el .htaccess
+// (ErrorDocument 404) para cualquier URL que no exista.
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Página no encontrada | TAREWA"
+  description="La página que buscás no existe o cambió de dirección."
+  noindex
+>
+  <main class="inner-page">
+
+    <header class="page-header reveal">
+      <p class="section-label">Error 404</p>
+      <h1>Página no <span>encontrada</span></h1>
+      <p>La dirección que buscás no existe o cambió. Te dejamos los accesos principales del sitio.</p>
+      <div class="acciones">
+        <a href="/" class="btn btn-primary">Ir al inicio</a>
+        <a href="/productos" class="btn btn-secondary">Ver productos</a>
+        <a href="/#contacto" class="btn btn-secondary">Contacto</a>
+      </div>
+    </header>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding-bottom: var(--space-section);
+  }
+</style>

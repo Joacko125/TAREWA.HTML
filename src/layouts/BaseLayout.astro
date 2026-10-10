@@ -16,15 +16,21 @@ interface Props {
   ogImage?: string;
   /** Nav oculto al cargar, con reveal al pasar la sección #hero (index y /nosotros). */
   navReveal?: boolean;
+  /** Excluye la página de buscadores (404, /gracias/). */
+  noindex?: boolean;
 }
 
 const {
   title = 'Resistencias Eléctricas Industriales | TAREWA Argentina',
   description = 'TAREWA: fabricantes de resistencias eléctricas industriales en Buenos Aires, Argentina. +60 años de experiencia y envíos a todo el país. Pedí tu presupuesto.',
   canonical = 'https://tarewa.com/',
-  ogImage = 'https://tarewa.com/assets/logo.avif',
+  ogImage = 'https://tarewa.com/og/tarewa.jpg',
   navReveal = false,
+  noindex = false,
 } = Astro.props;
+// Las og:image generadas (src/pages/og/) son siempre JPG 1200×630: se declaran
+// las medidas para que Facebook/WhatsApp las muestren ya en el primer share.
+const ogGenerada = ogImage.startsWith('https://tarewa.com/og/');
 ---
 
 <!DOCTYPE html>
@@ -34,6 +40,7 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex" />}
   <link rel="canonical" href={canonical} />
 
   <!-- Open Graph -->
@@ -42,6 +49,13 @@ const {
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={ogImage} />
+  {ogGenerada && (
+    <>
+      <meta property="og:image:type" content="image/jpeg" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+    </>
+  )}
   <meta property="og:locale" content="es_AR" />
   <meta property="og:site_name" content="TAREWA" />
 
@@ -58,8 +72,8 @@ const {
     "name": "TAREWA",
     "description": "Fabricantes de resistencias eléctricas industriales con más de 60 años de experiencia.",
     "url": "https://tarewa.com",
-    "logo": "https://tarewa.com/assets/logo.avif",
-    "image": "https://tarewa.com/assets/logo.avif",
+    "logo": "https://tarewa.com/assets/logo.png",
+    "image": "https://tarewa.com/assets/logo.png",
     "telephone": "+5491141937728",
     "email": "ventas@tarewa.com",
     "foundingDate": "1964",
@@ -90,8 +104,29 @@ const {
     ]
   })} />
 
-  <link rel="icon" type="image/avif" href="/assets/favicon.avif" />
+  <!-- Favicon (generado en build, ver src/lib/imagenes.js): WebP 32×32 como
+       principal (~1 KB); .ico 16/32/48 de respaldo para navegadores viejos y
+       buscadores. El sizes="48x48" del .ico hace que los navegadores modernos
+       elijan el WebP para la pestaña. -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" type="image/webp" sizes="32x32" href="/favicon-32.webp" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <!-- Tipografías self-hosted (Fontsource) importadas en el frontmatter del layout -->
+
+  <!-- Google tag de Google Ads (conversiones y remarketing; mismo ID que el
+       WordPress anterior). Solo en el build de producción. Para sumar GA4,
+       agregar gtag('config', 'G-XXXXXXX') debajo del config de Ads. -->
+  {import.meta.env.PROD && (
+    <>
+      <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=AW-1040136013"></script>
+      <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-1040136013');
+      </script>
+    </>
+  )}
 </head>
 <body>
 
@@ -205,17 +240,44 @@ const {
       if (svg) svg.style.display = 'block';
     });
 
-    // Form submit
-    function handleSubmit(e) {
+    // Form submit: lo recibe public/enviar-consulta.php (PHP del hosting), que
+    // manda el mail a ventas@tarewa.com. Si sale bien, lleva a /gracias/
+    // (página de conversión de Google Ads). Sin JS, el form hace el POST normal.
+    async function handleSubmit(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('.btn-form');
-      btn.textContent = '¡Enviado!';
-      btn.classList.add('is-sent');
-      setTimeout(() => {
-        btn.textContent = 'Enviar consulta';
-        btn.classList.remove('is-sent');
-        e.target.reset();
-      }, 3000);
+      const form = e.target;
+      const btn = form.querySelector('.btn-form');
+      const estado = form.querySelector('.form-estado');
+      if (btn.disabled) return;
+      btn.disabled = true;
+      btn.textContent = 'Enviando…';
+      if (estado) estado.hidden = true;
+
+      let error = '';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        const data = await res.json().catch(() => ({}));
+        if (data.ok) {
+          btn.textContent = '¡Enviado!';
+          btn.classList.add('is-sent');
+          window.location.assign('/gracias/');
+          return;
+        }
+        error = data.error || '';
+      } catch (err) {
+        // Sin conexión o servidor caído: mensaje genérico.
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Enviar consulta';
+      if (estado) {
+        estado.textContent = error || 'No pudimos enviar tu consulta. Probá de nuevo o escribinos a ventas@tarewa.com.';
+        estado.hidden = false;
+      }
     }
     // Exponer la función al scope global para el atributo inline onsubmit
     window.handleSubmit = handleSubmit;

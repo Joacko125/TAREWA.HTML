@@ -1299,6 +1299,9 @@ section { padding: var(--space-section) var(--gutter); }
 }
 .btn-form:hover { background: var(--rojo-hover); transform: translateY(-2px); }
 .btn-form.is-sent { background: var(--exito); }
+.btn-form:disabled { cursor: progress; transform: none; }
+/* Aviso de error del envío (rojo-tinta sobre lino: AA) */
+.form-estado { font-size: var(--fs-sm); color: var(--rojo-tinta); }
 
 /* ══ FOOTER ═══════════════════════════════════════════════════════════════ */
 footer {

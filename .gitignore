@@ -39,3 +39,6 @@ _astro_tmp/
 
 # Fotos/logos originales (fuente de las .avif de public/assets; pesan ~80 MB)
 assets-fuente/
+
+# Paquete de deploy para cPanel (contenido de dist/)
+tarewa-deploy-*.zip

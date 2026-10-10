@@ -1,0 +1,143 @@
+# ══════════════════════════════════════════════════════════════════════════
+#  tarewa.com · .htaccess para hosting cPanel (Apache o LiteSpeed)
+#  Sitio estático generado por Astro. Fuente: public/.htaccess
+#
+#  Las redirecciones usan destino absoluto (https://tarewa.com/...) y van
+#  ANTES de las de https/www: cualquier URL vieja llega a destino en UN solo
+#  301, aunque entre por http:// o www.
+# ══════════════════════════════════════════════════════════════════════════
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+  AddCharset utf-8 .html .xml .txt .css .js
+</IfModule>
+
+# Las páginas viven sin barra final (/nosotros), igual que los canonical y el
+# sitemap: Apache no agrega la barra (sin 301 extra) y la regla 6 sirve el
+# index.html de la carpeta.
+<IfModule mod_dir.c>
+  DirectorySlash Off
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 0. Reescrituras internas (regla 6) y ErrorDocument: no se reprocesan.
+  RewriteCond %{ENV:REDIRECT_STATUS} .
+  RewriteRule ^ - [L]
+
+  # ── 1. index.html explícito → URL limpia ──────────────────────────────
+  RewriteCond %{THE_REQUEST} ^[A-Z]+\s/(?:(.+)/)?index\.html[\s?] [NC]
+  RewriteRule ^ https://tarewa.com/%1 [R=301,L,NE]
+
+  # ── 2. WordPress anterior (2023–2026) ─────────────────────────────────
+  RewriteRule ^sample-page/?$ https://tarewa.com/? [R=301,L,NC]
+  RewriteRule ^category(/.*)?$ https://tarewa.com/blog? [R=301,L,NC]
+  RewriteRule ^(comments/)?feed/?$ https://tarewa.com/blog? [R=301,L,NC]
+  # Páginas de adjuntos (/scirocco-png/, /tarewa-png-2/, /favicon/, ...)
+  RewriteRule ^favicon/?$ https://tarewa.com/? [R=301,L,NC]
+  RewriteRule ^[a-z0-9_-]+-(png|jpe?g|gif|svg)(-[0-9]+)?/?$ https://tarewa.com/? [R=301,L,NC]
+  # Sitemaps de Rank Math → sitemap nuevo
+  RewriteRule ^(sitemap_index|page-sitemap|post-sitemap|wp-sitemap[a-z0-9_-]*)\.xml$ https://tarewa.com/sitemap.xml? [R=301,L,NC]
+
+  # ── 3. Sitios anteriores (2002–2019) ──────────────────────────────────
+  RewriteRule ^index\.(php|htm)$ https://tarewa.com/? [R=301,L,NC]
+  RewriteRule ^(pdfs/)?(productos|subcategorias|categorias)\.php$ https://tarewa.com/productos? [R=301,L,NC]
+  RewriteRule ^contacto\.php$ https://tarewa.com/#contacto [R=301,L,NE,NC]
+  RewriteRule ^certificaciones\.php$ https://tarewa.com/nosotros? [R=301,L,NC]
+  # Manuales de pirómetros con equivalente en los PDFs actuales
+  RewriteRule ^descarga/manual_pirometros_tarewa_101\.pdf$ https://tarewa.com/assets/catalogos/manual-pirometros-twr-101.pdf? [R=301,L,NC]
+  RewriteRule ^descarga/manual_pirometros_tarewa_401\.pdf$ https://tarewa.com/assets/catalogos/manual-programacion-twm-401.pdf? [R=301,L,NC]
+  # Páginas técnicas (/archivos, /2006/archivos, /infotecnica): cada sección a
+  # su ficha actual, según el prefijo del archivo (s_bli.htm, bli10_g.htm, ...)
+  # o la carpeta (/infotecnica/Blindadas/).
+  RewriteRule ^(archivos|2006|infotecnica)/(.+/)?(s_)?bli([0-9]+_g)?\.htm$ https://tarewa.com/productos/resistencias-blindadas? [R=301,L,NC]
+  RewriteRule ^infotecnica/blindadas(/.*)?$ https://tarewa.com/productos/resistencias-blindadas? [R=301,L,NC]
+  RewriteRule ^(archivos|2006|infotecnica)/(.+/)?(s_)?sus([0-9]+_g)?\.htm$ https://tarewa.com/productos/resistencias-suspendidas? [R=301,L,NC]
+  RewriteRule ^infotecnica/suspendidas(/.*)?$ https://tarewa.com/productos/resistencias-suspendidas? [R=301,L,NC]
+  RewriteRule ^(archivos|2006|infotecnica)/(.+/)?(s_)?sun([0-9]+_g)?\.htm$ https://tarewa.com/productos/bandas-calefactoras? [R=301,L,NC]
+  RewriteRule ^(archivos|2006|infotecnica)/(.+/)?(s_)?inf([0-9]+_g)?\.htm$ https://tarewa.com/productos/pantallas-infrarrojas? [R=301,L,NC]
+  RewriteRule ^(archivos|2006|infotecnica)/(.+/)?(s_)?ter([0-9]+_g)?\.htm$ https://tarewa.com/productos/sensores-temperatura? [R=301,L,NC]
+  RewriteRule ^(archivos|2006|infotecnica)/(.+/)?(s_)?acc([0-9]+_g)?\.htm$ https://tarewa.com/productos/accesorios? [R=301,L,NC]
+  RewriteRule ^(archivos|2006|infotecnica)/(.+/)?(s_)?esp([0-9]+_g)?\.htm$ https://tarewa.com/productos/resistencias-especiales? [R=301,L,NC]
+  # Aislantes, cartuchos, controladores y datos de ingeniería: solo tienen catálogo PDF
+  RewriteRule ^(archivos|2006|infotecnica)/(.+/)?(s_)?(ais|car|con|ing)([0-9]+_g)?\.htm$ https://tarewa.com/catalogos? [R=301,L,NC]
+  RewriteRule ^(pdfs|descarga|infotecnica)(/.*)?$ https://tarewa.com/catalogos? [R=301,L,NC]
+  RewriteRule ^(espanol|english|site)(/.*)?$ https://tarewa.com/? [R=301,L,NC]
+  RewriteRule ^(catalogo|archivos|2006)(/.*)?$ https://tarewa.com/productos? [R=301,L,NC]
+  RewriteRule ^(productos|ceramix|dynisco|hotset|nuovaret|thermoplay)\.htm$ https://tarewa.com/productos? [R=301,L,NC]
+  RewriteRule ^empresa\.htm$ https://tarewa.com/nosotros? [R=301,L,NC]
+  RewriteRule ^servicios\.htm$ https://tarewa.com/#servicios [R=301,L,NE,NC]
+  RewriteRule ^pedidos\.htm$ https://tarewa.com/#contacto [R=301,L,NE,NC]
+  RewriteRule ^tarew\.htm$ https://tarewa.com/? [R=301,L,NC]
+
+  # ── 4. Rutas del sitio nuevo que cambiaron (antes en netlify.toml) ─────
+  RewriteRule ^servicios/?$ https://tarewa.com/#servicios [R=301,L,NE,NC]
+  RewriteRule ^(productos|catalogos)/resistencias-(zuncho|planas)/?$ https://tarewa.com/productos/bandas-calefactoras [R=301,L,NC]
+  RewriteRule ^productos/caloventores-industriales/?$ https://scirocco.com.ar/ [R=301,L,NC]
+  # Fichas que estuvieron en /catalogos/[slug] (/catalogos sigue siendo la página de PDFs)
+  RewriteCond $1 !^index\.html$ [NC]
+  RewriteRule ^catalogos/([^/]+)/?$ https://tarewa.com/productos/$1 [R=301,L,NC]
+
+  # ── 5. Barra final → sin barra, solo en páginas (carpetas con index.html;
+  #       en las demás, LiteSpeed vuelve a agregar la barra y haría loop).
+  #       /gracias/ conserva la barra: es la URL del WordPress que puede estar
+  #       configurada como conversión en Ads.
+  RewriteCond %{REQUEST_URI} !^/gracias/$ [NC]
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.+)/$ https://tarewa.com/$1 [R=301,L]
+
+  # ── 6. Canónico: https y sin www ───────────────────────────────────────
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+  # X-Forwarded-Proto: el hosting tiene nginx adelante de LiteSpeed; sin este
+  # chequeo, si el SSL termina en nginx, la regla entraría en loop.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https [NC]
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # ── 7. URLs limpias: /nosotros sirve nosotros/index.html (interno) ─────
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*[^/])$ /$1/index.html [L]
+</IfModule>
+
+# ── Compresión ───────────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+  <IfModule mod_filter.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/xml text/javascript application/javascript application/json image/svg+xml font/ttf font/otf application/vnd.ms-fontobject
+  </IfModule>
+</IfModule>
+
+# ── Caché y cabeceras ────────────────────────────────────────────────────
+# SetEnvIf en vez de <If> para que LiteSpeed lo interprete igual que Apache.
+# Las dos variables se excluyen por regex (sin env=!VAR, que LiteSpeed ignora):
+#   CACHE_30D        imágenes, fuentes y PDFs fuera de /_astro/
+#   ASTRO_INMUTABLE  todo /_astro/ (CSS, JS y fuentes con hash en el nombre)
+<IfModule mod_setenvif.c>
+  SetEnvIf Request_URI "^/(?!_astro/).*\.(avif|webp|jpe?g|png|gif|svg|ico|woff2?|ttf|otf|eot|pdf)$" CACHE_30D
+  SetEnvIf Request_URI "^/_astro/" ASTRO_INMUTABLE
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Seguridad (los mismos que tenía netlify.toml)
+  Header always set X-Frame-Options "DENY"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # HTML: el navegador revalida siempre (cada deploy se ve al instante).
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  # Imágenes, fuentes y PDFs: 30 días.
+  Header set Cache-Control "public, max-age=2592000" env=CACHE_30D
+  # /_astro/: 1 año, inmutable.
+  Header set Cache-Control "public, max-age=31536000, immutable" env=ASTRO_INMUTABLE
+</IfModule>
