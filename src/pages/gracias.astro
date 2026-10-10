@@ -1,0 +1,37 @@
+---
+// Confirmación del formulario de contacto. Conserva la URL /gracias/ del
+// WordPress anterior: si Google Ads mide conversiones por esa URL, siguen
+// contando. El .htaccess la exceptúa de la regla que quita la barra final.
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Gracias por tu consulta | TAREWA"
+  description="Recibimos tu consulta. Nos contactaremos a la brevedad con una respuesta."
+  canonical="https://tarewa.com/gracias/"
+  noindex
+>
+  <main class="inner-page">
+
+    <header class="page-header reveal">
+      <p class="section-label">Consulta enviada</p>
+      <h1>¡Gracias por tu <span>mensaje</span>!</h1>
+      <p>Recibimos tu consulta. Nos contactaremos a la brevedad con una respuesta.</p>
+      <div class="acciones">
+        <a href="/" class="btn btn-primary">Volver al inicio</a>
+        <a href="/productos" class="btn btn-secondary">Ver productos</a>
+      </div>
+    </header>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding-bottom: var(--space-section);
+  }
+</style>

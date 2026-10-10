@@ -422,30 +422,31 @@ const slides = fs
     </div>
 
     <div class="contacto-form reveal right">
-      <form onsubmit="handleSubmit(event)">
+      <!-- Lo procesa public/enviar-consulta.php (mail a ventas@tarewa.com). -->
+      <form action="/enviar-consulta.php" method="post" onsubmit="handleSubmit(event)">
         <div class="form-row">
           <div class="form-group">
-            <label>Nombre</label>
-            <input type="text" placeholder="Tu nombre" required />
+            <label for="cf-nombre">Nombre</label>
+            <input id="cf-nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" maxlength="100" required />
           </div>
           <div class="form-group">
-            <label>Empresa</label>
-            <input type="text" placeholder="Tu empresa (opcional)" />
+            <label for="cf-empresa">Empresa</label>
+            <input id="cf-empresa" name="empresa" type="text" placeholder="Tu empresa (opcional)" autocomplete="organization" maxlength="150" />
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Teléfono</label>
-            <input type="tel" placeholder="Tu teléfono" />
+            <label for="cf-telefono">Teléfono</label>
+            <input id="cf-telefono" name="telefono" type="tel" placeholder="Tu teléfono" autocomplete="tel" maxlength="50" />
           </div>
           <div class="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="Tu email" required />
+            <label for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" placeholder="Tu email" autocomplete="email" maxlength="254" required />
           </div>
         </div>
         <div class="form-group">
-          <label>Producto de interés</label>
-          <select>
+          <label for="cf-producto">Producto de interés</label>
+          <select id="cf-producto" name="producto">
             <option value="">Seleccioná un producto</option>
             <option>Resistencias blindadas</option>
             <option>Resistencias tubulares</option>
@@ -461,10 +462,16 @@ const slides = fs
           </select>
         </div>
         <div class="form-group">
-          <label>Mensaje</label>
-          <textarea placeholder="Describí lo que necesitás: tipo de resistencia, tensión, potencia, dimensiones, cantidad..."></textarea>
+          <label for="cf-mensaje">Mensaje</label>
+          <textarea id="cf-mensaje" name="mensaje" maxlength="5000" placeholder="Describí lo que necesitás: tipo de resistencia, tensión, potencia, dimensiones, cantidad..."></textarea>
+        </div>
+        <!-- Antispam: campo trampa invisible; si llega completo, el PHP lo descarta. -->
+        <div class="sr-only" aria-hidden="true">
+          <label for="cf-sitio">No completar</label>
+          <input id="cf-sitio" name="sitio_web" type="text" tabindex="-1" autocomplete="off" />
         </div>
         <button type="submit" class="btn-form">Enviar consulta</button>
+        <p class="form-estado" role="alert" hidden></p>
       </form>
     </div>
    </div>
