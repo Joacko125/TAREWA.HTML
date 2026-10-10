@@ -1,20 +1,12 @@
 ---
 // Recuadro "Quiénes somos" (stats + sello ISO 9001). Compartido por la sección
 // resumen del index y por /nosotros: va dentro de .nosotros-visual.
-// El sello flota arriba a la derecha: el label y el título lo rodean, así no
-// empuja el bloque de texto ni desborda el recuadro (estilos en global.css).
+// El sello va al final del recuadro: en recuadros anchos se ubica arriba a la
+// derecha, a la par del título; en angostos, en su propia fila bajo los stats
+// (estilos en global.css). En ningún caso empuja el texto ni desborda la caja.
 ---
 
 <div class="nosotros-box reveal left">
-  <img
-    class="nosotros-box-iso"
-    src="/assets/logo-iso-9001.avif"
-    alt="Certificación ISO 9001 — DNV GL"
-    width="180"
-    height="172"
-    loading="lazy"
-    decoding="async"
-  />
   <p class="section-label">Quiénes somos</p>
   <h2 class="section-title" style="font-size:1.8rem; margin-bottom:0.5rem;">
     Industria <span>argentina</span>,<br>calidad que se siente
@@ -37,4 +29,13 @@
       <div class="stat-label">Envíos a todo el país</div>
     </div>
   </div>
+  <img
+    class="nosotros-box-iso"
+    src="/assets/sello-iso-9001.avif"
+    alt="Certificación ISO 9001 — DNV GL"
+    width="260"
+    height="250"
+    loading="lazy"
+    decoding="async"
+  />
 </div>

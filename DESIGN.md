@@ -112,7 +112,8 @@ La **mono en fichas técnicas y números** es clave: grita "ingeniería" y se ve
 
 Reveal on-scroll suave (`.reveal` + IntersectionObserver), filamento que se enciende en
 hover, nav transparente→sólido al scrollear, carrusel continuo de logos de las otras
-marcas en el footer (pausa con hover/foco). Todo se desactiva con
+marcas en el footer (pausa con hover/foco, arrastrable con mouse y dedo), visor de
+fotos a pantalla completa en las fichas de producto. Todo se desactiva con
 `@media (prefers-reduced-motion: reduce)` (el carrusel queda como grilla quieta).
 
 ---

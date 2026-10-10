@@ -3,7 +3,8 @@
 // desde otras páginas anteponen "/" para volver al index y hacer scroll.
 // `reveal`: el nav arranca oculto y aparece al pasar el hero de slides
 // (lo maneja el script de BaseLayout vía data-reveal; ver global.css).
-import { productos } from '../data/productos.js';
+import { productos, hrefProducto } from '../data/productos.js';
+import IconoExterno from './IconoExterno.astro';
 
 const { reveal = false } = Astro.props;
 const isHome = Astro.url.pathname === '/';
@@ -45,7 +46,13 @@ const navItems = [
           </a>
           <ul class="nav-dropdown">
             {productos.map(p => (
-              <li><a href={`/productos/${p.slug}`}>{p.nombre}</a></li>
+              <li>
+                {p.urlExterna ? (
+                  <a href={p.urlExterna} target="_blank" rel="noopener">{p.nombre}<IconoExterno /></a>
+                ) : (
+                  <a href={hrefProducto(p)}>{p.nombre}</a>
+                )}
+              </li>
             ))}
           </ul>
         </li>

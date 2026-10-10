@@ -1,0 +1,8 @@
+---
+// Indicador discreto de link externo (flecha ↗) + aviso para lectores de
+// pantalla. Va dentro del <a target="_blank">, al final del texto.
+// `aviso={false}` cuando el link ya lo anuncia por su aria-label.
+const { aviso = true } = Astro.props;
+---
+
+<svg class="icono-externo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg>{aviso && <span class="sr-only"> (se abre en una pestaña nueva)</span>}

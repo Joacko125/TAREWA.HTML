@@ -77,7 +77,8 @@ Cada entrada de `productos.js` genera automáticamente:
    - `descripcion`: array de párrafos. Se renderizan uno abajo del otro.
    - `whatsappTexto`: el mensaje pre-cargado cuando el cliente clickea el botón.
    - `marca` (opcional): para líneas de otra marca del grupo sin código interno (ej. `'SCIROCCO'`). Se muestra en lugar del código.
-   - `enlaceExterno` (opcional): `{ href, texto }`. Reemplaza el botón de MercadoLibre por uno al sitio indicado (ej. caloventores → scirocco.com.ar). El link de MercadoLibre de todos los demás productos está en `contacto.js` (`mercadoLibreUrl`).
+   - `enlaceExterno` (opcional): `{ href, texto }`. En la ficha, reemplaza el botón de MercadoLibre por uno al sitio indicado (ej. bancos de carga → bancosdecarga.com.ar). El link de MercadoLibre de todos los demás productos está en `contacto.js` (`mercadoLibreUrl`).
+   - `urlExterna` (opcional): el producto **no tiene ficha propia**. La card del listado y el ítem del menú llevan directo a esa URL, en pestaña nueva y con un ícono ↗ (ej. caloventores → scirocco.com.ar). Si además aparece en la home, la card del index se edita a mano igual. Con `urlExterna` no hacen falta `descripcion` ni fotos de galería.
 
 2. **Fotos del carrusel.** La primera foto es la del campo `imagen`. Para sumar más, creá la carpeta `public/assets/productos/mi-producto-nuevo/` y subí `1.avif`, `2.avif`, `3.avif`, …; en el próximo build aparecen todas en el carrusel, en orden numérico (no hay tope de cantidad).
 

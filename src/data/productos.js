@@ -1,5 +1,6 @@
 // Catálogo de productos TAREWA.
-// Cada entrada genera automáticamente una página en /productos/[slug].
+// Cada entrada genera automáticamente una página en /productos/[slug]
+// (salvo las que tienen `urlExterna`: esas enlazan directo a otro sitio).
 // Para agregar un producto nuevo leé src/data/README.md.
 //
 // El orden del array es el orden de /productos y del menú desplegable, y
@@ -64,24 +65,17 @@ export const productos = [
     whatsappTexto: 'Hola TAREWA, quería consultar por Pantallas Infrarrojas Industriales (PI-007).',
   },
   {
-    // Línea de la marca SCIROCCO (otra marca del grupo, ver Footer). No lleva
-    // código interno ni badge de stock: se muestra la marca en su lugar y el
-    // botón de tienda lleva al sitio de SCIROCCO en vez de a MercadoLibre.
+    // Línea de la marca SCIROCCO (otra marca del grupo, ver Footer). Sin ficha
+    // propia: `urlExterna` hace que la card, el listado y el menú lleven
+    // directo al sitio de SCIROCCO (pestaña nueva) y que no se genere
+    // /productos/[slug]. No lleva código interno ni badge: se muestra la marca.
     slug: 'caloventores-industriales',
     nombre: 'Caloventores industriales SCIROCCO',
     marca: 'SCIROCCO',
+    urlExterna: 'https://scirocco.com.ar/',
     imagen: '/assets/producto-caloventor.avif',
     resumen: 'Calefacción eléctrica segura y eficiente para grandes espacios y procesos productivos. Equipos robustos, portátiles y customizables, sin necesidad de conexión a gas.',
-    descripcion: [
-      'Los caloventores SCIROCCO son equipos de calefacción eléctrica seguros y eficientes, pensados para calefaccionar grandes espacios y acompañar procesos industriales. Un ventilador impulsa el aire a través de las resistencias y reparte el calor en el ambiente, sin necesidad de conexión a gas.',
-      'SCIROCCO es otra de nuestras marcas. Sus caloventores se destacan por la robustez para el uso industrial, la portabilidad para llevar el calor adonde haga falta y la posibilidad de customizarlos según cada instalación, tanto para la calefacción de ambientes como para procesos productivos.',
-      'Contanos qué espacio o proceso necesitás calefaccionar y te asesoramos para elegir el equipo adecuado. También podés conocer la línea completa en el sitio de SCIROCCO.',
-    ],
     whatsappTexto: 'Hola TAREWA, quería consultar por Caloventores industriales SCIROCCO.',
-    enlaceExterno: {
-      href: 'https://scirocco.com.ar/',
-      texto: 'Ver la línea completa en SCIROCCO',
-    },
   },
   {
     // Fusión de los ex "Resistencias tipo Zuncho" (SCM-003) y "Resistencias
@@ -156,5 +150,13 @@ export const productos = [
       'Para uso continuo (test de larga duración) usamos chapa de acero pintada al horno y bornera industrial. Para uso portátil, bastidor con ruedas y conectores de potencia. Te asesoramos en la configuración eléctrica y el dimensionamiento según lo que necesités probar.',
     ],
     whatsappTexto: 'Hola TAREWA, quería consultar por Bancos de Carga Resistivos (BC-010).',
+    // En lugar de MercadoLibre, el botón de tienda va al sitio propio de la marca.
+    enlaceExterno: {
+      href: 'https://www.bancosdecarga.com.ar/',
+      texto: 'Conocé más en bancosdecarga.com.ar',
+    },
   },
 ];
+
+// Destino del producto: su ficha interna o, si tiene `urlExterna`, ese sitio.
+export const hrefProducto = (p) => p.urlExterna ?? `/productos/${p.slug}`;
