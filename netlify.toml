@@ -40,6 +40,18 @@
   to = "/productos/bandas-calefactoras"
   status = 301
 
+# Caloventores SCIROCCO ya no tienen ficha propia: la URL que llegó a
+# publicarse lleva directo al sitio de SCIROCCO.
+[[redirects]]
+  from = "/productos/caloventores-industriales"
+  to = "https://scirocco.com.ar/"
+  status = 301
+
+[[redirects]]
+  from = "/productos/caloventores-industriales/"
+  to = "https://scirocco.com.ar/"
+  status = 301
+
 # Las páginas de producto se movieron de /catalogos/[slug] a /productos/[slug].
 # Redirige las URLs viejas (solo subrutas; /catalogos sigue siendo la página de PDFs).
 [[redirects]]

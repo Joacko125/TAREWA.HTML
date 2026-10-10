@@ -6,7 +6,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 export async function getStaticPaths() {
-  return productos.map((p) => ({
+  // Los productos con `urlExterna` (caloventores SCIROCCO) no tienen ficha propia.
+  return productos.filter((p) => !p.urlExterna).map((p) => ({
     params: { producto: p.slug },
     props: { producto: p },
   }));
@@ -59,7 +60,13 @@ const thumbColsSm = totalFotos <= 7 ? 4 : thumbCols > 5 ? Math.ceil(thumbCols / 
 
         <div class:list={['producto-galeria reveal', { 'is-single': totalFotos === 1 }]} data-galeria>
           <figure class="galeria-main">
-            <img data-galeria-main src={producto.imagen} alt={`${producto.nombre} — foto principal`} loading="eager" />
+            <!-- Click (o Enter) en la foto principal: abre el visor a pantalla completa -->
+            <button class="galeria-main-btn" type="button" data-visor-abrir aria-haspopup="dialog" aria-label="Ampliar foto">
+              <img data-galeria-main src={producto.imagen} alt={`${producto.nombre} — foto principal`} loading="eager" />
+              <span class="galeria-zoom" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+              </span>
+            </button>
           </figure>
           <ul class="galeria-thumbs" aria-label="Fotos del producto" style={`--thumb-cols:${thumbCols};--thumb-cols-sm:${thumbColsSm}`}>
             <li>
@@ -92,7 +99,7 @@ const thumbColsSm = totalFotos <= 7 ? 4 : thumbCols > 5 ? Math.ceil(thumbCols / 
             {producto.enlaceExterno ? (
               <a href={producto.enlaceExterno.href} target="_blank" rel="noopener" class="producto-cta-btn producto-cta-externo">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                {producto.enlaceExterno.texto}
+                {producto.enlaceExterno.texto}<span class="sr-only"> (se abre en una pestaña nueva)</span>
               </a>
             ) : (
               <a href={mercadoLibreUrl} target="_blank" rel="noopener" class="producto-cta-btn producto-cta-ml">
@@ -129,6 +136,33 @@ const thumbColsSm = totalFotos <= 7 ? 4 : thumbCols > 5 ? Math.ceil(thumbCols / 
         Volver a Productos
       </a>
     </article>
+
+    <!-- ══ VISOR DE FOTOS — <dialog> modal nativo: deja inerte el resto de la
+         página y cierra con Escape. Flechas / teclado / swipe recorren las
+         fotos de la galería; la X o un click en el fondo lo cierran. ══ -->
+    <dialog class="visor" data-visor aria-label={`Fotos de ${producto.nombre}`}>
+      <div class="visor-escena" data-visor-escena>
+        <figure class="visor-figura">
+          <img data-visor-img src={producto.imagen} alt={`${producto.nombre} — foto principal`} decoding="async" />
+        </figure>
+      </div>
+      {totalFotos > 1 && (
+        <p class="visor-contador" aria-live="polite"><span data-visor-actual>1</span> / {totalFotos}</p>
+      )}
+      <button class="visor-btn visor-cerrar" type="button" data-visor-cerrar aria-label="Cerrar visor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      {totalFotos > 1 && (
+        <>
+          <button class="visor-btn visor-prev" type="button" data-visor-prev aria-label="Foto anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="visor-btn visor-next" type="button" data-visor-next aria-label="Foto siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </>
+      )}
+    </dialog>
 
   </main>
 </BaseLayout>
@@ -170,6 +204,36 @@ const thumbColsSm = totalFotos <= 7 ? 4 : thumbCols > 5 ? Math.ceil(thumbCols / 
   /* ══ GALERÍA: principal + thumbnails ══ */
   .producto-galeria { position: sticky; top: 5.5rem; }
   .galeria-main { margin: 0; }
+  /* La foto principal es un botón que abre el visor */
+  .galeria-main-btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+    border-radius: var(--radius-sm);
+  }
+  /* Pista de "ampliar": chip claro abajo a la derecha (misma piel que el badge) */
+  .galeria-zoom {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--grafito);
+    background: color-mix(in srgb, var(--lino) 92%, transparent);
+    border: 1px solid var(--linea);
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(4px);
+    transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+  }
+  .galeria-zoom svg { width: 16px; height: 16px; }
+  .galeria-main-btn:hover .galeria-zoom { color: var(--rojo-tinta); border-color: var(--rojo-tinta); }
   .galeria-main img {
     width: 100%;
     aspect-ratio: 4 / 3;
@@ -259,7 +323,8 @@ const thumbColsSm = totalFotos <= 7 ? 4 : thumbCols > 5 ? Math.ceil(thumbCols / 
   .producto-cta-ml { background: var(--mercadolibre); color: var(--mercadolibre-texto); }
   .producto-cta-ml:hover { background: var(--mercadolibre-hover); }
 
-  /* Sitio de otra marca del grupo (ej. SCIROCCO): botón grafito del sistema */
+  /* Sitio propio de la marca (ej. bancosdecarga.com.ar) en lugar de
+     MercadoLibre: mismo formato de botón, en grafito del sistema */
   .producto-cta-externo { background: var(--grafito); color: var(--papel); }
   .producto-cta-externo:hover { background: var(--grafito-2); }
 
@@ -350,6 +415,97 @@ const thumbColsSm = totalFotos <= 7 ? 4 : thumbCols > 5 ? Math.ceil(thumbCols / 
   .producto-back svg { width: 18px; height: 18px; }
   .producto-back:hover { color: var(--grafito); gap: 0.85rem; }
 
+  /* ══ VISOR (pantalla completa) ══
+     Fondo grafito casi opaco; controles de vidrio oscuro con hairline que se
+     encienden en amarillo, como el CTA secundario del hero. */
+  :global(html.visor-abierto) { overflow: hidden; }
+  .visor {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: var(--papel);
+    background: color-mix(in srgb, var(--grafito) 96%, transparent);
+    overscroll-behavior: contain;
+  }
+  .visor::backdrop { background: transparent; }
+  .visor[open] { animation: visor-entra 0.22s var(--ease); }
+  @keyframes visor-entra { from { opacity: 0; } to { opacity: 1; } }
+
+  .visor-escena {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4.5rem clamp(1rem, 7vw, 6.5rem);
+    touch-action: pan-y pinch-zoom;
+  }
+  .visor-figura { margin: 0; display: flex; max-width: 100%; max-height: 100%; }
+  .visor-figura img {
+    display: block;
+    max-width: 100%;
+    max-height: calc(100vh - 9rem);
+    max-height: calc(100dvh - 9rem);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    background: var(--lino);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  }
+
+  .visor-btn {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    color: var(--papel);
+    background: color-mix(in srgb, var(--grafito-2) 85%, transparent);
+    border: 1px solid var(--linea-dark);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+  }
+  .visor-btn svg { width: 22px; height: 22px; }
+  .visor-btn:hover { color: var(--amarillo); border-color: var(--amarillo); }
+  .visor-btn:focus-visible { outline: 2px solid var(--amarillo); outline-offset: 2px; }
+  .visor-cerrar { top: 1rem; right: 1rem; }
+  .visor-prev,
+  .visor-next { top: 50%; transform: translateY(-50%); }
+  .visor-prev { left: 1rem; }
+  .visor-next { right: 1rem; }
+
+  .visor-contador {
+    position: absolute;
+    left: 50%;
+    bottom: 1.4rem;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.12em;
+    color: var(--acero-claro);
+  }
+
+  /* Mobile: flechas abajo, a los lados del contador, para no tapar la foto */
+  @media (max-width: 600px) {
+    .visor-escena { padding: 4rem 0.75rem 5rem; }
+    .visor-prev,
+    .visor-next { top: auto; bottom: 0.8rem; transform: none; }
+    .visor-prev { left: 0.75rem; }
+    .visor-next { right: 0.75rem; }
+    .visor-cerrar { top: 0.75rem; right: 0.75rem; }
+    .visor-contador { bottom: 1.55rem; }
+  }
+
   @media (max-width: 900px), (orientation: landscape) and (max-height: 500px) {
     .breadcrumb { padding: 1.2rem var(--gutter) 0; }
     .producto-detalle { padding: 1.5rem var(--gutter) 4.5rem; }
@@ -377,21 +533,108 @@ const thumbColsSm = totalFotos <= 7 ? 4 : thumbCols > 5 ? Math.ceil(thumbCols / 
       const thumbs = Array.from(root.querySelectorAll('.galeria-thumb'));
       if (!main || !thumbsWrap) return;
 
-      function activate(btn) {
-        const img = btn.querySelector('img');
-        if (!img) return;
-        main.src = img.getAttribute('src');
-        main.alt = img.dataset.alt || main.alt;
-        thumbs.forEach((t) => {
-          const on = t === btn;
+      // Las fotos ya vienen filtradas desde el build (solo las que existen).
+      // Cada miniatura usa el archivo completo: es la mejor resolución disponible.
+      const fotos = thumbs.map((t) => {
+        const img = t.querySelector('img');
+        return { src: img.getAttribute('src'), alt: img.dataset.alt || '' };
+      });
+      let actual = 0;
+
+      function activate(i) {
+        if (!fotos[i]) return;
+        actual = i;
+        main.src = fotos[i].src;
+        main.alt = fotos[i].alt || main.alt;
+        thumbs.forEach((t, j) => {
+          const on = j === i;
           t.classList.toggle('is-active', on);
           if (on) t.setAttribute('aria-current', 'true');
           else t.removeAttribute('aria-current');
         });
       }
+      thumbs.forEach((btn, i) => btn.addEventListener('click', () => activate(i)));
 
-      // Las fotos extra ya vienen filtradas desde el build (solo las que existen).
-      thumbs.forEach((btn) => btn.addEventListener('click', () => activate(btn)));
+      // ── Visor a pantalla completa ──
+      const visor = document.querySelector('[data-visor]');
+      const abrir = root.querySelector('[data-visor-abrir]');
+      if (!visor || !abrir || typeof visor.showModal !== 'function') return;
+      const vImg = visor.querySelector('[data-visor-img]');
+      const vActual = visor.querySelector('[data-visor-actual]');
+      const cerrar = visor.querySelector('[data-visor-cerrar]');
+      const total = fotos.length;
+      let iv = 0;
+      let ignorarClick = false;
+
+      function mostrar(i) {
+        iv = (i + total) % total;
+        vImg.src = fotos[iv].src;
+        vImg.alt = fotos[iv].alt;
+        if (vActual) vActual.textContent = String(iv + 1);
+        // Precarga las vecinas para que pasar de foto sea instantáneo
+        [iv + 1, iv - 1].forEach((k) => { new Image().src = fotos[(k + total) % total].src; });
+      }
+
+      abrir.addEventListener('click', () => {
+        mostrar(actual);
+        // Sin scroll de fondo (y sin salto por la barra que desaparece)
+        const barra = window.innerWidth - document.documentElement.clientWidth;
+        document.documentElement.classList.add('visor-abierto');
+        if (barra > 0) document.body.style.paddingRight = `${barra}px`;
+        visor.showModal();
+        cerrar.focus();
+      });
+
+      // Al cerrar (X, fondo o Escape): se libera el scroll, la galería queda en
+      // la foto que se estaba viendo y el foco vuelve a la foto principal.
+      visor.addEventListener('close', () => {
+        document.documentElement.classList.remove('visor-abierto');
+        document.body.style.paddingRight = '';
+        activate(iv);
+        abrir.focus();
+      });
+
+      cerrar.addEventListener('click', () => visor.close());
+      visor.querySelector('[data-visor-prev]')?.addEventListener('click', () => mostrar(iv - 1));
+      visor.querySelector('[data-visor-next]')?.addEventListener('click', () => mostrar(iv + 1));
+
+      // Click en el fondo (fuera de la foto y de los controles) cierra
+      visor.addEventListener('click', (e) => {
+        if (ignorarClick) { ignorarClick = false; return; }
+        if (e.target === visor || e.target.matches('[data-visor-escena], .visor-figura')) visor.close();
+      });
+
+      // Teclado: flechas recorren; Tab queda atrapado entre los controles.
+      // Escape lo resuelve el <dialog> nativo (cancel → close).
+      visor.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' && total > 1) { e.preventDefault(); mostrar(iv - 1); }
+        else if (e.key === 'ArrowRight' && total > 1) { e.preventDefault(); mostrar(iv + 1); }
+        else if (e.key === 'Tab') {
+          const foco = Array.from(visor.querySelectorAll('button'));
+          const primero = foco[0], ultimo = foco[foco.length - 1];
+          if (e.shiftKey && document.activeElement === primero) { e.preventDefault(); ultimo.focus(); }
+          else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primero.focus(); }
+        }
+      });
+
+      // Swipe horizontal en mobile
+      let x0 = null, y0 = 0;
+      visor.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) { x0 = null; return; }
+        x0 = e.touches[0].clientX;
+        y0 = e.touches[0].clientY;
+      }, { passive: true });
+      visor.addEventListener('touchend', (e) => {
+        if (x0 === null || total < 2) return;
+        const t = e.changedTouches[0];
+        const dx = t.clientX - x0, dy = t.clientY - y0;
+        x0 = null;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+          ignorarClick = true; // el swipe no cuenta como click en el fondo
+          setTimeout(() => { ignorarClick = false; }, 400);
+          mostrar(dx < 0 ? iv + 1 : iv - 1);
+        }
+      }, { passive: true });
     });
   })();
 </script>
